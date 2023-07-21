@@ -1,0 +1,209 @@
+{
+	"auto_complete": {
+		"selected_items": [
+			["flex-", "flex-wrap"],
+			["margin", "margin-left"],
+			["w", "width"],
+			["ma", "max-width"],
+			["marin", "margin"],
+			["fle", "flex-direction"],
+			["over", "overflow-x"],
+			["ali", "align-items"],
+			["gap", "column-gap"],
+			["just", "justify-items"],
+			["sel", "align-self"],
+			["self", "justify-self"],
+			["re", "relative"],
+			["inli", "inline-block"],
+			["align", "align-self"]
+		]
+	},
+	"buffers": [],
+	"build_system": "",
+	"build_system_choices": [
+		[
+			[
+				["Packages/Golang Build/Go.sublime-build", ""],
+				["Packages/Golang Build/Go.sublime-build", "Run"],
+				["Packages/Golang Build/Go.sublime-build", "Test"],
+				["Packages/Golang Build/Go.sublime-build", "Install"],
+				["Packages/Golang Build/Go.sublime-build", "Cross-Compile (Interactive)"],
+				["Packages/Golang Build/Go.sublime-build", "Clean"]
+			],
+			["Packages/Golang Build/Go.sublime-build", "Run"]
+		]
+	],
+	"build_varint": "",
+	"command_palette": {
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items": [
+			["format", "JsPrettier: Format Code"],
+			["beaut", "HTMLBeautify"],
+			["refactor", "Text Refactor: Extract Method"],
+			["installp", "Package Control: Install Package"],
+			["ins", "Package Control: Install Package"],
+			["inst", "Package Control: Install Package"],
+			["prefere", "Preferences: Settings"],
+			["ter", "Go: Open Terminal"],
+			["go", "Go: Open Terminal"],
+			["install", "Package Control: Install Package"],
+			["packa", "Install Package Control"],
+			["typescript", "Set Syntax: TypeScript"],
+			["TypeScript", "Set Syntax: TypeScript"],
+			["javas", "Set Syntax: JavaScript"],
+			["type", "Set Syntax: TypeScript"]
+		],
+		"width": 0.0
+	},
+	"console": {
+		"height": 0.0,
+		"history": []
+	},
+	"distraction_free": {
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders": ["/home/fyc/app/masturfyc.github.io"],
+	"file_history": [
+		"/home/fyc/app/warnet/frontend/build/_app/immutable/chunks/classAdderBuilder.aad7a23a.js",
+		"/home/fyc/app/warnet/frontend/src/routes/+layout.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/app.css",
+		"/home/fyc/app/warnet/frontend/src/routes/product/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/product/Pagination.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/coa/list.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/coa/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/coa/pedoman.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/beban/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/beban/form.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/journal/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/customer/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/report/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/trx/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/member/form.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/Footer.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/member/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/paket/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/region/+page.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/Header.svelte",
+		"/home/fyc/app/warnet/frontend/src/routes/report/pages/Home.svelte",
+		"/home/fyc/app/warnet/frontend/.prettierrc.cjs",
+		"/home/fyc/app/warnet/frontend/.prettierrc",
+		"/home/fyc/app/warnet/frontend/src/theme/_smui-theme.scss",
+		"/home/fyc/app/warnet/frontend/src/theme/dark/_smui-theme.scss",
+		"/home/fyc/app/warnet/frontend/src/routes/trx/Footer.svelte",
+		"/home/fyc/app/svelte-project/warnet/frontend/package.json",
+		"/home/fyc/app/svelte-project/warnet/frontend/src/routes/orders/+page.svelte",
+		"/home/fyc/app/svelte-project/warnet/frontend/src/routes/orders/FormPayment.svelte",
+		"/home/fyc/app/svelte-project/warnet/frontend/src/routes/orders/OpenOrder.svelte",
+		"/home/fyc/app/svelte-project/warnet/frontend/build/_app/immutable/chunks/axios-base.dd422180.js",
+		"/home/fyc/app/svelte-project/warnet/frontend/src/routes/report/pages/LabaRugi.svelte",
+		"/home/fyc/app/svelte-project/warnet/frontend/src/routes/report/pages/Home.svelte",
+		"/home/fyc/.config/sublime-text-3/Packages/User/golang.sublime-settings",
+		"/home/fyc/app/svelte-project/warnet/backend/main.go",
+		"/home/fyc/app/svelte-project/warnet/backend/config.go",
+		"/home/fyc/.config/sublime-text-3/Packages/sublime_lib/dependency-metadata.json",
+		"/home/fyc/.config/sublime-text-3/Packages/sublime_lib/unittesting.json",
+		"/home/fyc/app/svelte-project/warnet/frontend/node_modules/@smui/list/src/Graphic.svelte",
+		"/home/fyc/.config/sublime-text-3/Packages/User/JavaScript.sublime-build"
+	],
+	"find": {
+		"height": 26.0
+	},
+	"find_in_files": {
+		"height": 98.0,
+		"where_history": []
+	},
+	"find_state": {
+		"case_sensitive": false,
+		"find_history": [],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history": [],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups": [
+		{
+			"sheets": []
+		}
+	],
+	"incremental_find": {
+		"height": 26.0
+	},
+	"input": {
+		"height": 0.0
+	},
+	"layout": {
+		"cells": [[0, 0, 1, 1]],
+		"cols": [0.0, 1.0],
+		"rows": [0.0, 1.0]
+	},
+	"menu_visible": true,
+	"output.LSP Log Panel": {
+		"height": 0.0
+	},
+	"output.SublimeLinter": {
+		"height": 0.0
+	},
+	"output.diagnostics": {
+		"height": 0.0
+	},
+	"output.exec": {
+		"height": 132.0
+	},
+	"output.find_results": {
+		"height": 0.0
+	},
+	"output.golang_build": {
+		"height": 132.0
+	},
+	"output.mdpopups": {
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Golang Build/Go.sublime-build",
+	"project": "fyc.sublime-project",
+	"replace": {
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file": {
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items": [],
+		"width": 0.0
+	},
+	"select_project": {
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items": [],
+		"width": 0.0
+	},
+	"select_symbol": {
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items": [],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings": {},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 251.0,
+	"status_bar_visible": true,
+	"template_settings": {}
+}
