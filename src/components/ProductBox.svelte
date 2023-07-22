@@ -53,7 +53,7 @@ export let idPicture = 0;
 		<div class="flex-1"><slot name="name" /></div>
 		<div><slot name="variant" /></div>
 		<div class="m5-4">
-			<span class="font-bold"><slot name="price" /></span>
+			<span class="font-bold">Rp <slot name="price" /></span>
 			<span>{'/'}&nbsp;<slot name="unit" /></span>
 		</div>
 	</div>
