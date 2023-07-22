@@ -2,9 +2,9 @@
 const baseURL = import.meta.env.VITE_API_URL;
 
 export async function fetchUrl(url: string, ...params) {
-	if(url.startsWith('/')) {
+	if (url.startsWith('/')) {
 		return await fetch(baseURL + url, ...params);
-	} else  {
+	} else {
 		return await fetch(url, ...params);
 	}
 }
