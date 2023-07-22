@@ -1,66 +1,293 @@
 {
-	"auto_complete": {
-		"selected_items": [
-			["flex-", "flex-wrap"],
-			["margin", "margin-left"],
-			["w", "width"],
-			["ma", "max-width"],
-			["marin", "margin"],
-			["fle", "flex-direction"],
-			["over", "overflow-x"],
-			["ali", "align-items"],
-			["gap", "column-gap"],
-			["just", "justify-items"],
-			["sel", "align-self"],
-			["self", "justify-self"],
-			["re", "relative"],
-			["inli", "inline-block"],
-			["align", "align-self"]
-		]
-	},
-	"buffers": [],
-	"build_system": "",
-	"build_system_choices": [
+	"auto_complete":
+	{
+		"selected_items":
 		[
 			[
-				["Packages/Golang Build/Go.sublime-build", ""],
-				["Packages/Golang Build/Go.sublime-build", "Run"],
-				["Packages/Golang Build/Go.sublime-build", "Test"],
-				["Packages/Golang Build/Go.sublime-build", "Install"],
-				["Packages/Golang Build/Go.sublime-build", "Cross-Compile (Interactive)"],
-				["Packages/Golang Build/Go.sublime-build", "Clean"]
+				"p",
+				"ProductBox.svelte"
 			],
-			["Packages/Golang Build/Go.sublime-build", "Run"]
+			[
+				"focu",
+				":focus-within"
+			],
+			[
+				"ho",
+				":hover"
+			],
+			[
+				"yell",
+				"lightyellow"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"flex-",
+				"flex-wrap"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"ma",
+				"max-width"
+			],
+			[
+				"marin",
+				"margin"
+			],
+			[
+				"fle",
+				"flex-direction"
+			],
+			[
+				"over",
+				"overflow-x"
+			],
+			[
+				"ali",
+				"align-items"
+			],
+			[
+				"gap",
+				"column-gap"
+			],
+			[
+				"just",
+				"justify-items"
+			],
+			[
+				"sel",
+				"align-self"
+			],
+			[
+				"self",
+				"justify-self"
+			],
+			[
+				"re",
+				"relative"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"align",
+				"align-self"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "<script lang=\"ts\">\n\timport { onMount } from 'svelte';\n\timport ProductBox from '../components/ProductBox.svelte';\n  import \"../app.css\";\n\n  import {fetchUrl} from '$lib'\n\ttype iProduct = {\n\t\tid: number;\n\t\tcategory_id: number;\n\t\tparent_id: number;\n\t\tname: string;\n\t\tbarcode: string;\n\t\tunit: string;\n\t\tcontent: number;\n\t\thpp: number;\n\t\tppn: number;\n\t\tis_active: boolean;\n\t\tmargin: number;\n\t\tprice: number;\n\t\tis_for_sale: boolean;\n\t\tis_inventory: boolean;\n\t\tvariant_name?: string;\n\t\tdescriptions?: string;\n\t\tcategory_name?: string;\n\t};\n\n\tconst endpoint = '/sale/product';\n\n\tlet products: iProduct[] = [];\n\tlet page = 0;\n\tlet limit = 5;\n\tlet hashMore = false;\n  let isEnable = false;\n\n\tconst loadCustomer = async (page = 0, limit = 5) => {\n\t\tconst d = await fetchUrl(`${endpoint}/${page}/${limit}`);\n\t\tconst p = (await d.json()) ?? [];\n    \n\t\thashMore = p.length < limit;\n\t\tproducts = [...products, ...p];\n\t};\n\n  $: if(isEnable) loadCustomer(page, limit);\n\n  onMount(() => {\n    isEnable = true;\n  })\n</script>\n\n<h1>Welcome to Fine Young Canibals</h1>\n<p>Visit <a href=\"https://sapulidi.site\">sapulidi.site</a> to read the documentation</p>\n<div class=\"div-product\">\n\t{#each products as c (c.id)}\n\t\t<ProductBox>\n\t\t\t<span slot=\"name\">{c.name}</span>\n\t\t\t<span slot=\"variant\">{c.variant_name ?? ''} ({c.category_name})</span>\n\t\t\t<span slot=\"price\">{c.price.toLocaleString('id-ID')}</span>\n\t\t\t<!-- <span slot=\"unit\">{c.unit}</span> -->\n\t\t</ProductBox>\n\t{/each}\n</div>\n<div class=\"flex justify-center mt-6\">\n\t<select\n\t\tbind:value={limit}\n\t\ton:change={() => {\n\t\t\tproducts = [];\n\t\t\tpage = 0;\n\t\t\thashMore = false;\n\t\t}}\n\t>\n\t\t{#each [3, 5, 10, 30, 50] as n}\n\t\t\t<option value={n}>{n}</option>\n\t\t{/each}\n\t</select>\n\t<button disabled={hashMore} on:click={() => (page = page + 1)}>More product...</button>\n</div>\n\n<!-- <style lang=\"postcss\">\n  :global(html) {\n    background-color: theme(colors.gray.100);\n  }\n</style>\n -->",
+			"file": "src/routes/+page.svelte",
+			"file_size": 1904,
+			"file_write_time": 133344789771907854,
+			"settings":
+			{
+				"buffer_size": 1904,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					3,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAAIHAAAAAAAAAwcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAgcAAAAAAAACBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					5,
+					1,
+					"",
+					null,
+					"AQAAAAMHAAAAAAAAZwcAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAwcAAAAAAAADBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					21,
+					1,
+					"toggle_comment",
+					{
+						"block": false
+					},
+					"AgAAAGcHAAAAAAAAawcAAAAAAAAAAAAAAwcAAAAAAAAIBwAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAwcAAAAAAABnBwAAAAAAAAAAAAAAAAAA"
+				]
+			]
+		},
+		{
+			"contents": "const tailwindcss = require('tailwindcss');\nconst autoprefixer = require(\"autoprefixer\");\nmodule.exports = {\n  plugins: [ \n    require(\"tailwindcss\"), \n    require(\"autoprefixer\")\n  ]\n}",
+			"file": "src/postcss.config.js",
+			"file_size": 185,
+			"file_write_time": 133344790832907875,
+			"settings":
+			{
+				"buffer_size": 185,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			},
+			"undo_stack":
+			[
+				[
+					4,
+					1,
+					"right_delete",
+					null,
+					"AQAAAAAAAAAAAAAAAAAAAAAAAACyAQAAaW1wb3J0IHRhaWx3aW5kIGZyb20gJ3RhaWx3aW5kY3NzJwppbXBvcnQgYXV0b3ByZWZpeGVyIGZyb20gJ2F1dG9wcmVmaXhlcicKaW1wb3J0IG5lc3RpbmcgZnJvbSAncG9zdGNzcy1uZXN0aW5nJwoKZXhwb3J0IGRlZmF1bHQgIHsKICBzeW50YXg6ICdwb3N0Y3NzLXNjc3MnLAogIHBsdWdpbnM6IFsKICAgIC8vIFNvbWUgcGx1Z2lucywgbGlrZSBwb3N0Y3NzLW5lc3RlZCwgbmVlZCB0byBydW4gYmVmb3JlIFRhaWx3aW5kCiAgICBuZXN0aW5nKCksCiAgICB0YWlsd2luZCgpLAoKICAgIC8vIEJ1dCBvdGhlcnMsIGxpa2UgYXV0b3ByZWZpeGVyLCBuZWVkIHRvIHJ1biBhZnRlcgoKICAgIGF1dG9wcmVmaXhlcigpLAogICAgLy8gIWRldiAmJgogICAgLy8gICBjc3NuYW5vKHsKICAgIC8vICAgICBwcmVzZXQ6ICdkZWZhdWx0JywKICAgIC8vICAgfSksCiAgXSwKfTs",
+					"AQAAAAAAAAABAAAAAAAAAAAAAACyAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					6,
+					1,
+					"",
+					null,
+					"AQAAAAAAAAAAAAAAuQAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"contents": "/** @type {import('tailwindcss').Config} */\nmodule.exports = {\n  content: ['./src/**/*.{html,js,svelte,ts}'],\n  theme: {\n    extend: {\n      colors: {\n        // you can either spread `colors` to apply all the colors\n        ...colors,\n        // or add them one by one and name whatever you want\n        amber: colors.amber,\n        emerald: colors.emerald,\n      }      \n    },\n  },\n  plugins: [],\n}\n\n",
+			"file": "src/tailwind.config.js",
+			"file_size": 403,
+			"file_write_time": 133344789000907839,
+			"settings":
+			{
+				"buffer_size": 403,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					""
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Install"
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Cross-Compile (Interactive)"
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Golang Build/Go.sublime-build",
+				"Run"
+			]
 		]
 	],
 	"build_varint": "",
-	"command_palette": {
+	"command_palette":
+	{
 		"height": 0.0,
 		"last_filter": "",
-		"selected_items": [
-			["format", "JsPrettier: Format Code"],
-			["beaut", "HTMLBeautify"],
-			["refactor", "Text Refactor: Extract Method"],
-			["installp", "Package Control: Install Package"],
-			["ins", "Package Control: Install Package"],
-			["inst", "Package Control: Install Package"],
-			["prefere", "Preferences: Settings"],
-			["ter", "Go: Open Terminal"],
-			["go", "Go: Open Terminal"],
-			["install", "Package Control: Install Package"],
-			["packa", "Install Package Control"],
-			["typescript", "Set Syntax: TypeScript"],
-			["TypeScript", "Set Syntax: TypeScript"],
-			["javas", "Set Syntax: JavaScript"],
-			["type", "Set Syntax: TypeScript"]
+		"selected_items":
+		[
+			[
+				"format",
+				"JsPrettier: Format Code"
+			],
+			[
+				"beaut",
+				"HTMLBeautify"
+			],
+			[
+				"refactor",
+				"Text Refactor: Extract Method"
+			],
+			[
+				"installp",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"prefere",
+				"Preferences: Settings"
+			],
+			[
+				"ter",
+				"Go: Open Terminal"
+			],
+			[
+				"go",
+				"Go: Open Terminal"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Install Package Control"
+			],
+			[
+				"typescript",
+				"Set Syntax: TypeScript"
+			],
+			[
+				"TypeScript",
+				"Set Syntax: TypeScript"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"type",
+				"Set Syntax: TypeScript"
+			]
 		],
 		"width": 0.0
 	},
-	"console": {
+	"console":
+	{
 		"height": 0.0,
-		"history": []
+		"history":
+		[
+		]
 	},
-	"distraction_free": {
+	"distraction_free":
+	{
 		"menu_visible": true,
 		"show_minimap": false,
 		"show_open_files": false,
@@ -68,8 +295,23 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders": ["/home/fyc/app/masturfyc.github.io"],
-	"file_history": [
+	"expanded_folders":
+	[
+		"/home/fyc/app/masturfyc.github.io"
+	],
+	"file_history":
+	[
+		"/home/fyc/app/masturfyc.github.io/svelte.config.js",
+		"/home/fyc/app/masturfyc.github.io/src/tailwind.config.js",
+		"/home/fyc/app/masturfyc.github.io/src/postcss.config.js",
+		"/home/fyc/app/masturfyc.github.io/src/routes/+page.svelte",
+		"/home/fyc/app/masturfyc.github.io/src/components/ProductBox.svelte",
+		"/home/fyc/app/masturfyc.github.io/src/lib/components/ProductBox.svelte",
+		"/home/fyc/app/masturfyc.github.io/vite.config.ts",
+		"/home/fyc/app/masturfyc.github.io/src/app.css",
+		"/home/fyc/app/masturfyc.github.io/src/routes/app.css",
+		"/home/fyc/app/svelte-project/warnet/frontend/f.env",
+		"/home/fyc/app/masturfyc.github.io/.env",
 		"/home/fyc/app/warnet/frontend/build/_app/immutable/chunks/classAdderBuilder.aad7a23a.js",
 		"/home/fyc/app/warnet/frontend/src/routes/+layout.svelte",
 		"/home/fyc/app/warnet/frontend/src/routes/+page.svelte",
@@ -112,21 +354,33 @@
 		"/home/fyc/app/svelte-project/warnet/frontend/node_modules/@smui/list/src/Graphic.svelte",
 		"/home/fyc/.config/sublime-text-3/Packages/User/JavaScript.sublime-build"
 	],
-	"find": {
-		"height": 26.0
+	"find":
+	{
+		"height": 38.0
 	},
-	"find_in_files": {
+	"find_in_files":
+	{
 		"height": 98.0,
-		"where_history": []
+		"where_history":
+		[
+			"/home/fyc/app/masturfyc.github.io/src,<project filters>",
+			"/home/fyc/app/masturfyc.github.io,<project filters>"
+		]
 	},
-	"find_state": {
+	"find_state":
+	{
 		"case_sensitive": false,
-		"find_history": [],
+		"find_history":
+		[
+			"lib"
+		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
-		"replace_history": [],
+		"replace_history":
+		[
+		],
 		"reverse": false,
 		"scrollbar_highlights": true,
 		"show_context": true,
@@ -135,75 +389,233 @@
 		"whole_word": false,
 		"wrap": false
 	},
-	"groups": [
+	"groups":
+	[
 		{
-			"sheets": []
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/routes/+page.svelte",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1904,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1800,
+								1900
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html, text.xml"
+								},
+								{
+									"rhs_empty": true,
+									"selector": "punctuation.accessor"
+								},
+								{
+									"characters": ".\"'`/@<>*#$+^([@-:|",
+									"selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc",
+									"server": "LSP-svelte"
+								}
+							],
+							"lsp_active": true,
+							"lsp_hover_provider_count": 1,
+							"lsp_uri": "file:///home/fyc/app/masturfyc.github.io/src/routes/%2Bpage.svelte",
+							"show_definitions": false,
+							"syntax": "Packages/Svelte/Svelte.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 986.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/postcss.config.js",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 185,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								185,
+								185
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///home/fyc/app/masturfyc.github.io/src/postcss.config.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/tailwind.config.js",
+					"selected": true,
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 403,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"lsp_uri": "file:///home/fyc/app/masturfyc.github.io/src/tailwind.config.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": true,
+					"type": "text"
+				}
+			]
 		}
 	],
-	"incremental_find": {
+	"incremental_find":
+	{
 		"height": 26.0
 	},
-	"input": {
-		"height": 0.0
+	"input":
+	{
+		"height": 38.0
 	},
-	"layout": {
-		"cells": [[0, 0, 1, 1]],
-		"cols": [0.0, 1.0],
-		"rows": [0.0, 1.0]
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
 	},
 	"menu_visible": true,
-	"output.LSP Log Panel": {
+	"output.LSP Log Panel":
+	{
 		"height": 0.0
 	},
-	"output.SublimeLinter": {
+	"output.SublimeLinter":
+	{
 		"height": 0.0
 	},
-	"output.diagnostics": {
+	"output.diagnostics":
+	{
 		"height": 0.0
 	},
-	"output.exec": {
+	"output.exec":
+	{
 		"height": 132.0
 	},
-	"output.find_results": {
+	"output.find_results":
+	{
 		"height": 0.0
 	},
-	"output.golang_build": {
+	"output.golang_build":
+	{
 		"height": 132.0
 	},
-	"output.mdpopups": {
+	"output.mdpopups":
+	{
 		"height": 0.0
 	},
 	"pinned_build_system": "Packages/Golang Build/Go.sublime-build",
 	"project": "fyc.sublime-project",
-	"replace": {
+	"replace":
+	{
 		"height": 48.0
 	},
 	"save_all_on_build": true,
-	"select_file": {
+	"select_file":
+	{
 		"height": 0.0,
 		"last_filter": "",
-		"selected_items": [],
+		"selected_items":
+		[
+		],
 		"width": 0.0
 	},
-	"select_project": {
+	"select_project":
+	{
 		"height": 0.0,
 		"last_filter": "",
-		"selected_items": [],
+		"selected_items":
+		[
+		],
 		"width": 0.0
 	},
-	"select_symbol": {
+	"select_symbol":
+	{
 		"height": 0.0,
 		"last_filter": "",
-		"selected_items": [],
+		"selected_items":
+		[
+		],
 		"width": 0.0
 	},
 	"selected_group": 0,
-	"settings": {},
+	"settings":
+	{
+	},
 	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 251.0,
 	"status_bar_visible": true,
-	"template_settings": {}
+	"template_settings":
+	{
+	}
 }

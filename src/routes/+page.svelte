@@ -2,7 +2,8 @@
 	import { onMount } from 'svelte';
 	import ProductBox from '../components/ProductBox.svelte';
   import {fetchUrl} from '$lib'
-	type iProduct = {
+  import "../app.css";
+ 	type iProduct = {
 		id: number;
 		category_id: number;
 		parent_id: number;
@@ -22,7 +23,7 @@
 		category_name?: string;
 	};
 
-	const endpoint = '/v1/product-list';
+	const endpoint = '/sale/product';
 
 	let products: iProduct[] = [];
 	let page = 0;
@@ -44,7 +45,7 @@
     isEnable = true;
   })
 </script>
-
+<div class="p-2">
 <h1>Welcome to Fine Young Canibals</h1>
 <p>Visit <a href="https://sapulidi.site">sapulidi.site</a> to read the documentation</p>
 <div class="div-product">
@@ -57,8 +58,9 @@
 		</ProductBox>
 	{/each}
 </div>
-<div class="mt-16">
+<div class="flex flex-row mt-4 gap-x-4">
 	<select
+  class="btn-primary"
 		bind:value={limit}
 		on:change={() => {
 			products = [];
@@ -70,17 +72,17 @@
 			<option value={n}>{n}</option>
 		{/each}
 	</select>
-	<button disabled={hashMore} on:click={() => (page = page + 1)}>More product...</button>
+	<button class="btn-primary" disabled={hashMore} on:click={() => (page = page + 1)}>Tampilkan lebih banyak lagi</button>
 </div>
 
-<style>
-	.div-product {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		gap: 20px;
-	}
-	.mt-16 {
-		margin-top: 16px;
-	}
+</div>
+<style lang="postcss">
+
+  :global(html) {
+    background-color: theme(colors.gray.100);
+  }
+
+  .div-product {
+    @apply flex flex-row flex-wrap gap-3 mt-10
+  }
 </style>
