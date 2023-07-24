@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import ProductBox from '../../components/ProductBox.svelte';
-	import axios from '../../lib/axios-base';
+	import axios from '$lib/axios-base';
 
-	import '../app.css';
 	type iProduct = {
 		id: number;
 		category_id: number;
@@ -83,12 +82,5 @@
 	</div>
 </div>
 
-<style lang="postcss">
-	:global(html) {
-		background-color: theme(colors.gray.100);
-	}
-
-	.div-product {
-		@apply flex flex-row flex-wrap gap-3 mt-10 justify-start;
-	}
+<style lang="scss">
 </style>

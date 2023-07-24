@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Button, { Label } from '@smui/button';
 	import Textfield from '@smui/textfield';
-	import { user, refresh_token as refToken, acces_token as accToken, user_role } from '../lib/store';
+	import { user, refresh_token as refToken, acces_token as accToken, user_role } from '$lib/store';
 	import { onDestroy } from 'svelte';
 	import { InitialFocus } from '@smui/dialog';
-	import axios from '../lib/axios-base';
+	import axios from '$lib/axios-base';
 	import { useQueryClient } from '@sveltestack/svelte-query';
-	import {push} from 'svelte-spa-router'
+    import { goto } from '$app/navigation';
 
 	let user_value = '';
 	let username_or_email = '';
@@ -50,7 +50,7 @@
 				refToken.update((o) => (o = refresh_token));
 				accToken.update((o) => (o = access_token));
 				loadUser();
-				push('/');
+				goto('/');
 			})
 			.catch((error) => {
 				console.log(error);
@@ -83,7 +83,7 @@
 		accToken.update((o) => (o = ''));
 		refToken.update((o) => (o = ''));
 		client.removeQueries();
-		push('/');
+		goto('/');
 	}
 
 	$: isDisabled = username_or_email.length === 0 || password.length === 0;
@@ -111,7 +111,7 @@
 			</div>
 			<div style="color: red;margin-top:20px">{err_user}</div>
 			<div class="button-group">
-				<Button ripple color="secondary" type="button" on:click={() => push('/')}>
+				<Button ripple color="secondary" type="button" on:click={() => goto('/')}>
 					<Label>Batal</Label>
 				</Button>
 				<Button color="primary" ripple type="submit" disabled={isDisabled}>

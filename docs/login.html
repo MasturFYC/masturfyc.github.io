@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<!-- Material Icons -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+		<!-- Roboto -->
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
+		/>
+
+		<link id="theme1" rel="stylesheet" href="/smui.css" media="(prefers-color-scheme: light)" />
+		<link
+			id="theme2"
+			rel="stylesheet"
+			href="/smui-dark.css"
+			media="screen and (prefers-color-scheme: dark)"
+		/>
+		
+		<link rel="modulepreload" href="./_app/immutable/entry/start.083c84ed.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.04dfdf3d.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c6f791a2.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c3e9b8ec.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8d715a76.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.a2ecf332.js">
+	</head>
+
+	<body data-sveltekit-preload-data="hover">
+		<div>
+			<script>
+				{
+					__sveltekit_1lhet5 = {
+						base: new URL(".", location).pathname.slice(0, -1),
+						env: {}
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("./_app/immutable/entry/start.083c84ed.js"),
+						import("./_app/immutable/entry/app.8d715a76.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

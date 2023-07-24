@@ -1,26 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset='utf-8'>
-	<meta name='viewport' content='width=device-width,initial-scale=1'>
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Material+Icons&Roboto+Mono:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-		rel="stylesheet"
-	/>
-	<link rel="stylesheet" href="/smui.css" media="(prefers-color-scheme: light)" />
-	<link rel="stylesheet" href="/smui-dark.css" media="screen and (prefers-color-scheme: dark)" />
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<!-- Material Icons -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+		<!-- Roboto -->
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
+		/>
 
-	<title>Svelte app</title>
+		<link id="theme1" rel="stylesheet" href="/smui.css" media="(prefers-color-scheme: light)" />
+		<link
+			id="theme2"
+			rel="stylesheet"
+			href="/smui-dark.css"
+			media="screen and (prefers-color-scheme: dark)"
+		/>
+		
+		<link rel="modulepreload" href="/_app/immutable/entry/start.083c84ed.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/scheduler.04dfdf3d.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/singletons.c6f791a2.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/index.c3e9b8ec.js">
+		<link rel="modulepreload" href="/_app/immutable/entry/app.8d715a76.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/index.a2ecf332.js">
+	</head>
 
-	<link rel='icon' type='image/png' href='/favicon.png'>
-	<link rel='stylesheet' href='/global.css'>
-	<link rel='stylesheet' href='/bundle.css'>
+	<body data-sveltekit-preload-data="hover">
+		<div>
+			<script>
+				{
+					__sveltekit_1lhet5 = {
+						base: "",
+						env: {}
+					};
 
-	<script defer src='/bundle.js'></script>
-</head>
+					const element = document.currentScript.parentElement;
 
-<body>
-</body>
+					Promise.all([
+						import("/_app/immutable/entry/start.083c84ed.js"),
+						import("/_app/immutable/entry/app.8d715a76.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+	</body>
 </html>
