@@ -1,16 +1,67 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-@layer base {
-	html {
-		font-size: 13px;
-		font-weight: 400;
-	}
+.mt-10 {
+	margin-top: 10px;
+}
+.mt-20 {
+	margin-top: 20px;
+}
+.mb-10 {
+	margin-bottom: 10px;
+}
+.mb-20 {
+	margin-bottom: 20px;
 }
 
-@layer components {
-	.btn-primary {
-		@apply py-2 px-4 bg-amber-500 text-white font-semibold rounded-md shadow-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-opacity-75 disabled:outline-none disabled:bg-gray-300 disabled:ring-0 disabled:text-gray-500 disabled:shadow-none;
+.flex-1 {
+	flex: 1;
+}
+
+.font-bold {
+	font-weight: 700;
+}
+
+.font-italic {
+	font-style: oblique;
+}
+.title {
+	font-weight: 400;
+	font-size: x-large;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-center {
+	align-items: center;
+}
+
+.border-1 {
+	border: 1px solid var(--border-color);
+}
+
+.radius-1 {
+	border-radius: 4px;
+}
+
+section {
+	max-width: calc(100% - 64px);
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+	section {
+		max-width: calc(100% - 24px);
+		margin: 0 auto;
 	}
 }

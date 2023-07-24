@@ -1,10 +1,18 @@
-// place files you want to import through the `$lib` alias in this folder.
-const baseURL = import.meta.env.VITE_API_URL;
-
-export async function fetchUrl(url: string, ...params) {
-	if (url.startsWith('/')) {
-		return await fetch(baseURL + url, ...params);
-	} else {
-		return await fetch(url, ...params);
-	}
+export type UnitKoperasi = {
+	id: number;
+	name: string;
+	description?: string;
 }
+
+export type MemberKoperasi = {
+	member_id: number;
+	unit_id: number;
+	name: string;
+	created_at: string;
+	address?: string;
+	is_active: boolean;
+	type_id: number;
+	phone?: string;
+	unit_name: string;
+	description?: string;
+};
