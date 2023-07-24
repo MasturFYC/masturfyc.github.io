@@ -10,7 +10,7 @@
 	const endpoint = '/koperasi/member/search';
 	const client = useQueryClient();
 
-	let txt = '';
+	let txt = ' ';
 	let page = 0;
 	let limit = 5;
 	let hashMore = false;
