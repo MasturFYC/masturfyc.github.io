@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Dialog, { Title, Content, Actions, InitialFocus } from '@smui/dialog';
-	import { onMount } from 'svelte';
 	import Button from '@smui/button';
 	import Textfield from '@smui/textfield';
 	import { useMutation, useQueryClient } from '@sveltestack/svelte-query';
@@ -8,7 +7,7 @@
 	import type { UnitKoperasi } from '$lib';
 	import IconButton from '@smui/icon-button';
 
-	export let unitId = 0;
+  export let unit: UnitKoperasi;
 	export let page = 0;
 	export let limit = 0;
 
@@ -17,21 +16,8 @@
 	
 	const client = useQueryClient();
 
-	let initUnit: UnitKoperasi = {
-        id: 0,
-        name: '',
-				description:''
-    };
-
-  let unit: UnitKoperasi = {...initUnit};
-
 	let dirty = false;
 	let clicked = 'no';
-
-	const fetchUnitById = async (id: number) => {
-		const { data } = await axios.get<UnitKoperasi>(`/koperasi/unit/${id}`);
-		return data;
-	};
 
 	const fetchUpdateData = async (e: UnitKoperasi): Promise<UnitKoperasi> =>
 		await axios.patch(`/koperasi/unit/patch/${e.id}`, e, {
@@ -105,21 +91,18 @@
 		}
 	});
 
-	onMount(async () => {
-
-		if (unitId > 0) {
-      const data = client.getQueryData<UnitKoperasi>(['units', { id: unitId }]) ?? 
-      await client.fetchQuery(['units', { id: unitId }], () =>fetchUnitById(unitId));
-      unit = data ?? {...initUnit};
-		}
-	});
+	$: if(unit.description === undefined) unit.description = '';
 
 	$: isNameValid = unit.name.length > 2;
 	$: isDisabled = !isNameValid || !dirty;
 
 	$: if(fetchSuccess) {
 		if(unit.id === 0) {
-			unit = {...initUnit}
+			unit = {
+        id: 0,
+        name: '',
+				description:''
+    	}
 		}
 		open = false;
 		fetchSuccess = false;
@@ -137,10 +120,11 @@
 </script>
 
 <IconButton
+	title="Edit unit"
 			class="material-icons icon"
-			size="{unitId === 0 ? 'normal' : 'button'}"
+			size="{unit.id === 0 ? 'normal' : 'button'}"
 			on:click={async () => (open = true)}			
-			aria-label="New unit">{unitId === 0 ? 'note_add' : 'edit'}</IconButton>	
+			aria-label="New unit">{unit.id === 0 ? 'note_add' : 'edit'}</IconButton>	
 
 <Dialog
 	surface$style="width: 480px; max-width: calc(100vw - 32px);overflow:unset;"
@@ -148,15 +132,15 @@
 	aria-describedby="simple-content"
 	bind:open
 >
-	<Title id="simple-title">Unit Koperasi</Title>
-	<Content id="simple-content" style="overflow:unset">
-		<div class="flex-row flexwrap px-20 mt-10">
+	<Title id="simple-title" style={"margin: 0 16px 16px 16px;padding:0"}>Unit Koperasi</Title>
+	<Content id="simple-content" style="overflow:unset;margin:0 16px;padding:0">
+		<div class="flex-row flexwrap mt-10">
 			<div class="flex-col flex-1 w-min-300">
 				<Textfield
 					bind:dirty
 					bind:value={unit.name}
 					use={[InitialFocus]}
-					label="Nama"
+					label="Nama unit"
 					type="text"
 					invalid={!isNameValid}
 					input$placeholder="e.g. nama unit"
@@ -168,6 +152,7 @@
 					textarea
 					label="Deskripsi"
 					input$rows={5}
+					input$emptyValueUndefined
 					bind:dirty
 					bind:value={unit.description}
 				/>
@@ -197,10 +182,6 @@
 	.w-min-300 {
 		min-width: 300px;
 	}
-	.px-20 {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
 
 	* :global(.w-100) {
 		width: 100%;
@@ -210,9 +191,6 @@
 	:global(.ctrl-style > div) {
 		margin-top: -3px;
 		/* border: 1px solid #333; */
-	}
-	* :global(.mdc-deprecated-list-item) {
-		height: 26px;
 	}
 
 	* :global(.ml-6) {

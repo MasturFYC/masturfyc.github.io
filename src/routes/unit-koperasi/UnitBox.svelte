@@ -1,20 +1,34 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
   import UnitForm from './UnitForm.svelte';
   import DeleteItem from './DeleteItem.svelte';
+  import type { UnitKoperasi } from '$lib';
+  import {current_unit_id} from '../member-koperasi/store'
+	import IconButton from '@smui/icon-button';
 
-  export let unitId: number = 0;
+
+  export let unit: UnitKoperasi;
 	export let page = 0;
 	export let limit = 0;
 
 </script>
 <div class="box-shadow radius-1 border-1">
   <div class="div-content">
-    <div class="div-name"><slot name="name" /></div>
-    <div><slot name="description" /></div>
+    <div class="div-name">{unit.name}</div>
+    <div>{unit.description??''}</div>
   </div>
     <div class="flex-row gap-x-10">
-      <UnitForm unitId={unitId} {page} {limit} />
-      <DeleteItem {unitId} {page} {limit} />
+      <UnitForm {unit} {page} {limit} />
+      <DeleteItem unitId={unit.id} {page} {limit} />
+      <IconButton 
+      title={"Show member by unit"}
+      size="button"
+      class="material-icons" 
+      on:click={() => {
+        current_unit_id.update(() => unit.id)
+        goto("/member-koperasi-by-unit")
+      }}
+      aria-label="Download">account_circle</IconButton>
   </div>
 </div>
 
@@ -24,7 +38,8 @@
 	}
 
 .div-name {
-  font-weight: 700;
+  font-weight: 400;
+  font-size: large;
   //color: var(--accent-color)
 }
 .div-content {
@@ -32,7 +47,9 @@
 }
 .box-shadow {
   box-shadow: 1px 1px 5px var(--shadow-color);
-  max-width: 220px;
-  width: 100%;
+  min-width: 220px;
+  max-width: 480px;
+  flex: 1;
+  background-color: var(--control-background);
 }
 </style>

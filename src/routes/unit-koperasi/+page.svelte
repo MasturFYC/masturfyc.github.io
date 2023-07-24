@@ -5,10 +5,15 @@
 	import axios from '$lib/axios-base';
 	import type { UnitKoperasi } from '$lib';
 	import UnitForm from './UnitForm.svelte'
-	import UnitBox from './UnitBox.svelte';
+	import UnitBox from './UnitBox.svelte';	
 
 	const endpoint = '/koperasi/unit/list';
 	const client = useQueryClient();
+	let initUnit: UnitKoperasi = {
+        id: 0,
+        name: '',
+				description:''
+    };
 
 	let limits = [3, 5, 10, 20, 25, 50];
 	let page: number = 0;
@@ -58,7 +63,7 @@
 <section class="mb-20">
 	<div class="flex-row mb-24 flex-center">
 		<div class="title">Unit Koperasi</div>
-		<UnitForm unitId={0} {page} {limit} />
+		<UnitForm unit={{...initUnit}} {page} {limit} />
 	</div>
 	<Query options={queryOptions}>
 		<div slot="query" let:queryResult>
@@ -69,10 +74,7 @@
 			{:else}
 				<div class="arr-box">
 					{#each queryResult.data ?? [] as c (c.id)}
-          <UnitBox unitId={c.id}>
-            <div slot="name">{c.name}</div>
-            <div slot="description">{c.description ?? ''}</div>
-          </UnitBox>						
+	          <UnitBox unit={c} />
 					{/each}
 				</div>
 			{/if}
@@ -149,6 +151,7 @@
 	* :global(.shaped-outlined .mdc-select__anchor) {
 		border-radius: 16px;
 		height: 32px;
+		background: var(--control-background);
 	}
 	* :global(.shaped-outlined .mdc-text-field__input) {
 		padding-left: 32px;

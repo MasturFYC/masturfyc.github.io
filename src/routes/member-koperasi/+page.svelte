@@ -3,9 +3,13 @@
 	import Select, { Option } from '@smui/select';
 	import Button from '@smui/button';
 	import axios from '$lib/axios-base';
-	import type { MemberKoperasi } from '$lib';
+	import type { MemberKoperasi, UnitKoperasi } from '$lib';
   import MemberBox from './MemberBox.svelte'
 	import MemberForm from './MemberForm.svelte';
+	import { unit_koperasi } from '$lib/store';
+    import { onMount } from 'svelte';
+    import { initMember } from './store';
+		import SearchBox from './SearchBox.svelte';
 
 	const endpoint = '/koperasi/member/search';
 	const client = useQueryClient();
@@ -15,6 +19,16 @@
 	let limit = 5;
 	let hashMore = false;
 
+	const fetchUnits = async () => {
+		const { data } = await axios.get<UnitKoperasi[]>('/koperasi/unit/list-unit');
+		return data;
+	};
+
+	const loadUnit = async () => {
+		const data = client.getQueryData<UnitKoperasi[]>(['koperasi', 'units']) ??
+			(await client.fetchQuery<UnitKoperasi[]>(['koperasi', 'unit'], () => fetchUnits()));
+		unit_koperasi.update(() => data ?? []);
+	};
 
 	const setPage = (newPage: number) => {
 		page = newPage;
@@ -43,6 +57,8 @@
 		return '';
 	};
 
+	onMount(() => loadUnit())
+
 	$: queryOptions = {
 		queryKey: ['members', txt, { page: page, limit: limit }],
 		queryFn: () => fetchMembers(txt, page, limit),
@@ -57,10 +73,14 @@
 </svelte:head>
 
 
-<section>
+<section class="mb-10">
 	<div class="flex-row mb-24 flex-center">
-		<div class="title">Anggota koperasi</div>
-		<MemberForm memberId={0} {txt} {limit} {page} />
+		<div class="title">Anggota Koperasi</div>
+		<MemberForm member={{...initMember}} {txt} {limit} {page} />
+		<SearchBox on:search={(e) => {
+			txt = e.detail.txt;
+			page = 0;
+		}}/>
 	</div>
 	<Query options={queryOptions}>
 		<div slot="query" let:queryResult>
@@ -71,12 +91,7 @@
 			{:else}
 				<div class="arr-box">
 					{#each queryResult.data ?? [] as c (c.member_id)}
-          <MemberBox memberId={c.member_id} {txt} {limit} {page} >
-            <div slot="name">{c.name}</div>
-            <div slot="address">{c.address ?? ''}, {c.phone ?? ''}</div>
-            <div slot="unit">{c.unit_name}</div>
-            <div slot="active">Masih aktif? {c.is_active ? 'Ya':'Tidak'}</div>
-          </MemberBox>						
+          	<MemberBox member={c} {txt} {limit} {page} />
 					{/each}
 				</div>
 			{/if}
@@ -154,6 +169,7 @@
 	* :global(.shaped-outlined .mdc-select__anchor) {
 		border-radius: 16px;
 		height: 32px;
+		background: var(--control-background);
 	}
 	* :global(.shaped-outlined .mdc-text-field__input) {
 		padding-left: 32px;
