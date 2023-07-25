@@ -13,7 +13,7 @@ export const initMember: MemberKoperasi = {
 	phone: '',
 	unit_name: '',
 	description: '',
-	code: '',
+	code: ''
 };
 
 export let current_unit_id = writable(0);

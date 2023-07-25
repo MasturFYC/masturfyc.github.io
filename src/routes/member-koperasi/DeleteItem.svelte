@@ -55,7 +55,7 @@
 	class="material-icons"
 	style="color:var(--text-color)"
 	size="button"
-	title="Remove"
+	title="Remove member"
 	on:click={() => open = true}>
 	delete
 </IconButton>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
 	import Dialog, { Title, Content, Actions, InitialFocus } from '@smui/dialog';
 	import { onMount } from 'svelte';
 	import Button from '@smui/button';
@@ -10,7 +11,6 @@
 	import type { MemberKoperasi, UnitKoperasi } from '$lib';
 	import { unit_koperasi } from '$lib/store';
 	import Select, { Option } from '@smui/select';
-	import dayjs from 'dayjs';
 	import IconButton from '@smui/icon-button';
 	import { initMember } from './store';
 
@@ -18,6 +18,7 @@
 	export let limit = 0; //parseInt($page.url.searchParams.get('limit') ?? '0');
 	export let txt = ''; //$page.url.searchParams.get('txt') ?? '';
 
+	const dispatch = createEventDispatcher();
 	let fetchSuccess = false;
 	let open = false;
 
@@ -166,6 +167,7 @@
 		}
 		open = false;
 		fetchSuccess = false;
+		dispatch("update", {data: {...member}})
 	}
 
 	$: if (clicked === 'yes') {
@@ -178,9 +180,11 @@
 	}
 
 	$: setSelectedUnit(member.unit_id);
+
 </script>
 
 <IconButton
+	title="Edit member"
 	size={member.member_id === 0 ? 'normal' : 'button'}
 	class="material-icons icon"
 	on:click={async () => {
@@ -231,6 +235,7 @@
 				<Textfield
 					bind:dirty
 					bind:value={member.name}
+					input$maxlength={50}
 					label="Nama"
 					type="text"
 					invalid={!isNameValid}
@@ -242,6 +247,7 @@
 				<Textfield
 					label="Alamat"
 					variant="filled"
+					input$maxlength={128}
 					input$emptyValueUndefined
 					input$placeholder="e.g. Jl. Aria Wiralodra No. 11"
 					bind:dirty
@@ -250,6 +256,7 @@
 				<Textfield
 					label="Telephone"
 					variant="filled"
+					input$maxlength={25}
 					input$emptyValueUndefined
 					input$placeholder="e.g. 0851 XXXX XXXX"
 					bind:dirty

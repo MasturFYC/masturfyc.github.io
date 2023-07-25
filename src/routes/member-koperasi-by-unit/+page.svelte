@@ -180,6 +180,7 @@
 	* :global(.w-28) {
 		width: 28px;
 	}
+
 	* :global(.shaped-outlined),
 	* :global(.shaped-outlined .mdc-select__anchor) {
 		border-radius: 16px;
@@ -191,7 +192,8 @@
 		padding-right: 0;
 	}
 	* :global(.shaped-outlined .mdc-notched-outline .mdc-notched-outline__leading) {
-		border-radius: 16px 0 0 16px;		
+		border-radius: 16px 0 0 16px;
+		width: 28px;
 	}
 	* :global(.shaped-outlined .mdc-notched-outline .mdc-notched-outline__trailing) {
 		border-radius: 0 16px 16px 0;

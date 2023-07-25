@@ -36,7 +36,7 @@
         Perusahaan ini terdaftar dengan merek dagang yang memiliki kekuatan hukum. Sehingga tidak ada pihak lain yang dapat menggunakan nama/tanda/simbol yang sama dengan apa yang sudah digunakan. Hal ini yang membuat merek dagang penting untuk dimiliki. Menurut Undang-Undang Nomor 15 Tahun 2001 tentang Merek, "<i>Merek Dagang adalah Merek yang digunakan pada barang yang diperdagangkan oleh seseorang atau beberapa orang secara bersama-sama atau badan hukum untuk membedakan barang-barang sejenis lainnya</i>".
       </div>
     </div>
-  <div class="flex-1 w-min-300" style={"background-image: url('https://serayunews.com/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-25-at-13.32.43-1024x683.jpeg');background-position-y: center;background-size: cover;"}>{''}</div>
+  <div class="flex-1 w-min-300" style={"background-image: url('https://kominfo.jatimprov.go.id/uploads/photonews/21/06/af3ab6d23b82653576867dbeaf5641ee.jpg');background-position-y: center;background-size: cover;"}>{''}</div>
   </div>
 </div>
 <div class="sec-ligth">
