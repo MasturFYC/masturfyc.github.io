@@ -124,9 +124,9 @@
 		});
 
     if(data.id > 0) {
-      console.log(data)
-      loadTransaction(data.id)
-    }
+			trx.id = data.id;
+     	client.invalidateQueries(['trx', { id: member.member_id }])
+		}
   }
 
   $: setSelectedAccount(trx.details)
