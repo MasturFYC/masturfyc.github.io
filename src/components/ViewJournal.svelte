@@ -5,6 +5,7 @@
 	import Button, { Label } from '@smui/button';
 	import { numberFormater } from '$lib';
 	import dayjs from 'dayjs';
+	import Property from './Property.svelte';
 
 	let open = false;
 	let clicked = 'no';
@@ -75,6 +76,9 @@
 	</Content>
 
 	<Actions>
+		<div class="flex-1 font-sm">
+			Updated at: {dayjs(trx?.updated_at).format('DD-MM-YYYY')}, by: {trx?.updated_by}
+		</div>
 		<Button
 			type="button"
 			title="Save setting"
@@ -105,5 +109,9 @@
 	}
 	.text-left {
 		text-align: left;
+	}
+	.font-sm {
+		font-size: smaller;
+		color: var(--label-color);
 	}
 </style>

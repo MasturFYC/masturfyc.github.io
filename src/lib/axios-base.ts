@@ -1,13 +1,17 @@
 import axios from 'axios';
 //import type {AxiosResponse} from 'axios'
-import { user, refresh_token as refToken, acces_token as accToken } from './store';
+import { user, user_role, refresh_token as refToken, acces_token as accToken } from './store';
 const instance = axios.create({ baseURL: import.meta.env.VITE_API_URL });
 
 let access_token = '';
 let refresh_token = '';
+let current_user = '';
+let current_role = '';
 
 accToken.subscribe((o) => (access_token = o));
 refToken.subscribe((o) => (refresh_token = o));
+user.subscribe((o) => (current_user = o));
+user_role.subscribe((o) => (current_role = o));
 
 function saveToken(acc_token: string, refresh_token: string) {
 	//  sessionStorage.setItem("access_token", access_token);
@@ -26,6 +30,8 @@ instance.interceptors.request.use((config) => {
 
 	if (access_token) {
 		config.headers['Authorization'] = `Bearer ${access_token}`;
+		config.headers['x-user'] = current_user;
+		config.headers['x-role'] = current_role;
 	}
 	return config;
 });

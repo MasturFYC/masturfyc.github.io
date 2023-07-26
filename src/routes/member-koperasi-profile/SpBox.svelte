@@ -8,11 +8,11 @@
 	import Textfield from '@smui/textfield';
 	import ViewJournal from '../../components/ViewJournal.svelte';
 	import Select, { Option } from '@smui/select';
+	import { coa_payments } from '$lib/store';
 
 	const client = useQueryClient();
 
 	export let member: MemberKoperasi;
-	export let coas: iAccount[] = [];
 
 	const initDetail: TransactionDetail = {
 		id: 0,
@@ -84,8 +84,8 @@
 	});
 
 	function getAccountName(e: number, name = 'Simpanan pokok') {
-		if (coas && coas.length > 0) {
-			const d = coas.filter((o) => o.id === e)[0];
+		if ($coa_payments.length > 0) {
+			const d = $coa_payments.filter((o) => o.id === e)[0];
 			if (d) {
 				return d.name;
 			}
@@ -95,7 +95,7 @@
 
 	async function fetchTransaction(id: number) {
 		const { data } = await axios.get<Transaction>(
-			`/koperasi/member/simpanan/${id}/${accountId}/1`
+			`/koperasi/member/simpanan/${id}/${accountId}`
 		);
 		return data;
 	}
@@ -129,8 +129,8 @@
 	const setSelectedAccount = (details: TransactionDetail[] | undefined) => {
 		if (details && details.length > 0) {
 			const d = details.filter((o) => o.account_id < 200)[0];
-			if (d && coas && coas.length > 0) {
-				const p = coas.filter((f) => f.id === d.account_id)[0];
+			if (d && $coa_payments.length > 0) {
+				const p = $coa_payments.filter((f) => f.id === d.account_id)[0];
 				if (p) {
 					selectedAccount = p;
 				}
@@ -191,7 +191,7 @@
 						variant="filled"
 						bind:value={selectedAccount}
 					>
-						{#each coas as c (c.id)}
+						{#each $coa_payments as c (c.id)}
 							<Option value={c}>{c.name}</Option>
 						{/each}
 					</Select>

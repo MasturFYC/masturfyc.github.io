@@ -47,6 +47,7 @@ export type Transaction = {
 	created_at: string;
 	updated_at: string;
 	is_valid: boolean;
+	updated_by?: string;
 	details?: TransactionDetail[];
 };
 

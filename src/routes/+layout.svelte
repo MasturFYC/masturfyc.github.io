@@ -151,7 +151,6 @@
     flex-direction: column;
     row-gap: 0;
     position: relative;
-    justify-content: space-between;
     flex: 1;
     min-height: 100vh;
   }

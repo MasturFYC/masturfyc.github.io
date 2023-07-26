@@ -1,4 +1,4 @@
-import type { UnitKoperasi } from './index';
+import type { UnitKoperasi, iAccount } from './index';
 import { writable } from 'svelte/store';
 
 let persistedUser = localStorage.getItem('user');
@@ -19,3 +19,4 @@ export const search_name = writable('');
 export let unit_koperasi = writable<UnitKoperasi[]>([]);
 export const theme = writable<string>('light');
 export const toggleTheme = writable<boolean>(false);
+export let coa_payments = writable<iAccount[]>([]);

@@ -11,7 +11,8 @@
 		color: var(--label-color, rgba(0, 0, 0, 0.75));
 		//font-style: oblique;
     cursor: default;
-    font-size: smaller;
+    font-size: 0.85em;
+    line-height: 1.0em;
 	}
   .p-label::after {
     content: ':';
@@ -19,6 +20,6 @@
     padding-left: 4px;
   }
   .p-value {
-    font-size: medium;
+    font-size: 1.1em;
   }
 </style>

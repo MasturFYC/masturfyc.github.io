@@ -12,24 +12,23 @@
 	import SwBox from './SwBox.svelte';
 	import Property from '../../components/Property.svelte';
 	import SwForm from './SwForm.svelte';
-	import { user, user_role } from '$lib/store';
 
 	const client = useQueryClient();
-	const title = 'Simpanan wajib';
+	const title = 'Hari Raya';
 
 	export let member: MemberKoperasi;
 	export let coas: iAccount[] = [];
 	let fetchSuccess = false;
 	let counter = 1;
 
-	const accountId = 302;
+	const accountId = 303;
 	const accountCash = 101;
 
 	const initDetail: TransactionDetail = {
 		id: 0,
 		trx_id: 0,
 		account_id: 0,
-		description: title,
+		description: `Simpanan ${title.toLowerCase()}`,
 		debt: 0,
 		cred: 0,
 		ref_id: 0,
@@ -39,12 +38,12 @@
 
 	const initTrx: Transaction = {
 		id: 0,
-		name: 'SIMPANAN-WAJIB',
+		name: 'SHR',
 		member_id: member.member_id,
 		created_at: dayjs().format('YYYY-MM-DD'),
 		updated_at: dayjs().format('YYYY-MM-DD'),
 		is_valid: true,
-		description: `Penerimaan ${title.toLowerCase()} dari  ${member.name}`,
+		description: `Penerimaan simpanan ${title.toLowerCase()} dari ${member.name}`,
 		details: [
 			{ ...initDetail, account_id: accountId, cred: 0, name: getAccountName(accountId) },
 			{ ...initDetail, account_id: accountCash, debt: 0, name: getAccountName(accountCash) }
@@ -53,7 +52,7 @@
 
 	let trx: Transaction = { ...initTrx };
 
-	function getAccountName(e: number, name = title) {
+	function getAccountName(e: number, name = `Simpanan ${title.toLowerCase()}`) {
 		if (coas && coas.length > 0) {
 			const d = coas.filter((o) => o.id === e)[0];
 			if (d) {
@@ -225,7 +224,7 @@
 		return 0;
 	};
 
-	$: query_key = ['trxs', 'sw', { id: member.member_id }];
+	$: query_key = ['trxs', 'shr', { id: member.member_id }]
 	$: queryOptions = {
 		queryKey: query_key,
 		queryFn: () => fetchTransactions(member.member_id)
@@ -241,11 +240,11 @@
 
 <div class="flex-row gap-x-2 flex-center">
 	{#if counter === 0}
-		<div>{member.name} belum mempunyai data {title.toLowerCase()}.</div>
+		<div>{member.name} belum mempunyai data simpanan {title.toLowerCase()}.</div>
 	{:else}
-		<div>Data {title.toLowerCase()}</div>
+		<div>Data simpanan {title.toLowerCase()}</div>
 	{/if}
-	<SwForm trx={{ ...trx }} on:changeSW={changeSW} {title} />
+	<SwForm trx={{ ...trx }} on:changeSW={changeSW} title={`Simpanan ${title.toLowerCase()}`} />
 </div>
 
 <Query options={queryOptions}>
@@ -256,10 +255,15 @@
 			<div>Error: {showErrorMessage(queryResult)}</div>
 		{:else}
 			{#each queryResult.data ?? [] as c (c.id)}
-				<SwBox trx={c} on:delete={deleteItem} on:changeSW={changeSW} />
+				<SwBox
+					trx={c}
+					on:delete={deleteItem}
+					on:changeSW={changeSW}
+					title={`Simpanan ${title.toLowerCase()}`}
+				/>
 			{/each}
 			<Property
-				label={`Total ${title.toLowerCase()}`}
+				label={`Total simpanan ${title.toLowerCase()}`}
 				value={getTotal(queryResult.data).toLocaleString('id-ID')}
 			/>
 		{/if}

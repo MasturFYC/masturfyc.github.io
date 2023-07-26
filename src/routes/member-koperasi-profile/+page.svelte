@@ -6,12 +6,12 @@
 	import type { MemberKoperasi, iAccount } from '$lib';
 	import { initMember } from '../member-koperasi/store';
 	import ProfileBox from './ProfileBox.svelte';
-
-	import { goto } from '$app/navigation';
 	import Tab, { Label } from '@smui/tab';
 	import TabBar from '@smui/tab-bar';
 	import SpBox from './SpBox.svelte';
 	import SwList from './SwList.svelte';
+	import { coa_payments } from '$lib/store';
+	import ShrList from './ShrList.svelte';
 
 	const member_id = parseInt($page.url.searchParams.get('id') ?? '0');
 	const client = useQueryClient();
@@ -23,7 +23,11 @@
 	const tab_sw = 'Simpanan Wajib';
 	const tab_shr = 'Simpanan Hari Raya';
 	const tab_pin = 'Pinjaman';
-	const tabs = [tab_profile, tab_sp, tab_sw, tab_shr, tab_pin];
+	const tab_resume = 'Resume';
+	const tab_history = 'History';
+	const tab_setting = 'Settings';
+	
+	const tabs = [tab_profile, tab_pin, tab_sw, tab_shr, tab_sp, tab_resume, tab_history, tab_setting];
 	let active = tab_profile;
 
 	async function fetchMember(id: number) {
@@ -47,12 +51,14 @@
 		const data =
 			client.getQueryData<iAccount[]>(['coa', 'payment']) ??
 			(await client.fetchQuery<iAccount[]>(['coa', 'payment'], () => fetchCoaPayments()));
-		coas = data ?? [];
+		coa_payments.update(() => data ?? []);
 	};
 
 	onMount(() => {
 		loadMember(member_id);
-		loadAccount();
+		if ($coa_payments.length === 0) {
+			loadAccount();
+		}
 	});
 </script>
 
@@ -62,7 +68,6 @@
 
 <section class="mt-20 mb-20">
 	<div class="title mb-20">{member.name}</div>
-
 	<div class="flex-row flex-wrap">
 		<TabBar {tabs} let:tab bind:active>
 			<Tab {tab} minWidth>
@@ -73,9 +78,11 @@
 			{#if active === tab_profile}
 				<ProfileBox {member} on:update={(e) => (member = e.detail.data)} />
 			{:else if active === tab_sp}
-				<SpBox {member} {coas} />
+				<SpBox {member} />
 			{:else if active === tab_sw}
-				<SwList {member} {coas} />
+				<SwList {member} />
+			{:else if active === tab_shr}
+				<ShrList {member} />
 			{/if}
 		</div>
 	</div>
