@@ -23,17 +23,6 @@
     }
   }
 
-  // function getPreferredColorScheme() {
-  //   if (window.matchMedia) {
-  //     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  //       return 'dark';
-  //     } else {
-  //       return 'light';
-  //     }
-  //   }
-  //   return 'light';
-  // }
-
   function loadTheme() {
     const mql = window?.matchMedia('(prefers-color-scheme: dark)');
     theme.update(() => (mql.matches ? 'dark' : 'light'));
@@ -89,70 +78,8 @@
       <Content>
         {#if $user}
         <List>
-          <!-- <Item
-            href="/trx"
-            on:click={() => setActive('Star')}
-            activated={active === 'Star'}
-            aria-current={$page.url.pathname.startsWith('/trx') ? 'page' : undefined}
-            >
-            <Graphic class="material-icons" aria-hidden="true">star</Graphic>
-            <Text>Transaksi</Text>
-          </Item>
-          <Item
-            href="/beban"
-            on:click={() => setActive('Sent Mail')}
-            activated={active === 'Sent Mail'}
-            aria-current={$page.url.pathname.startsWith('/beban') ? 'page' : undefined}
-            >
-            <Graphic class="material-icons" aria-hidden="true"><span class="material-icons">
-            view_list
-            </span></Graphic>
-            <Text>Beban</Text>
-          </Item>          
-          <Item
-            href="/journal"
-            on:click={() => setActive('Journal')}
-            activated={active === 'Journal'}
-            aria-current={$page.url.pathname.startsWith('/journal') ? 'page' : undefined}
-            >
-            <Graphic class="material-icons" aria-hidden="true">leaderboard</Graphic>
-            <Text>Jurnal umum</Text>
-          </Item>
-          <Item
-            activated={active === 'Order'}
-            href="/orders"
-            aria-current={$page.url.pathname.startsWith('/orders') ? 'page' : undefined}
-            on:click={async () => {
-            setActive('Order');
-            }}
-            >
-            <Graphic class="material-icons" aria-hidden="true">shopping_cart</Graphic>
-            <Text>Order</Text>
-          </Item> -->
           <Separator />
           <Subheader tag="h6">Master</Subheader>
-          <!-- <Item
-            activated={active === 'Coa'}
-            href="/coa"
-            aria-current={$page.url.pathname.startsWith('/coa') ? 'page' : undefined}
-            on:click={async () => {
-            setActive('Coa');
-            }}
-            >
-            <Graphic class="material-icons" aria-hidden="true">add_task</Graphic>
-            <Text>Chart of Account</Text>
-          </Item> -->
-          <!-- <Item
-            activated={active === 'Paket'}
-            href="/paket"
-            aria-current={$page.url.pathname.startsWith('/coa') ? 'page' : undefined}
-            on:click={async () => {
-            setActive('Paket');
-            }}
-            >
-            <Graphic class="material-icons" aria-hidden="true">record_voice_over</Graphic>
-            <Text>Paket</Text>
-          </Item> -->
           <Item
             activated={active === 'UnitKoperasi'}
             href="/unit-koperasi"
@@ -191,6 +118,7 @@
           </Item>
         </List>
         {/if}
+        <Footer />
       </Content>
     </Drawer>
     <!-- Don't include fixed={false} if this is a page wide drawer.
@@ -204,7 +132,6 @@
       <main class="main-content flex-1">
         <slot />
       </main>
-      <Footer />
     </AppContent>
   </div>
 </QueryClientProvider>
@@ -212,43 +139,12 @@
   .flex-center {
     align-items: center;
   }
-  //.div-main {
-  //  margin: 0;
-//    width: 100%;
-//    max-width: 100vw;
-//    min-height: 100vh;
-//    position: relative;
-//    border: 5px solid #999;
- // }
 
-  // * :global(.card-display) {
-  //   display: flex;
-  //   flex-wrap: wrap;
-  //   justify-content: center;
-  // }
-  // * :global(.card-container) {
-  //   display: inline-flex;
-  //   /* justify-content: center; */
-  //   align-items: center;
-  //   min-height: 200px;
-  //   width: 380px;
-  //   max-width: 100%;
-  //   overflow-x: auto;
-  //   margin-right: 20px;
-  //   margin-bottom: 20px;
-  // }
-  // * :global(.card-container > *) {
-  //   margin: 0 auto;
-  //   background-color: var(--mdc-theme-text-hint-on-background, rgba(255, 255, 255, 0.15));
-  //   border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.1));
-  // }
   .drawer-container {
     // display: block;
     position: relative;
     overflow-x: hidden;
     z-index: 0;
-    // height: 100%;
-    // min-height: calc(100vh - 160px);
   }
   * :global(.app-content) {
     display: flex;
@@ -257,27 +153,10 @@
     position: relative;
     justify-content: space-between;
     flex: 1;
-//    overflow: auto;
-//    position: relative;
     min-height: 100vh;
   }
   
   .main-content {
-    //    overflow: auto;
     box-sizing: border-box;
   }
-  // @media screen and (max-width: 600px) {
-  //   // * :global(.card-container) {
-  //   //   margin-right: 0;
-  //   //   padding-right: 0;
-  //   //   padding-left: 0;
-  //   // }
-  //   .div-main {
-  //     display: inherit;
-  //     justify-items: center;
-  //     /* margin-right: 0;
-  //     padding-right: 2px;
-  //     padding-left: 4px; */
-  //   }
-  // }
 </style>

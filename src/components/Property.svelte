@@ -9,12 +9,16 @@
 <style lang="scss">
 	.p-label {
 		color: var(--label-color, rgba(0, 0, 0, 0.75));
-		font-style: oblique;
+		//font-style: oblique;
     cursor: default;
+    font-size: smaller;
 	}
   .p-label::after {
     content: ':';
     font-style: normal;
     padding-left: 4px;
+  }
+  .p-value {
+    font-size: medium;
   }
 </style>

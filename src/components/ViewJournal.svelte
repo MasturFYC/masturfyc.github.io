@@ -42,7 +42,7 @@
 	aria-describedby="simple-content"
 	bind:open
 >
-	<Title id="simple-title">Journal</Title>
+	<Title id="simple-title">Journal #{trx?.id}</Title>
 	<Content id="simple-content" style="overflow:unset">
     {#if trx}
     <div class="mb-10">{dayjs(trx.created_at).format('DD MMMM YYYY')}, {trx.description}</div>

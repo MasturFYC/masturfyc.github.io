@@ -9,8 +9,9 @@
 	@use '@material/theme/color-palette';
 
 	.div-footer {
-		min-height: 120px;
+		//min-height: 120px;
+		margin-top: 48px;
 		padding: 12px;
-		background-color: var(--footer-background);
+		//background-color: var(--footer-background);
 	}
 </style>

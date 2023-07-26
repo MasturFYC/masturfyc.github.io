@@ -16,8 +16,7 @@
 
 </script>
 
-<div class="box-shadow radius-1 border-1 mt-10">
-	<div class="div-content flex-col gap-y-2">
+	<div class="flex-col gap-y-2">
 		<div class="flex-row flex-center">
 			<div class="flex-1">
 				<Property label={'No. Anggota'} value={member.code} />
@@ -31,20 +30,10 @@
 		<Property label={'Telephone'} value={member.phone} />
 		<Property label={'Masih aktif?'} value={member.is_active ? 'Ya' : 'Tidak'} />
 	</div>
-</div>
 
 <style lang="scss">
 	* :global(.icon:visited) {
 		color: var(--text-color);
-	}
-
-	.div-content {
-		margin: 12px;
-	}
-	.box-shadow {
-		box-shadow: 1px 1px 5px var(--shadow-color);
-		flex: 1;
-		background-color: var(--control-background);
 	}
 	.gap-y-2 {
 		row-gap: 12px;

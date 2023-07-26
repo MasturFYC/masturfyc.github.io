@@ -44,7 +44,7 @@
 				>
 			</Section>
 			<Section align="end" toolbar>
-				<IconButton class="material-icons" aria-label="Download">account_circle</IconButton>
+				<IconButton class="material-icons icons" aria-label="Download">account_circle</IconButton>
 				<IconButton
 					on:click={()=>goto("/login")}
 					class="material-icons"
@@ -57,7 +57,7 @@
 
 <style lang="scss">
 	@use '@material/theme/color-palette';
-
+	
 	a {
 		text-decoration: none;
 		color: inherit;
@@ -92,10 +92,12 @@
 		}
 	}
 	* :global(.primary) {
-		background-color: color-palette.$amber-900;
-		color: color-palette.$grey-100;
+		background-color: var(--control-background); // color-palette.$amber-900;
+		color: var(--text-color);
+		padding: 6px 0;
+		// color: color-palette.$grey-100;
 	}
 	* :global(.material-icons) {
-		color: color-palette.$grey-100;
+		color: var(--text-color);
 	}
 </style>
