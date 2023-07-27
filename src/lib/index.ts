@@ -67,3 +67,8 @@ export type Loan = {
 };
 
 export type LoanTransaction = Transaction & {loan: Loan};
+
+export type PropertyValue = {
+	id: number;
+	name: string;
+}

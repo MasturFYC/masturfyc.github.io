@@ -111,7 +111,7 @@
 			period: p,
 			principal: _principal,
 			service_price: _service,
-			provision: _provision
+			provision: _provision,
 		};
 
 		const details = trx.details;
@@ -134,7 +134,11 @@
 			}
 		}
 
-		return { ...trx, loan: loan, details: [...(details ?? [])] };
+		return { ...trx, 
+			description: description,
+			created_at: created_at,
+			loan: loan,
+			details: [...(details ?? [])] };
 	}
 
 	// const setTransactionDetils = (e: TransactionDetail[] | undefined) => {
@@ -200,8 +204,8 @@
 
 <IconButton
 	title={trx.id === 0 ? `Ajukan ${title.toLowerCase()}` : `Edit ${title.toLowerCase()}`}
-	size={trx.id === 0 ? 'normal' : 'button'}
 	class="material-icons icon"
+	size="{trx.id === 0 ? 'normal' : 'button'}"
 	on:click={async () => {
 		open = true;
 	}}
@@ -253,7 +257,6 @@
 								bind:value={created_at}
 								label="Tanggal transaksi"
 								type="date"
-								class="flex-1"
 								variant="filled"
 							/>
 							<Select
@@ -262,7 +265,6 @@
 								variant="filled"
 								invalid={!isAccountValid}
 								bind:value={selectedAccount}
-								class="flex-1"
 							>
 								{#each $coa_payments as c (c.id)}
 									<Option value={c}>{c.name}</Option>
@@ -282,9 +284,9 @@
 					/>
 
 			</div>
-			<div>
-				<div class="flex-row gap-x-2 gap-y-2 flex-wrap">
-					<div class="flex-col gap-y-2 flex-1">
+			<div class="w-120">
+				<div class="flex-row gap-x-4 gap-y-2 flex-wrap mb-10">
+					<div class="flex-col gap-y-2">
 						<Property label="Prosentase" value={`${prosentase.toLocaleString('id-ID')}%`} />
 						<Property label="Provisi" value={provision.toLocaleString('id-ID')} />
 					</div>
@@ -329,7 +331,20 @@
 		row-gap: 12px;
 	}
 
+	.gap-x-4 {
+		column-gap: 24px;
+	}
+
 	.gap-x-2 {
 		column-gap: 12px;
+	}
+	.w-120 {
+		width: 250px;
+	}
+
+	@media screen and (max-width: 600px) {
+		.w-120 {
+		width: 100%;
+	}
 	}
 </style>

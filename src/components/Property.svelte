@@ -8,7 +8,7 @@
 </div>
 <style lang="scss">
 	.p-label {
-		color: var(--label-color, rgba(0, 0, 0, 0.75));
+		color: var(--text-content);
 		//font-style: oblique;
     cursor: default;
     font-size: 0.85em;

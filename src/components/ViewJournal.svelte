@@ -11,6 +11,7 @@
 	let clicked = 'no';
 
   export let trx: Transaction | undefined = undefined;
+	export let disabled = false;
 
   const getTotalDebt = (details: TransactionDetail[] | undefined): number => {
     if(details && details.length > 0) {
@@ -31,6 +32,7 @@
 	size="button"
 	title="View journal"
   class="material-icons"
+	disabled={disabled}
 	on:click={() => {
 		clicked = 'no';
 		open = true;
@@ -43,10 +45,10 @@
 	aria-describedby="simple-content"
 	bind:open
 >
-	<Title id="simple-title">Journal #{trx?.id}</Title>
-	<Content id="simple-content" style="overflow:unset">
+	<Title id="simple-title" style={'margin: 0 12px;padding:0'}>Journal #{trx?.id}</Title>
+	<Content id="simple-content" style="overflow:unset;margin:0 12px;padding:0">
     {#if trx}
-    <div class="mb-10">{dayjs(trx.created_at).format('DD MMMM YYYY')}, {trx.description}</div>
+    <div class="mb-10 div-desc">{dayjs(trx.created_at).format('DD MMMM YYYY')}, {trx.description}</div>
 		<table>
 			<thead>
 				<th class="text-left">AKUN</th>
@@ -75,7 +77,7 @@
     {/if}
 	</Content>
 
-	<Actions>
+	<Actions style={'margin: 0 12px;padding:0'}>
 		<div class="flex-1 font-sm">
 			Updated at: {dayjs(trx?.updated_at).format()}, by: {trx?.updated_by}
 		</div>
@@ -111,6 +113,13 @@
 	}
 	.font-sm {
 		font-size: smaller;
-		color: var(--label-color);
+		color: var(--text-content);
+		font-family: var(--font-mono);
 	}
+	.div-desc,
+	td, th {
+		font-family: var(--font-mono);
+		font-size: smaller;
+	}
+
 </style>
