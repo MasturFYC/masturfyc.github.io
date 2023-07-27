@@ -8,15 +8,15 @@
 	import ProfileBox from './ProfileBox.svelte';
 	import Tab, { Label } from '@smui/tab';
 	import TabBar from '@smui/tab-bar';
+	import { coa_payments } from '$lib/store';
 	import SpBox from './SpBox.svelte';
 	import SwList from './SwList.svelte';
-	import { coa_payments } from '$lib/store';
 	import ShrList from './ShrList.svelte';
+	import SwPin from './SwPin/index.svelte';
 
 	const member_id = parseInt($page.url.searchParams.get('id') ?? '0');
 	const client = useQueryClient();
 	let member: MemberKoperasi = { ...initMember };
-	let coas: iAccount[] = [];
 
 	const tab_profile = 'Profile';
 	const tab_sp = 'Simpanan Pokok';
@@ -83,6 +83,8 @@
 				<SwList {member} />
 			{:else if active === tab_shr}
 				<ShrList {member} />
+			{:else if active === tab_pin}
+				<SwPin {member} />
 			{/if}
 		</div>
 	</div>

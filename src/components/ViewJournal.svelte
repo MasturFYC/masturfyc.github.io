@@ -77,11 +77,10 @@
 
 	<Actions>
 		<div class="flex-1 font-sm">
-			Updated at: {dayjs(trx?.updated_at).format('DD-MM-YYYY')}, by: {trx?.updated_by}
+			Updated at: {dayjs(trx?.updated_at).format()}, by: {trx?.updated_by}
 		</div>
 		<Button
 			type="button"
-			title="Save setting"
 			defaultAction
 			color="primary"
 			ripple

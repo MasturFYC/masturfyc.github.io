@@ -12,7 +12,7 @@
 		//font-style: oblique;
     cursor: default;
     font-size: 0.85em;
-    line-height: 1.0em;
+    line-height: 1.5em;
 	}
   .p-label::after {
     content: ':';
@@ -20,6 +20,6 @@
     padding-left: 4px;
   }
   .p-value {
-    font-size: 1.1em;
+    font-size: 1.065em;
   }
 </style>

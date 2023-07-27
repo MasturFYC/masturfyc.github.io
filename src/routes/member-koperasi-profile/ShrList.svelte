@@ -17,7 +17,7 @@
 	const title = 'Hari Raya';
 
 	export let member: MemberKoperasi;
-	export let coas: iAccount[] = [];
+
 	let fetchSuccess = false;
 	let counter = 1;
 
@@ -45,22 +45,22 @@
 		is_valid: true,
 		description: `Penerimaan simpanan ${title.toLowerCase()} dari ${member.name}`,
 		details: [
-			{ ...initDetail, account_id: accountId, cred: 0, name: getAccountName(accountId) },
-			{ ...initDetail, account_id: accountCash, debt: 0, name: getAccountName(accountCash) }
+			{ ...initDetail, account_id: accountId, cred: 0, name: 'Simpanan hari raya' },
+			{ ...initDetail, account_id: accountCash, debt: 0, name: 'Kas/Bank' }
 		]
 	};
 
 	let trx: Transaction = { ...initTrx };
 
-	function getAccountName(e: number, name = `Simpanan ${title.toLowerCase()}`) {
-		if (coas && coas.length > 0) {
-			const d = coas.filter((o) => o.id === e)[0];
-			if (d) {
-				return d.name;
-			}
-		}
-		return name;
-	}
+	// function getAccountName(e: number, name = `Simpanan ${title.toLowerCase()}`) {
+	// 	if (coas && coas.length > 0) {
+	// 		const d = coas.filter((o) => o.id === e)[0];
+	// 		if (d) {
+	// 			return d.name;
+	// 		}
+	// 	}
+	// 	return name;
+	// }
 
 	async function fetchTransactions(id: number) {
 		const { data } = await axios.get<Transaction[]>(
@@ -238,14 +238,11 @@
 	}
 </script>
 
-<div class="flex-row gap-x-2 flex-center">
-	{#if counter === 0}
-		<div>{member.name} belum mempunyai data simpanan {title.toLowerCase()}.</div>
-	{:else}
-		<div>Data simpanan {title.toLowerCase()}</div>
-	{/if}
-	<SwForm trx={{ ...trx }} on:changeSW={changeSW} title={`Simpanan ${title.toLowerCase()}`} />
-</div>
+{#if counter === 0}
+	<div>{member.name} belum mempunyai data simpanan {title.toLowerCase()}.</div>
+{:else}
+	<div class="mb-10">Data simpanan {title.toLowerCase()}</div>
+{/if}
 
 <Query options={queryOptions}>
 	<div slot="query" let:queryResult>
@@ -269,6 +266,7 @@
 		{/if}
 	</div>
 </Query>
+<SwForm trx={{ ...trx }} on:changeSW={changeSW} title={`Simpanan ${title.toLowerCase()}`} />
 
 <style lang="scss">
 	* :global(.icon:visited) {

@@ -56,3 +56,14 @@ export const numberFormater = Intl.NumberFormat('id-ID', {
 	minimumSignificantDigits: 1,
 	useGrouping: true
 });
+
+export type Loan = {
+	trx_id: number;
+	nominal: number;
+	provision: number;
+	period: number;
+	principal: number;
+	service_price: number;
+};
+
+export type LoanTransaction = Transaction & {loan: Loan};
