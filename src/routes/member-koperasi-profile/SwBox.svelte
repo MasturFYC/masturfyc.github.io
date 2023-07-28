@@ -9,7 +9,7 @@
 	const dispatch = createEventDispatcher();
 
 	export let trx: Transaction;
-	export let title = 'Simpanan';
+	export let title = 'Simpanan wajib';
 
 	const getSW = (e: TransactionDetail[] | undefined) => {
 
@@ -24,7 +24,7 @@
 
 
 	const changeSW = (e: CustomEvent) => {
-		dispatch('changeSW', {data: e.detail.data});
+		dispatch('change', {data: e.detail.data});
 	}
 
 
@@ -40,7 +40,7 @@
 			</div>
 		</div>
 		<div>
-			<SwForm {trx} on:changeSW={changeSW} {title} />
+			<SwForm {trx} on:change={changeSW} {title} />
 			<ViewJournal {trx} />
 			<DeleteItem trxId={trx.id} on:delete={(e) => dispatch('delete', { data: trx.id })} />
 		</div>

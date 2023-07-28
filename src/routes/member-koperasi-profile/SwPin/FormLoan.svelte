@@ -11,11 +11,9 @@
 	import { coa_payments } from '$lib/store';
 	import Property from '../../../components/Property.svelte';
 	import { numberToText } from '$lib/conver-number-to-string';
+	import { acc_cash, acc_loan, acc_provision } from '../store';
 
 	const dispatch = createEventDispatcher();
-	const acc_provision = 402;
-	const acc_cash = 101;
-	const acc_loan = 112;
 
 	export let trx: LoanTransaction;
 	export let title = 'Pinjaman';
@@ -45,14 +43,14 @@
 		}
 	};
 
-	const setPrice = (details: TransactionDetail[] | undefined) => {
-		if (details && details.length > 0) {
-			const d = details.filter((o) => o.account_id === acc_provision)[0];
-			if (d) {
-				price = d.debt;
-			}
-		}
-	};
+	// const setPrice = (details: TransactionDetail[] | undefined) => {
+	// 	if (details && details.length > 0) {
+	// 		const d = details.filter((o) => o.account_id === acc_provision)[0];
+	// 		if (d) {
+	// 			price = d.debt;
+	// 		}
+	// 	}
+	// };
 
 	const setData = (e: LoanTransaction) => {
 		setSelectedAccount(e.details);
@@ -289,6 +287,7 @@
 					<div class="flex-col gap-y-2">
 						<Property label="Prosentase" value={`${prosentase.toLocaleString('id-ID')}%`} />
 						<Property label="Provisi" value={provision.toLocaleString('id-ID')} />
+						<Property label="Uang diterima kreditur" value={(price - provision).toLocaleString('id-ID')} />
 					</div>
 					<div class="flex-col gap-y-2 flex-1">
 						<Property label="Pokok" value={principal.toLocaleString('id-ID')} />
@@ -299,7 +298,7 @@
 						/>
 					</div>
 				</div>
-				<Property label="Terbilang" value={numberToText(price.toString())} />
+				<Property label="Terbilang" value={numberToText((price - provision).toString())} />
 	
 			</div>
 

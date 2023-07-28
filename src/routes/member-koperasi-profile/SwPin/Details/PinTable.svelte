@@ -1,72 +1,70 @@
 <script lang="ts">
-	import {
-		Query,
-		useMutation,
-		useQueryClient,
-		type QueryObserverResult
-	} from '@sveltestack/svelte-query';
+	import type {
+		LoanTransaction,
+		MemberKoperasi,
+		PaymentTransaction,
+		Transaction
+	} from '$lib';
+	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
+	import { acc_cash, acc_loan, acc_payment, acc_service, initDetail } from '../../store';
 	import axios from '$lib/axios-base';
-	import type { Transaction, TransactionDetail, MemberKoperasi, iAccount } from '$lib';
+
+	import { Query, useMutation, useQueryClient, type QueryObserverResult } from '@sveltestack/svelte-query';
 	import dayjs from 'dayjs';
+	import PaymentDialog from './PaymentForm.svelte';
+	import ViewJournal from '../../../../components/ViewJournal.svelte';
+	import DeleteItem from '../../DeleteItem.svelte';
 
-	import SwBox from './SwBox.svelte';
-	import Property from '../../components/Property.svelte';
-	import SwForm from './SwForm.svelte';
-
-	const client = useQueryClient();
-	const title = 'Simpanan wajib';
-
+	export let trxLoan: LoanTransaction;
 	export let member: MemberKoperasi;
 
+	const client = useQueryClient();
+	const query_key = ['member', 'payments', trxLoan.id];
 	let fetchSuccess = false;
-	let counter = 1;
 
-	const accountId = 302;
-	const accountCash = 101;
-
-	const initDetail: TransactionDetail = {
-		id: 0,
-		trx_id: 0,
-		account_id: 0,
-		description: title,
-		debt: 0,
-		cred: 0,
-		ref_id: 0,
-		name: title,
-		is_new: true
-	};
+	const title = 'Angsuran pinjaman';
 
 	const initTrx: Transaction = {
 		id: 0,
-		name: 'SIMPANAN-WAJIB',
+		name: 'LOAN-PAYMENT',
 		member_id: member.member_id,
 		created_at: dayjs().format('YYYY-MM-DD'),
 		updated_at: dayjs().format('YYYY-MM-DD'),
 		is_valid: true,
-		description: `Penerimaan ${title.toLowerCase()} dari  ${member.name}`,
+		description: `Penerimaan ${title.toLowerCase()} dari ${member.name}`,
 		details: [
-			{ ...initDetail, account_id: accountId, cred: 0, name: 'Simpanan wajib' },
-			{ ...initDetail, account_id: accountCash, debt: 0, name: 'Kas/Bank' }
+			{
+				...initDetail,
+				account_id: acc_payment,
+				name: 'Angsuran pinjaman anggota',
+				description: `${title} #${trxLoan.id}`,
+				ref_id: trxLoan.id,
+				cred: trxLoan.loan.principal
+			},
+			{
+				...initDetail,
+				account_id: acc_service,
+				name: 'Jasa pinjaman',
+				description: `${title} #${trxLoan.id}`,
+				ref_id: trxLoan.id,
+				cred: trxLoan.loan.service_price
+			},
+			{
+				...initDetail,
+				account_id: acc_cash,
+				name: 'Kas/Bank',
+				description: `${title} #${trxLoan.id}`,
+				ref_id: trxLoan.id,
+				debt: trxLoan.loan.principal + trxLoan.loan.service_price
+			}
+
 		]
 	};
 
-	let trx: Transaction = { ...initTrx };
-
-	// function getAccountName(e: number, name = title) {
-	// 	if (coas && coas.length > 0) {
-	// 		const d = coas.filter((o) => o.id === e)[0];
-	// 		if (d) {
-	// 			return d.name;
-	// 		}
-	// 	}
-	// 	return name;
-	// }
-
-	async function fetchTransactions(id: number) {
-		const { data } = await axios.get<Transaction[]>(
-			`/koperasi/member/simpanan/${id}/${accountId}?all=true`
+	async function fetchPaymnetTransactions(id: number) {
+		const { data } = await axios.get<PaymentTransaction[]>(
+			`/koperasi/member/loan/payments/${id}/${acc_loan}/${acc_payment}`
 		);
-		counter = data.length;
 		return data;
 	}
 
@@ -81,11 +79,11 @@
 			await client.cancelQueries();
 
 			// Snapshot the previous value
-			const previousData = client.getQueryData<MemberKoperasi[]>(query_key);
+			const previousData = client.getQueryData<Transaction[]>(query_key);
 
 			// Optimistically update to the new value
 			if (previousData) {
-				client.setQueryData<MemberKoperasi[]>(
+				client.setQueryData<Transaction[]>(
 					query_key,
 					previousData
 				);
@@ -98,7 +96,7 @@
 		},
 		onError: (err: any, variables: number, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<MemberKoperasi[]>(
+				client.setQueryData<Transaction[]>(
 					query_key,
 					context.previousData
 				);
@@ -193,6 +191,7 @@
 		}
 	});
 
+
 	const showErrorMessage = (queryResult: QueryObserverResult<any, unknown>) => {
 		if (queryResult.error) {
 			const test = queryResult.error as string;
@@ -201,11 +200,13 @@
 		return '';
 	};
 
+	// import LinearProgress from '@smui/linear-progress';
+	// import Button from '@smui/button';
 	const deleteItem = (e: CustomEvent) => {
 		$deleteData.mutate(e.detail.data);
 	};
 
-	const changeSW = (e: CustomEvent) => {
+	const onchange = (e: CustomEvent) => {
 		const d = e.detail.data as Transaction;
 		if (d.id === 0) {
 			$createData.mutate(d);
@@ -214,35 +215,16 @@
 		}
 	};
 
-	const getTotal = (e: Transaction[] | undefined) => {
-		if (e && e.length > 0) {
-			const details = e.map((m) => m.details?.filter((o) => o.account_id > 200)[0]);
-			if (details && details.length > 0) {
-				return details.reduce((o, t) => o + t!.cred, 0);
-			}
-		}
-		return 0;
-	};
-
-	$: query_key = ['trxs', 'sw', { id: member.member_id }];
 	$: queryOptions = {
 		queryKey: query_key,
-		queryFn: () => fetchTransactions(member.member_id)
+		queryFn: () => fetchPaymnetTransactions(trxLoan.id)
 	};
+
 
 	$: if (fetchSuccess) {
 		fetchSuccess = false;
-		if (trx.id === 0) {
-			trx = { ...initTrx };
-		}
-	}
+	}	
 </script>
-
-	{#if counter === 0}
-		<div>{member.name} belum mempunyai data {title.toLowerCase()}.</div>
-	{:else}
-		<div class="mb-10">Data {title.toLowerCase()}</div>
-	{/if}
 
 <Query options={queryOptions}>
 	<div slot="query" let:queryResult>
@@ -251,20 +233,53 @@
 		{:else if queryResult.status === 'error'}
 			<div>Error: {showErrorMessage(queryResult)}</div>
 		{:else}
-			{#each queryResult.data ?? [] as c (c.id)}
-				<SwBox trx={c} on:delete={deleteItem} on:change={changeSW} />
-			{/each}
-			<Property
-				label={`Total ${title.toLowerCase()}`}
-				value={getTotal(queryResult.data).toLocaleString('id-ID')}
-			/>
+			<DataTable table$aria-label="User list" style="width: 100%;margin-top:12px">
+				<Head>
+					<Row>
+						<Cell numeric>ANGSURAN</Cell>
+						<Cell numeric>ID</Cell>
+						<Cell>TANGGAL</Cell>
+						<Cell style="width: 100%;">AKUN</Cell>
+						<Cell numeric>DEBET</Cell>
+						<Cell numeric>KREDIT</Cell>
+						<Cell numeric>SALDO</Cell>
+						<Cell>...</Cell>
+					</Row>
+				</Head>
+				<Body>
+					{#each queryResult.data ?? [] as c, i (c.id)}
+						<Row>
+							<Cell numeric>#{i}</Cell>
+							<Cell numeric>{c.id}</Cell>
+							<Cell>{dayjs(c.created_at).format('DD-MM-YYYY')}</Cell>
+							<Cell>{c.account_id} - {c.name}</Cell>
+							<Cell numeric>{c.debt.toLocaleString('id-ID')}</Cell>
+							<Cell numeric>{c.cred.toLocaleString('id-ID')}</Cell>
+							<Cell numeric>{c.saldo.toLocaleString('id-ID')}</Cell>
+							<Cell>
+								{#if i > 0}
+									<ViewJournal trx={{...initTrx, id: c.trx_id}} />
+									<DeleteItem trxId={c.trx_id} on:delete={deleteItem} />
+								{/if}
+							</Cell>
+						</Row>
+					{/each}
+				</Body>
+			</DataTable>
+			<PaymentDialog 
+				disabled={(queryResult.data?.length ?? 0) >= trxLoan.loan.period+1}
+				trx={{ ...initTrx }} 
+				on:change={onchange} 
+				title={`Angsuran pinjaman #${queryResult.data?.length}`}/>
 		{/if}
 	</div>
 </Query>
-<SwForm trx={{ ...trx }} on:change={changeSW} {title} />
 
-<style lang="scss">
-	* :global(.icon:visited) {
-		color: var(--text-color);
-	}
-</style>
+<!-- {#each items as item (item.id)}
+      <Row>
+        <Cell numeric>{item.id}</Cell>
+        <Cell>{item.name}</Cell>
+        <Cell>{item.username}</Cell>
+        <Cell>{item.email}</Cell>
+      </Row>
+    {/each} -->

@@ -12,6 +12,7 @@
 	import SwBox from './SwBox.svelte';
 	import Property from '../../components/Property.svelte';
 	import SwForm from './SwForm.svelte';
+	import { initDetail } from './store';
 
 	const client = useQueryClient();
 	const title = 'Hari Raya';
@@ -24,18 +25,6 @@
 	const accountId = 303;
 	const accountCash = 101;
 
-	const initDetail: TransactionDetail = {
-		id: 0,
-		trx_id: 0,
-		account_id: 0,
-		description: `Simpanan ${title.toLowerCase()}`,
-		debt: 0,
-		cred: 0,
-		ref_id: 0,
-		name: title,
-		is_new: true
-	};
-
 	const initTrx: Transaction = {
 		id: 0,
 		name: 'SHR',
@@ -45,8 +34,8 @@
 		is_valid: true,
 		description: `Penerimaan simpanan ${title.toLowerCase()} dari ${member.name}`,
 		details: [
-			{ ...initDetail, account_id: accountId, cred: 0, name: 'Simpanan hari raya' },
-			{ ...initDetail, account_id: accountCash, debt: 0, name: 'Kas/Bank' }
+			{ ...initDetail, account_id: accountId, name: 'Simpanan hari raya', description: `Simpanan ${title.toLowerCase()}` },
+			{ ...initDetail, account_id: accountCash, name: 'Kas/Bank', description: `Simpanan ${title.toLowerCase()}` }
 		]
 	};
 
@@ -255,7 +244,7 @@
 				<SwBox
 					trx={c}
 					on:delete={deleteItem}
-					on:changeSW={changeSW}
+					on:change={changeSW}
 					title={`Simpanan ${title.toLowerCase()}`}
 				/>
 			{/each}
@@ -266,7 +255,7 @@
 		{/if}
 	</div>
 </Query>
-<SwForm trx={{ ...trx }} on:changeSW={changeSW} title={`Simpanan ${title.toLowerCase()}`} />
+<SwForm trx={{ ...trx }} on:change={changeSW} title={`Simpanan ${title.toLowerCase()}`} />
 
 <style lang="scss">
 	* :global(.icon:visited) {

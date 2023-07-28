@@ -72,3 +72,16 @@ export type PropertyValue = {
 	id: number;
 	name: string;
 }
+
+
+
+export type PaymentTransaction = {
+  id: number;
+	created_at: string;
+  trx_id: number;
+  account_id: number;
+  name: string,
+  debt: number;
+  cred: number;
+	saldo: number;
+};
