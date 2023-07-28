@@ -220,7 +220,6 @@
 		queryFn: () => fetchPaymnetTransactions(trxLoan.id)
 	};
 
-
 	$: if (fetchSuccess) {
 		fetchSuccess = false;
 	}	
@@ -236,8 +235,8 @@
 			<DataTable table$aria-label="User list" style="width: 100%;margin-top:12px">
 				<Head>
 					<Row>
-						<Cell numeric>ANGSURAN</Cell>
-						<Cell numeric>ID</Cell>
+						<Cell numeric>PERIODE</Cell>
+						<!-- <Cell numeric>ID</Cell> -->
 						<Cell>TANGGAL</Cell>
 						<Cell style="width: 100%;">AKUN</Cell>
 						<Cell numeric>DEBET</Cell>
@@ -250,7 +249,7 @@
 					{#each queryResult.data ?? [] as c, i (c.id)}
 						<Row>
 							<Cell numeric>#{i}</Cell>
-							<Cell numeric>{c.id}</Cell>
+							<!-- <Cell numeric>{c.trx_id}</Cell> -->
 							<Cell>{dayjs(c.created_at).format('DD-MM-YYYY')}</Cell>
 							<Cell>{c.account_id} - {c.name}</Cell>
 							<Cell numeric>{c.debt.toLocaleString('id-ID')}</Cell>

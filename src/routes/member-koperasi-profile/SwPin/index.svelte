@@ -78,39 +78,6 @@
 
 	query.subscribe((o) => (trxs = o.data ?? []));
 
-	const fetchDeleteData = async (e: number) =>
-		await axios.delete(`/koperasi/loan/delete/${e}`, {
-			headers: { 'Content-Type': 'application/json' }
-		});
-
-	const deleteData = useMutation(fetchDeleteData, {
-		onMutate: async (e: number) => {
-			// Cancel any outgoing refetches (so they don't overwrite our optimistic update)
-			await client.cancelQueries();
-
-			// Snapshot the previous value
-			const previousData = client.getQueryData<LoanTransaction[]>(getQueryKey(member.member_id));
-
-			// Optimistically update to the new value
-			if (previousData) {
-				client.setQueryData<LoanTransaction[]>(getQueryKey(member.member_id), previousData);
-			}
-
-			return previousData;
-		},
-		onSuccess: () => {
-			fetchSuccess = true;
-		},
-		onError: (err: any, variables: number, context: any) => {
-			if (context?.previousData) {
-				client.setQueryData<LoanTransaction[]>(getQueryKey(member.member_id), context.previousData);
-			}
-		},
-		onSettled: async (data: any, error: any, variables: number, context: any) => {
-			await client.invalidateQueries(getQueryKey(member.member_id));
-		}
-	});
-
 	const fetchUpdateData = async (e: LoanTransaction): Promise<LoanTransaction> =>
 		await axios.patch(`/koperasi/loan/update`, e, {
 			headers: { 'Content-Type': 'application/json' }
@@ -118,6 +85,11 @@
 
 	const fetchCreateData = async (e: LoanTransaction): Promise<LoanTransaction> =>
 		await axios.post('/koperasi/loan/insert', e, {
+			headers: { 'Content-Type': 'application/json' }
+		});
+
+	const fetchDeleteData = async (e: number) =>
+		await axios.delete(`/koperasi/loan/delete/${e}`, {
 			headers: { 'Content-Type': 'application/json' }
 		});
 
@@ -186,16 +158,47 @@
 				//        selectedCategoryId.set($category.id)
 			}
 		},
-		onSettled: async () => {
+		onSettled: async (data: any) => {
+			await client.invalidateQueries(getQueryKey(member.member_id));
+			await client.invalidateQueries(['member', 'payments', data.data.id]);
+		}
+	});
+
+	const deleteData = useMutation(fetchDeleteData, {
+		onMutate: async (e: number) => {
+			// Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+			await client.cancelQueries();
+
+			// Snapshot the previous value
+			const previousData = client.getQueryData<LoanTransaction[]>(getQueryKey(member.member_id));
+
+			// Optimistically update to the new value
+			if (previousData) {
+				client.setQueryData<LoanTransaction[]>(getQueryKey(member.member_id), previousData);
+			}
+
+			return previousData;
+		},
+		onSuccess: () => {
+			fetchSuccess = true;
+		},
+		onError: (err: any, variables: number, context: any) => {
+			if (context?.previousData) {
+				client.setQueryData<LoanTransaction[]>(getQueryKey(member.member_id), context.previousData);
+			}
+		},
+		onSettled: async (data: any, error: any, variables: number, context: any) => {
 			await client.invalidateQueries(getQueryKey(member.member_id));
 		}
 	});
+
 
 	const deletetrx = (e: CustomEvent) => {
 		tempOpens = [];
 		$deleteData.mutate(e.detail.data);
 	};
 	let tempOpens: boolean[] = [];
+
 	const onLoanChange = (e: CustomEvent) => {
 		if (e.detail.data.id === 0) {
 			tempOpens = [];
@@ -245,6 +248,29 @@
 	}
 
 	$: panels = createListProps(trxs);
+
+	// 	const totals = [
+	// 		{id: 1, debt: 2000, cred: 0, s: 0},
+	// 		{id: 2, debt: 0, cred: 100, s: 0},
+	// 		{id: 3, debt: 0, cred: 100, s: 0},
+	// 		{id: 4, debt: 0, cred: 100, s: 0}
+	// ];
+	// 	const sum = (arr: {id:number,v:number,s:number}[]) => {
+	// 		for(let i = 0; i < arr.length; i++) {
+	// 			if(i === 0) {
+	// 				totals.splice(0, 1, {...totals[0], s: totals[0].debt})
+	// 			} else {
+	// 				totals.splice(i, 1, {...totals[i], s: totals[i-1].s - totals[i].cred})
+	// 			}
+	// 		}
+	// 	}
+
+	// 	// n[0] = 20000
+	// 	// n[1] = 2000 - 100
+	// 	// n[2] = 2000 - 100 - 100
+	// 	// n[3] = 2000 - 100 - 100 - 100
+	// 	$: sum(totals);
+	// 	$: console.log(totals)
 </script>
 
 <FormLoan {trx} {title} on:change={onLoanChange} />
