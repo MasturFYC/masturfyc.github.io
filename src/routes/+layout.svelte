@@ -13,6 +13,18 @@
   import IconButton from '@smui/icon-button';
   import '../app.css';
 
+  import dayjs from 'dayjs';
+	import utc from "dayjs/plugin/utc"
+	import timezone from "dayjs/plugin/timezone"
+	import advanced from "dayjs/plugin/advancedFormat"
+  import locale from 'dayjs/locale/id'
+
+  dayjs.locale(locale)
+	dayjs.extend(timezone)
+	dayjs.extend(utc)
+	dayjs.extend(advanced)
+
+
   let open = false;
   let active = 'Inbox';
   let innerWidth = 0

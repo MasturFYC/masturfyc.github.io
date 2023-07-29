@@ -1,18 +1,18 @@
 <script lang="ts">
-	import type {
-		LoanTransaction,
-		MemberKoperasi,
-		PaymentTransaction,
-		Transaction
-	} from '$lib';
+	import type { LoanTransaction, MemberKoperasi, PaymentTransaction, Transaction } from '$lib';
 	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import { acc_cash, acc_loan, acc_payment, acc_service, initDetail } from '../../store';
 	import axios from '$lib/axios-base';
 
-	import { Query, useMutation, useQueryClient, type QueryObserverResult } from '@sveltestack/svelte-query';
+	import {
+		Query,
+		useMutation,
+		useQueryClient,
+		type QueryObserverResult
+	} from '@sveltestack/svelte-query';
 	import dayjs from 'dayjs';
-	import PaymentDialog from './PaymentForm.svelte';
-	import ViewJournal from '../../../../components/ViewJournal.svelte';
+	import PaymentDialog from './PaymentDialog.svelte';
+	import ViewJournal from '../../../../components/ViewJournal2.svelte';
 	import DeleteItem from '../../DeleteItem.svelte';
 
 	export let trxLoan: LoanTransaction;
@@ -57,7 +57,6 @@
 				ref_id: trxLoan.id,
 				debt: trxLoan.loan.principal + trxLoan.loan.service_price
 			}
-
 		]
 	};
 
@@ -83,10 +82,7 @@
 
 			// Optimistically update to the new value
 			if (previousData) {
-				client.setQueryData<Transaction[]>(
-					query_key,
-					previousData
-				);
+				client.setQueryData<Transaction[]>(query_key, previousData);
 			}
 
 			return previousData;
@@ -96,10 +92,7 @@
 		},
 		onError: (err: any, variables: number, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<Transaction[]>(
-					query_key,
-					context.previousData
-				);
+				client.setQueryData<Transaction[]>(query_key, context.previousData);
 			}
 		},
 		onSettled: async (data: any, error: any, variables: number, context: any) => {
@@ -135,10 +128,7 @@
 		},
 		onError: (err: any, variables: any, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<Transaction>(
-					query_key,
-					context.previousData
-				);
+				client.setQueryData<Transaction>(query_key, context.previousData);
 			}
 		},
 		// Always refetch after error or success:
@@ -162,10 +152,7 @@
 
 			// Optimistically update to the new value
 			if (previousData) {
-				client.setQueryData<Transaction[]>(
-					query_key,
-					[...previousData]
-				);
+				client.setQueryData<Transaction[]>(query_key, [...previousData]);
 			}
 
 			return previousData;
@@ -179,10 +166,7 @@
 		// If the mutation fails, use the context returned from onMutate to roll back
 		onError: (err: any, variables: any, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<Transaction>(
-					query_key,
-					context.previousData
-				);
+				client.setQueryData<Transaction>(query_key, context.previousData);
 				//        selectedCategoryId.set($category.id)
 			}
 		},
@@ -190,7 +174,6 @@
 			await client.invalidateQueries(query_key);
 		}
 	});
-
 
 	const showErrorMessage = (queryResult: QueryObserverResult<any, unknown>) => {
 		if (queryResult.error) {
@@ -207,11 +190,10 @@
 	};
 
 	const onchange = (e: CustomEvent) => {
-		const d = e.detail.data as Transaction;
-		if (d.id === 0) {
-			$createData.mutate(d);
+		if (e.detail.data.id === 0) {
+			$createData.mutate(e.detail.data);
 		} else {
-			$updateData.mutate(d);
+			$updateData.mutate(e.detail.data);
 		}
 	};
 
@@ -222,7 +204,7 @@
 
 	$: if (fetchSuccess) {
 		fetchSuccess = false;
-	}	
+	}
 </script>
 
 <Query options={queryOptions}>
@@ -232,32 +214,37 @@
 		{:else if queryResult.status === 'error'}
 			<div>Error: {showErrorMessage(queryResult)}</div>
 		{:else}
-			<DataTable table$aria-label="User list" style="width: 100%;margin-top:12px">
+			<DataTable table$aria-label="User list" style="width: 100%;margin:12px 0">
 				<Head>
 					<Row>
-						<Cell numeric>PERIODE</Cell>
+						<Cell class="text-center">PERIODE</Cell>
 						<!-- <Cell numeric>ID</Cell> -->
-						<Cell>TANGGAL</Cell>
+						<Cell class="text-center">TANGGAL</Cell>
 						<Cell style="width: 100%;">AKUN</Cell>
 						<Cell numeric>DEBET</Cell>
 						<Cell numeric>KREDIT</Cell>
 						<Cell numeric>SALDO</Cell>
-						<Cell>...</Cell>
+						<Cell class="text-center">...</Cell>
 					</Row>
 				</Head>
 				<Body>
 					{#each queryResult.data ?? [] as c, i (c.id)}
 						<Row>
-							<Cell numeric>#{i}</Cell>
+							<Cell class="text-center">#{i}</Cell>
 							<!-- <Cell numeric>{c.trx_id}</Cell> -->
-							<Cell>{dayjs(c.created_at).format('DD-MM-YYYY')}</Cell>
+							<Cell class="text-center">{dayjs(c.created_at).format('DD-MM-YYYY')}</Cell>
 							<Cell>{c.account_id} - {c.name}</Cell>
 							<Cell numeric>{c.debt.toLocaleString('id-ID')}</Cell>
 							<Cell numeric>{c.cred.toLocaleString('id-ID')}</Cell>
 							<Cell numeric>{c.saldo.toLocaleString('id-ID')}</Cell>
 							<Cell>
 								{#if i > 0}
-									<ViewJournal trx={{...initTrx, id: c.trx_id}} />
+									<PaymentDialog
+										trx={{ ...initTrx, id: c.trx_id }}
+										on:change={onchange}
+										title={`Angsuran pinjaman #${i}`}
+									/>
+									<ViewJournal trx={{ ...initTrx, id: c.trx_id }} />
 									<DeleteItem trxId={c.trx_id} on:delete={deleteItem} />
 								{/if}
 							</Cell>
@@ -265,11 +252,12 @@
 					{/each}
 				</Body>
 			</DataTable>
-			<PaymentDialog 
-				disabled={(queryResult.data?.length ?? 0) >= trxLoan.loan.period+1}
-				trx={{ ...initTrx }} 
-				on:change={onchange} 
-				title={`Angsuran pinjaman #${queryResult.data?.length}`}/>
+			<PaymentDialog
+				disabled={(queryResult.data?.length ?? 0) >= trxLoan.loan.period + 1}
+				trx={{ ...initTrx }}
+				on:change={onchange}
+				title={`Angsuran pinjaman #${queryResult.data?.length}`}
+			/>
 		{/if}
 	</div>
 </Query>
@@ -282,3 +270,17 @@
         <Cell>{item.email}</Cell>
       </Row>
     {/each} -->
+<style lang="scss">
+	* :global(.text-center) {
+		text-align: center;
+	}
+	* :global(.mdc-data-table__header-row),
+	* :global(.mdc-data-table__row) {
+		height: 42px;
+	}
+	* :global(.mdc-data-table__header-cell),
+	* :global(.mdc-data-table__header-cell--numeric),
+	* :global(.mdc-data-table__cell) {
+		padding: 0 6px;
+	}
+</style>

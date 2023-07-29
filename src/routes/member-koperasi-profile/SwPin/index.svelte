@@ -292,7 +292,9 @@
 				</Header>
 				<Content>
 					<LoanBox trxLoan={getCurrentTrx(c.id)} on:change={onLoanChange} on:delete={deletetrx} />
+					{#if opens[i] === true}
 					<PinTable trxLoan={getCurrentTrx(c.id)} {member} />
+					{/if}
 				</Content>
 			</Panel>
 		{/each}

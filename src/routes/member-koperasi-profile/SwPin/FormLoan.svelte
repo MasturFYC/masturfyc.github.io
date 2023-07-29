@@ -205,6 +205,7 @@
 	class="material-icons icon"
 	size="{trx.id === 0 ? 'normal' : 'button'}"
 	on:click={async () => {
+		clicked='no';
 		open = true;
 	}}
 	aria-label="New transaction">{trx.id === 0 ? 'note_add' : 'edit'}</IconButton

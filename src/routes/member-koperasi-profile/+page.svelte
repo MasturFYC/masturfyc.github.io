@@ -125,6 +125,7 @@
 		background-color: var(--control-background);
 		padding: 12px 24px;
 		min-height: 100%;
+		max-width: 960px;
 	}
 
 	@media screen and (max-width: 480px) {

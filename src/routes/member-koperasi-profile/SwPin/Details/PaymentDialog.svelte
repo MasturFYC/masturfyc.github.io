@@ -1,7 +1,7 @@
 <script lang="ts">
 	import IconButton from '@smui/icon-button';
 	import { createEventDispatcher } from 'svelte';
-	import type { Transaction, TransactionDetail, iAccount } from '$lib';
+	import type { PaymentTransaction, Transaction, TransactionDetail, iAccount } from '$lib';
 	import dayjs from 'dayjs';
 	import Button from '@smui/button';
 	import Dialog, { Content, Actions, InitialFocus } from '@smui/dialog';
@@ -9,12 +9,16 @@
 	import { Title } from '@smui/top-app-bar';
 	import Select, { Option } from '@smui/select';
 	import { coa_payments } from '$lib/store';
-  
+	import axios from '$lib/axios-base';
+	import { useQueryClient } from '@sveltestack/svelte-query';
+
 	const dispatch = createEventDispatcher();
+	const client = useQueryClient();
 
 	export let trx: Transaction;
-	export let title = 'Angsuran pinjaman'
+	export let title = 'Angsuran pinjaman';
 	export let disabled = false;
+	let loadOnMount = false;
 
 	let open = false;
 	let dirty = false;
@@ -51,9 +55,9 @@
 
 	const setData = (e: Transaction) => {
 		setSelectedAccount(e.details);
-		description = trx.description ?? '';
+		description = e.description ?? '';
 		setPrice(e.details);
-		created_at = dayjs(trx.created_at).format('YYYY-MM-DD');
+		created_at = dayjs(e.created_at).format('YYYY-MM-DD');
 	};
 
 	const setDetailAccount = (acc: iAccount | undefined) => {
@@ -68,21 +72,42 @@
 				};
 				details.splice(i, 1, d);
 				trx = { ...trx, details: details };
-        dirty = true;
+				dirty = true;
 			}
 		}
 	};
 
-  const resetData = () => {
-    setSelectedAccount(trx.details);
+	const resetData = () => {
+		setSelectedAccount(trx.details);
 		setPrice(trx.details);
 		description = trx.description ?? '';
-    created_at = dayjs(trx.created_at).format('YYYY-MM-DD');
-  }
+		created_at = dayjs(trx.created_at).format('YYYY-MM-DD');
+	};
 
-	$: setDetailAccount(selectedAccount);
+	async function fetchTrx(trxId: number) {
+		const { data } = await axios.get<Transaction>(`/trx/with-details/${trxId}`);
+		return data;
+	}
 
-  $: setData(trx);
+	const loadTrx = async (id: number) => {
+		const queryKey = ['trx', id];
+		const data =
+			client.getQueryData<Transaction>(queryKey) ??
+			(await client.fetchQuery(queryKey, () => fetchTrx(id)));
+		if (data && data.id > 0) {
+			trx = data;
+			setData(data);
+		}
+	};
+
+	$: if (loadOnMount) {
+		loadTrx(trx.id);
+		loadOnMount = false;
+	}
+
+$: setDetailAccount(selectedAccount);
+
+	// $: setData(trx);
 
 	$: isAccountValid = selectedAccount && selectedAccount.id > 0;
 	$: isDisabled = !isAccountValid || !dirty;
@@ -90,37 +115,45 @@
 
 	$: if (clicked === 'yes') {
 		clicked = 'no action';
-    const isNew = trx.id === 0;
+		const isNew = trx.id === 0;
+		const data = {
+			...trx,
+			created_at: created_at,
+			description: description,
+			updated_at: dayjs().format()
+		};
+
+		if (trx.id > 0) {
+			client.setQueryData<Transaction>(['trx', trx.id], () => data);
+		}
+
 		dispatch('change', {
-			data: {
-				...trx,
-				created_at: created_at,
-				description: description,
-				updated_at: dayjs().format('YYYY-MM-DD'),
-			}
+			data: data
 		});
 
-    if(isNew) {
-      resetData();
-    }
+		if (isNew) {
+			resetData();
+		}
 	}
 
-  $: if (clicked === 'no') {
+	$: if (clicked === 'no') {
 		clicked = 'no action';
-    resetData();
+		resetData();
 	}
-
 </script>
 
 <IconButton
-	disabled={disabled}
-  title={title}
-  size={'button'}
-  class="material-icons icon"
-  on:click={async () => {
-    open = true;
-  }}
-  aria-label="New transaction">{trx.id === 0 ? 'note_add' : 'edit'}</IconButton
+	{disabled}
+	{title}
+	size={'button'}
+	class="material-icons icon"
+	on:click={async () => {
+		if(trx.id > 0) {
+			loadOnMount = true;
+		}
+		open = true;
+	}}
+	aria-label="New transaction">{trx.id === 0 ? 'note_add' : 'edit'}</IconButton
 >
 
 <Dialog
@@ -131,10 +164,13 @@
 >
 	<Title id="simple-title" style={'margin: 16px;padding:0'}>{title}</Title>
 	<Content id="simple-content" style="overflow:unset;margin:0 16px;padding:0">
-		<form class="flex-col flex-1 w-min-300" on:submit|preventDefault={() => {
+		<form
+			class="flex-col flex-1 w-min-300"
+			on:submit|preventDefault={() => {
 				clicked = 'yes';
 				open = false;
-		}}>
+			}}
+		>
 			<Textfield
 				disabled
 				bind:dirty
@@ -145,8 +181,8 @@
 				variant="filled"
 			/>
 			<Select
-			use={[InitialFocus]}
-			key={getAccountKey}
+				use={[InitialFocus]}
+				key={getAccountKey}
 				label="Akun penerimaan"
 				variant="filled"
 				invalid={!isAccountValid}
@@ -174,23 +210,19 @@
 				input$emptyValueUndefined
 				input$maxlength={256}
 			/>
-			<input disabled={isDisabled} type="submit" style={"display:none"} />
+			<input disabled={isDisabled} type="submit" style={'display:none'} />
 		</form>
 	</Content>
 
 	<Actions>
 		<Button ripple color="secondary" on:click={() => (clicked = 'no')}>Batal</Button>
-		<Button
-			disabled={isDisabled}
-			color="primary"
-			ripple
-			on:click={() => (clicked = 'yes')}>Simpan</Button
+		<Button disabled={isDisabled} color="primary" ripple on:click={() => (clicked = 'yes')}
+			>Simpan</Button
 		>
 	</Actions>
 </Dialog>
 
 <style lang="scss">
-
 	* :global(input[type='number']::-webkit-outer-spin-button),
 	* :global(input[type='number']::-webkit-inner-spin-button) {
 		-webkit-appearance: none;
@@ -200,5 +232,4 @@
 	* :global(input[type='number']) {
 		-moz-appearance: textfield;
 	}
-
 </style>

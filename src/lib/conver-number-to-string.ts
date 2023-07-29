@@ -1,1 +1,1 @@
-../../../warnet/frontend/src/components/conver-number-to-string.ts
+/home/fyc/app/warnet-frontend/src/components/conver-number-to-string.ts
