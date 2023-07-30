@@ -9,7 +9,7 @@
 	import { Title } from '@smui/top-app-bar';
 	import Select, { Option } from '@smui/select';
 	import { coa_payments } from '$lib/store';
-	import Property from '../../../components/Property.svelte';
+	import Property from '$lib/components/Property.svelte';
 	import { numberToText } from '$lib/conver-number-to-string';
 	import { acc_cash, acc_loan, acc_provision } from '../store';
 
@@ -79,7 +79,7 @@
 
 	function getProsentase(nominal: number): number {
 		if (nominal <= 20000000) return 1.0;
-		else if (nominal >= 21000000 && nominal <= 30000000) return 1.2;
+		else if (nominal > 20000000 && nominal <= 30000000) return 1.2;
 		else return 1.5;
 	}
 
@@ -91,8 +91,8 @@
 	const previewChange = (n: number, p: number) => {
 		prosentase = getProsentase(n);
 		principal = n / p;
-		service = n * (prosentase / 100.0);
-		provision = n * (1.0 / 100.0);
+		service = (n * prosentase) / 100.0;
+		provision = (n * 1.0) / 100.0;
 	};
 
 	function changeNominal(n: number /* nominal */, p: number /* period */) {

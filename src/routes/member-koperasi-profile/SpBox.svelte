@@ -6,7 +6,7 @@
 	import dayjs from 'dayjs';
 	import Button from '@smui/button';
 	import Textfield from '@smui/textfield';
-	import ViewJournal from '../../components/ViewJournal.svelte';
+	import ViewJournal from '$lib/components/ViewJournal.svelte';
 	import Select, { Option } from '@smui/select';
 	import { coa_payments } from '$lib/store';
 
@@ -164,11 +164,12 @@
 
 </script>
 
-	<div class="div-content">
+	<div class="div-content p-2">
 		{#if fetchSuccess}
-			<div class="flex-row flex-center">
-				{member.name} sudah mempunyai simpanan pokok. <ViewJournal {trx} />
+			<div>
+				{member.name} sudah mempunyai simpanan pokok.
 			</div>
+			<ViewJournal {trx} />
 		{:else}
 			<div>
 				<div class="mb-10">
@@ -209,4 +210,8 @@
 	* :global(.icon:visited) {
 		color: var(--text-color);
 	}
+	.p-2 {
+		padding: 12px 24px;
+	}
+
 </style>

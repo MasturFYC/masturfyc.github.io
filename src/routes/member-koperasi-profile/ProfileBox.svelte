@@ -3,9 +3,8 @@
 	import type { MemberKoperasi } from '$lib';
 	import MemberForm from '../member-koperasi/MemberForm.svelte';
 	import DeleteItem from '../member-koperasi/DeleteItem.svelte';
-	import IconButton from '@smui/icon-button';
-	import Property from '../../components/Property.svelte';
-
+	import Property from '$lib/components/Property.svelte';
+	
 	export let member: MemberKoperasi;
 
 	const dispatch = createEventDispatcher();
@@ -16,7 +15,7 @@
 
 </script>
 
-	<div class="flex-col gap-y-2">
+	<div class="flex-col gap-y-2 p-2">
 		<div class="flex-row flex-center">
 			<div class="flex-1">
 				<Property label={'No. Anggota'} value={member.code} />
@@ -37,5 +36,8 @@
 	}
 	.gap-y-2 {
 		row-gap: 12px;
+	}
+	.p-2 {
+		padding:12px 24px;
 	}
 </style>

@@ -5,14 +5,14 @@
 	import axios from '$lib/axios-base';
 	import type { MemberKoperasi, iAccount } from '$lib';
 	import { initMember } from '../member-koperasi/store';
-	import ProfileBox from './ProfileBox.svelte';
 	import Tab, { Label } from '@smui/tab';
 	import TabBar from '@smui/tab-bar';
 	import { coa_payments } from '$lib/store';
+	import ProfileBox from './ProfileBox.svelte';
 	import SpBox from './SpBox.svelte';
-	import SwList from './SwList.svelte';
 	import ShrList from './ShrList.svelte';
 	import SwPin from './SwPin/index.svelte';
+	import SwList from './SwList.svelte';
 
 	const member_id = parseInt($page.url.searchParams.get('id') ?? '0');
 	const client = useQueryClient();
@@ -123,7 +123,6 @@
 	.box-shadow {
 		flex: 1;
 		background-color: var(--control-background);
-		padding: 12px 24px;
 		min-height: 100%;
 		max-width: 960px;
 	}

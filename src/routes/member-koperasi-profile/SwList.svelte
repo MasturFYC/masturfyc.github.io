@@ -10,7 +10,7 @@
 	import dayjs from 'dayjs';
 
 	import SwBox from './SwBox.svelte';
-	import Property from '../../components/Property.svelte';
+	import Property from '$lib/components/Property.svelte';
 	import SwForm from './SwForm.svelte';
 
 	const client = useQueryClient();
@@ -85,10 +85,7 @@
 
 			// Optimistically update to the new value
 			if (previousData) {
-				client.setQueryData<MemberKoperasi[]>(
-					query_key,
-					previousData
-				);
+				client.setQueryData<MemberKoperasi[]>(query_key, previousData);
 			}
 
 			return previousData;
@@ -98,10 +95,7 @@
 		},
 		onError: (err: any, variables: number, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<MemberKoperasi[]>(
-					query_key,
-					context.previousData
-				);
+				client.setQueryData<MemberKoperasi[]>(query_key, context.previousData);
 			}
 		},
 		onSettled: async (data: any, error: any, variables: number, context: any) => {
@@ -137,10 +131,7 @@
 		},
 		onError: (err: any, variables: any, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<Transaction>(
-					query_key,
-					context.previousData
-				);
+				client.setQueryData<Transaction>(query_key, context.previousData);
 			}
 		},
 		// Always refetch after error or success:
@@ -164,10 +155,7 @@
 
 			// Optimistically update to the new value
 			if (previousData) {
-				client.setQueryData<Transaction[]>(
-					query_key,
-					[...previousData]
-				);
+				client.setQueryData<Transaction[]>(query_key, [...previousData]);
 			}
 
 			return previousData;
@@ -181,10 +169,7 @@
 		// If the mutation fails, use the context returned from onMutate to roll back
 		onError: (err: any, variables: any, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<Transaction>(
-					query_key,
-					context.previousData
-				);
+				client.setQueryData<Transaction>(query_key, context.previousData);
 				//        selectedCategoryId.set($category.id)
 			}
 		},
@@ -238,33 +223,38 @@
 	}
 </script>
 
+<div class="p-2">
 	{#if counter === 0}
 		<div>{member.name} belum mempunyai data {title.toLowerCase()}.</div>
 	{:else}
 		<div class="mb-10">Data {title.toLowerCase()}</div>
 	{/if}
 
-<Query options={queryOptions}>
-	<div slot="query" let:queryResult>
-		{#if queryResult.status === 'loading'}
-			<div>Loading...</div>
-		{:else if queryResult.status === 'error'}
-			<div>Error: {showErrorMessage(queryResult)}</div>
-		{:else}
-			{#each queryResult.data ?? [] as c (c.id)}
-				<SwBox trx={c} on:delete={deleteItem} on:change={changeSW} />
-			{/each}
-			<Property
-				label={`Total ${title.toLowerCase()}`}
-				value={getTotal(queryResult.data).toLocaleString('id-ID')}
-			/>
-		{/if}
-	</div>
-</Query>
-<SwForm trx={{ ...trx }} on:change={changeSW} {title} />
+	<Query options={queryOptions}>
+		<div slot="query" let:queryResult>
+			{#if queryResult.status === 'loading'}
+				<div>Loading...</div>
+			{:else if queryResult.status === 'error'}
+				<div>Error: {showErrorMessage(queryResult)}</div>
+			{:else}
+				{#each queryResult.data ?? [] as c (c.id)}
+					<SwBox trx={c} on:delete={deleteItem} on:change={changeSW} />
+				{/each}
+				<Property
+					label={`Total ${title.toLowerCase()}`}
+					value={getTotal(queryResult.data).toLocaleString('id-ID')}
+				/>
+			{/if}
+		</div>
+	</Query>
+	<SwForm trx={{ ...trx }} on:change={changeSW} {title} />
+</div>
 
 <style lang="scss">
 	* :global(.icon:visited) {
 		color: var(--text-color);
+	}
+	.p-2 {
+		padding: 12px 24px;
 	}
 </style>

@@ -12,7 +12,7 @@
 	} from '@sveltestack/svelte-query';
 	import dayjs from 'dayjs';
 	import PaymentDialog from './PaymentDialog.svelte';
-	import ViewJournal from '../../../../components/ViewJournal2.svelte';
+	import ViewJournal from '$lib/components/ViewJournal2.svelte';
 	import DeleteItem from '../../DeleteItem.svelte';
 
 	export let trxLoan: LoanTransaction;
@@ -236,7 +236,7 @@
 							<Cell>{c.account_id} - {c.name}</Cell>
 							<Cell numeric>{c.debt.toLocaleString('id-ID')}</Cell>
 							<Cell numeric>{c.cred.toLocaleString('id-ID')}</Cell>
-							<Cell numeric>{c.saldo.toLocaleString('id-ID')}</Cell>
+							<Cell numeric class="font-bold">{c.saldo.toLocaleString('id-ID')}</Cell>
 							<Cell>
 								{#if i > 0}
 									<PaymentDialog

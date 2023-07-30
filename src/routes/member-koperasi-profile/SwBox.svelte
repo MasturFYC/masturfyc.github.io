@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { Transaction, TransactionDetail} from '$lib';
 	import dayjs from 'dayjs';
-	import ViewJournal from '../../components/ViewJournal.svelte';
+	import ViewJournal from '$lib/components/ViewJournal.svelte';
 	import DeleteItem from './DeleteItem.svelte';
 	import SwForm from './SwForm.svelte';
 

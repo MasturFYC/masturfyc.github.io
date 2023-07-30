@@ -104,6 +104,9 @@
 		loadTrx(trx.id);
 		loadOnMount = false;
 	}
+	$: if(trx.id === 0) {
+		setData(trx)
+	}
 
 $: setDetailAccount(selectedAccount);
 

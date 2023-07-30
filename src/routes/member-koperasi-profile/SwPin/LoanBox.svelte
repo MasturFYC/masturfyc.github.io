@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { LoanTransaction, Transaction } from "$lib";
   import dayjs from "dayjs";
-  import Property from "../../../components/Property.svelte";
+  import Property from "$lib/components/Property.svelte";
 	import FormLoan from "./FormLoan.svelte";
 	import { createEventDispatcher } from 'svelte';
-	import ViewJournal from "../../../components/ViewJournal.svelte";
+	import ViewJournal from "$lib/components/ViewJournal.svelte";
 	import DeleteItem from "../DeleteItem.svelte";
 
 	const dispatch = createEventDispatcher();
@@ -38,8 +38,9 @@
 {#if trxLoan}
 <div class="flex-row gap-x-4 stretch">
   <Property label="Tanggal" value={dayjs(trxLoan.created_at).format('DD-MM-YYYY')} />
-  <Property label="Nominal" value={trxLoan.loan.nominal.toLocaleString("id-ID")} />
   <Property label="Jumlah Periode" value={trxLoan.loan.period.toLocaleString("id-ID")} />
+  <Property label="Pokok" value={trxLoan.loan.principal.toLocaleString("id-ID")} />
+  <Property label="Jasa Pinjaman" value={trxLoan.loan.service_price.toLocaleString("id-ID")} />
   <Property label="Besar angsuran" value={(trxLoan.loan.principal + trxLoan.loan.service_price).toLocaleString("id-ID")} />
   <div>
   <FormLoan trx={trxLoan} title={'Pinjaman anggota'} on:change={onchange} />

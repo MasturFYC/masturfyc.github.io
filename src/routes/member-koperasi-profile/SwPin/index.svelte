@@ -305,3 +305,10 @@
 <pre>
   {JSON.stringify(trx, null, 4)}
 </pre> -->
+<style lang="scss">
+	* :global(.m-0) {
+		margin: 0;
+		padding: 0;
+		border: 1px solid #000;
+	}
+</style>
