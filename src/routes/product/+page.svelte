@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import ProductBox from '../../components/ProductBox.svelte';
+	import ProductBox from '$lib/components/ProductBox.svelte';
 	import axios from '$lib/axios-base';
 
 	type iProduct = {
@@ -32,11 +32,11 @@
 	let isEnable = false;
 
 	const loadCustomer = async (page = 0, limit = 5) => {
-		const d = await axios.get(`${endpoint}/${page}/${limit}`);
-		const p = (await d.json()) ?? [];
+		const { data } = await axios.get<iProduct[]>(`${endpoint}/${page}/${limit}`);
+		//	const p = (await d.json()) ?? [];
 
-		hashMore = p.length < limit;
-		products = [...products, ...p];
+		hashMore = data?.length < limit;
+		products = [...products, ...data];
 	};
 
 	$: if (isEnable) loadCustomer(page, limit);

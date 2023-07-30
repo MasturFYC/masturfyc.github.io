@@ -20,10 +20,13 @@ function saveToken(acc_token: string, refresh_token: string) {
 	accToken.update((o) => (o = acc_token));
 }
 
-// function destroyToken() {
-//   sessionStorage.removeItem("access_token");
-//   localStorage.removeItem("refresh_token");
-// }
+function destroyToken() {
+	refToken.update((o) => (o = ''));
+	accToken.update((o) => (o = ''));
+	user.update(() => '')
+	user_role.update(() => '')
+	console.log('Destroy request')
+}
 
 instance.interceptors.request.use((config) => {
 	//const access_token = access_token;//sessionStorage.getItem("access_token");
@@ -44,10 +47,11 @@ instance.interceptors.response.use(
 		return new Promise(async (resolve, reject) => {
 			const originalRequest = error.config;
 			if (
-				error.response &&
+				// error.response &&
 				error.response.status === 401 &&
-				error.config &&
-				!error.config.__isRetryRequest &&
+				// error.config &&
+				// !error.config.__isRetryRequest &&
+				!originalRequest._retry &&
 				refresh_token
 			) {
 				originalRequest._retry = true;
@@ -67,7 +71,10 @@ instance.interceptors.response.use(
 						const { access_token, refresh_token } = data.tokens;
 						saveToken(access_token, refresh_token);
 						return instance(originalRequest);
-					});
+					})
+					// .then(error => {
+					// 	destroyToken();
+					// });
 				resolve(response);
 			}
 

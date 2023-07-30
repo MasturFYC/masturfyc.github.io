@@ -25,7 +25,7 @@
 				user_role.update((o) => (o = data.role));
 			})
 			.catch((error) => {
-				console.log(error.response.data);
+				console.log(error.response);
 			});
 	};
 

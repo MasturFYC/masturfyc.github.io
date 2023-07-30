@@ -8,8 +8,8 @@
   import Drawer, { AppContent, Content, Header, Title, Subtitle, Scrim } from '@smui/drawer';
   import List, { Item, Text, Graphic, Separator, Subheader } from '@smui/list';
   import { user } from '$lib/store';
-  import HeaderPage from '../components/Header.svelte';
-  import Footer from '../components/Footer.svelte'
+  import HeaderPage from '$lib/components/Header.svelte';
+  import Footer from '$lib/components/Footer.svelte'
   import IconButton from '@smui/icon-button';
   import '../app.css';
 
