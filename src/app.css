@@ -1,6 +1,25 @@
-@import '@fontsource/fira-mono';
-@import '@fontsource/fira-mono/400.css';
 /* @import "@fontsource/fira-mono/400-italic.css"; */
+html, body {
+	font-family: 'Fira Code', monospace;
+	font-size: 0.95rem;	
+	background-image: url('/background.jpg');
+}
+
+dialog {
+	background-color: #fafcf9;
+}
+
+input, textarea, select, button, pre, code {
+	font-family: inherit;
+}
+
+input, textarea, select {
+	padding: 3px 6px;
+	font-size: small;
+}
+button {
+	padding: 3px 16px;
+}
 
 .p-2 {
 	padding: 12px;
@@ -31,8 +50,13 @@
 	font-style: oblique;
 }
 .title {
-	font-weight: 400;
+	font-weight: 500;
 	font-size: x-large;
+}
+
+.subtitle {
+	font-weight: 400;
+	font-size: large;
 }
 
 .flex-row {
@@ -57,14 +81,28 @@
 	border-radius: 4px;
 }
 
-section {
-	max-width: calc(100% - 64px);
-	margin: 0 auto;
-}
-
 .flex-center {
 	align-items: center;
 }
+
+.w-100 {
+	width: 100%;
+}
+
+section {
+	display: block;
+  max-width: 960px;
+	width: calc(100% - 64px);
+  margin: 0 16px;
+	background-color: #fafcf9;
+	border: 2px solid #999;
+	padding: 0 24px 24px;
+}
+
+.gap-x-20 {
+	column-gap: 24px;
+}
+
 @media screen and (max-width: 600px) {
 	section {
 		max-width: calc(100% - 24px);
@@ -72,6 +110,3 @@ section {
 	}
 }
 
-.w-100 {
-	width: 100%;
-}
