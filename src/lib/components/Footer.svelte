@@ -8,14 +8,6 @@
 				>
 			</div>
 		</div>
-		<div class="flex-col gap-y-20">
-			<div class="box">
-				<a href="/undangan-tahlil">Undangan Tahlil</a>
-			</div>
-			<div class="box">
-				<a href="/bilangan">Bilangan</a>
-			</div>
-		</div>
 	</div>
 </div>
 
@@ -23,15 +15,7 @@
 	.div-footer {
 		min-height: 120px;
 		margin-top: 48px;
-		padding: 16px;
-	}
-	:global(.box) {
-		text-align: center;
-		display: block;
-		border: 2px solid #999;
-		margin-bottom: 12px;
-		background-color: #fafcf9;
-		padding: 6px 12px;
+		max-width: 960px;
 	}
 	a {
 		//		color: #ddd;

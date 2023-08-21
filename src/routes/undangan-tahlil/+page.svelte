@@ -121,7 +121,7 @@
 						</label>
 					</div>
 					<label>
-						<span>Nama {data.jenisKelamin ? 'almarhum' : 'almarhumah'}</span>
+						<span class="label-span">Nama {data.jenisKelamin ? 'almarhum' : 'almarhumah'}</span>
 						<input
 							placeholder="e.g. Megawati"
 							type="text"
@@ -130,14 +130,14 @@
 						/>
 					</label>
 					<label>
-						<span>Tanggal dan jam acara</span>
+						<span class="label-span">Tanggal dan jam acara</span>
 						<div class="flex flex-row gap-x-2 flex-1">
 							<input type="date" bind:value={data.tanggal} class="flex-1" style="width: 100%;" />
 							<input type="time" bind:value={data.jam} style="width:120px" />
 						</div>
 					</label>
 					<label>
-						<span>Acara peringatan</span>
+						<span class="label-span">Acara peringatan</span>
 						<input
 							type="text"
 							bind:value={data.acara}
@@ -146,7 +146,7 @@
 						/>
 					</label>
 					<label>
-						<span>Tempat acara dilangsungkan</span>
+						<span class="label-span">Tempat acara dilangsungkan</span>
 						<textarea
 							rows="3"
 							bind:value={data.tempatAcara}
@@ -155,7 +155,7 @@
 						/>
 					</label>
 					<label>
-						<span>Nama pemangku hajat</span>
+						<span class="label-span">Nama pemangku hajat</span>
 						<input
 							type="text"
 							bind:value={data.pemangkuHajat}
@@ -179,7 +179,7 @@
 </section>
 <dialog id="my-dialog" bind:this={my_dialog}>
 	<div class="subtitle">Contoh data</div>
-	<pre>{JSON.stringify(contohData(), null, 4)}</pre>
+	<pre>{JSON.stringify(contohData(), null, 2)}</pre>
 	<div class="flex-row flex-base gap-x-20">
 		<div class="flex-1">Jika anda setuju dengan contoh data ini, click Yes.
       Tekan ESC kalo tidak setuju dan menutup dialog ini.
@@ -194,8 +194,6 @@
 	}
 	pre {
 		overflow-x: scroll;
-//		max-width: 480px;
-    font-size: 0.75rem;
 	}
 	.title {
 		margin: 24px 0;
@@ -206,12 +204,14 @@
 		row-gap: 3px;
 		margin-bottom: 12px;
 	}
-	label > span {
-		font-size: 0.75rem;
+
+	.label-span::after {
+		content: ':';
 	}
 
-	label > span::after {
-		content: ':';
+	label > span {
+		font-size: 0.75rem;
+		color: #555;
 	}
 
 	button {
@@ -227,6 +227,7 @@
 	dialog {
 		border-color: #999;
     max-width: 480px;
+		box-shadow: 0px 10px 24px #777;
 	}
 
 </style>

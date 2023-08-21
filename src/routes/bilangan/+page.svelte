@@ -1,7 +1,6 @@
 <script>
-	import { numberToText } from '$lib/components/convert-number-to-string';
-	import { cardNumber, format, getNumber } from '$lib/components/format';
-  import json from 'highlight.js/lib/languages/javascript';
+	import { numberToText } from '$lib/number-to-string';
+	import { cardNumber, format, getNumber } from '$lib/format';
 
 	let value = '11000000000000000';
 
@@ -17,7 +16,7 @@
 		<input style="width:95%" type="text" use:format={cardNumber} bind:value />
 	</div>
   <div class="mt-10">Wanna try? Change the number.</div>
-	<div class="mt-20">💥 <code class="language-json font-bold">{bilangan}</code></div>
+	<div class="mt-20">💥 <code class="language-json">{bilangan}</code></div>
 </section>
 
 <style lang="scss">

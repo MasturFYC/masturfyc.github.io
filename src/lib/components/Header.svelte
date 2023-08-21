@@ -17,9 +17,9 @@
 		border-bottom: 1px solid #ddd;
 //		background-color: #444;
 //		color: #ddd;
+		max-width: 960px;
 		height: 52px;
 		align-items: center;
-		padding: 0 16px;
 	}
 	.top-app-bar a {
 //		color: #ddd;

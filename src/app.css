@@ -1,7 +1,5 @@
 /* @import "@fontsource/fira-mono/400-italic.css"; */
 html, body {
-	font-family: 'Fira Code', monospace;
-	font-size: 0.95rem;	
 	background-image: url('/background.jpg');
 }
 
@@ -9,13 +7,8 @@ dialog {
 	background-color: #fafcf9;
 }
 
-input, textarea, select, button, pre, code {
-	font-family: inherit;
-}
-
 input, textarea, select {
 	padding: 3px 6px;
-	font-size: small;
 }
 button {
 	padding: 3px 16px;
