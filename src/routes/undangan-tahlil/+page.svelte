@@ -1,10 +1,11 @@
 <script lang="ts">
 	import dayjs from 'dayjs';
 	import { UndanganTahlil } from '$lib/interfaces';
+	import Modal from '$lib/components/Modal.svelte';
 
 	let is_download = false;
-	let my_dialog: HTMLDialogElement;
 	let clicked = 'no';
+	let showModal = false;
 
 	const getBada = (e: dayjs.Dayjs) => {
 		const j = e.hour();
@@ -92,7 +93,7 @@
 	};
 
 	$: if (clicked === 'yes') {
-		my_dialog.close();
+		showModal = false;
 		data = contohData();
 		clicked = 'no';
 	}
@@ -112,11 +113,7 @@
 				<div class="flex-col flex-1">
 					<div class="flex-row gap-x-6 flex-center">
 						<label style="display: flex;flex-direction: row; gap: 6px;align-items:baseline">
-							<input
-							id="gen"
-							type="checkbox"
-							bind:checked={data.jenisKelamin}
-						/>
+							<input id="gen" type="checkbox" bind:checked={data.jenisKelamin} />
 							<span>Jenis kelamin ({data.jenisKelamin ? 'Laki-laki' : 'Perempuan'})</span>
 						</label>
 					</div>
@@ -166,7 +163,7 @@
 				</div>
 				<div class="mt-2">
 					<button type="submit" disabled={is_download}>Download</button>
-					<button type="button" disabled={is_download} on:click={() => my_dialog.showModal()}
+					<button type="button" disabled={is_download} on:click={() => (showModal = true)}
 						>Kasih saya contoh data</button
 					>
 					{#if is_download}
@@ -177,16 +174,20 @@
 		</div>
 	</div>
 </section>
-<dialog id="my-dialog" bind:this={my_dialog}>
-	<div class="subtitle">Contoh data</div>
-	<pre>{JSON.stringify(contohData(), null, 2)}</pre>
-	<div class="flex-row flex-base gap-x-20">
-		<div class="flex-1">Jika anda setuju dengan contoh data ini, click Yes.
-      Tekan ESC kalo tidak setuju dan menutup dialog ini.
-    </div>
-		<button on:click={() => (clicked = 'yes')}>Yes setuju</button>
+
+<Modal bind:showModal>
+	<div slot="header">Contoh data</div>
+	<div>
+		<pre>{JSON.stringify(contohData(), null, 2)}</pre>
 	</div>
-</dialog>
+	<div slot="footer" class="flex-row flex-base gap-x-20">
+		<div class="flex-1">
+			Jika anda setuju dengan contoh data ini, click Yes. Tekan ESC kalo tidak setuju dan menutup
+			dialog ini.
+		</div>
+		<button on:click|preventDefault={() => (clicked = 'yes')}>Yes setuju</button>
+	</div>
+</Modal>
 
 <style lang="scss">
 	section {
@@ -223,11 +224,4 @@
 	.flex-base {
 		align-items: baseline;
 	}
-
-	dialog {
-		border-color: #999;
-    max-width: 480px;
-		box-shadow: 0px 10px 24px #777;
-	}
-
 </style>
