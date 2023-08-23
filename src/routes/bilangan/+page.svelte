@@ -22,5 +22,6 @@
 <style lang="scss">
   section {
     max-width: 420px;
+	min-width: 280px;
   }
 </style>

@@ -2,6 +2,8 @@
 	import dayjs from 'dayjs';
 	import { UndanganTahlil } from '$lib/interfaces';
 	import Modal from '$lib/components/Modal.svelte';
+	import { user } from '$lib/store';
+	import { onMount } from 'svelte';
 
 	let is_download = false;
 	let clicked = 'no';
@@ -92,6 +94,10 @@
 			});
 	};
 
+	onMount(() => {
+		user.set('')
+	})
+
 	$: if (clicked === 'yes') {
 		showModal = false;
 		data = contohData();
@@ -120,7 +126,6 @@
 					<label>
 						<span class="label-span">Nama {data.jenisKelamin ? 'almarhum' : 'almarhumah'}</span>
 						<input
-							placeholder="e.g. Megawati"
 							type="text"
 							bind:value={data.namaAlmarhum}
 							class="flex-1"
@@ -139,7 +144,6 @@
 							type="text"
 							bind:value={data.acara}
 							class="flex-1"
-							placeholder="e.g. mengenang 100 hari wafatnya ibunda"
 						/>
 					</label>
 					<label>
@@ -148,7 +152,6 @@
 							rows="3"
 							bind:value={data.tempatAcara}
 							class="flex-1"
-							placeholder="e.g. di Kediaman rumah almarhumah Jl. Cempaka No. 120-C Ds. Wanantara"
 						/>
 					</label>
 					<label>
@@ -157,13 +160,12 @@
 							type="text"
 							bind:value={data.pemangkuHajat}
 							class="flex-1"
-							placeholder="e.g. Puan Maharani"
 						/>
 					</label>
 				</div>
 				<div class="mt-2">
 					<button type="submit" disabled={is_download}>Download</button>
-					<button type="button" disabled={is_download} on:click={() => (showModal = true)}
+					<button type="button" disabled={is_download || $user === ''} on:click={() => (showModal = true)}
 						>Kasih saya contoh data</button
 					>
 					{#if is_download}

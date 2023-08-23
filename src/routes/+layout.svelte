@@ -29,6 +29,9 @@
 				<div class="box">
 					<a href="/bilangan">Bilangan</a>
 				</div>
+				<div class="box">
+					<a href="/ketua-dprd">Ketua DPRD Indramayu</a>
+				</div>
 		</div>
 		<main class="main-content flex-1">
 			<slot />
@@ -75,5 +78,16 @@
 	}
 	a:hover {
 		text-decoration: underline;
-	}  
+	} 
+
+	@media screen and (max-width: 480px) {
+
+		.container {
+			 max-width: 0 calc(100% - 12px);
+			 padding: 12px;
+		}
+		.dashboard {
+			flex-wrap: wrap;
+		}
+	}
 </style>
