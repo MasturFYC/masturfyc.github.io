@@ -35,7 +35,6 @@
   <meta property="og:type" content="article" /> 
   <meta property="og:url" content="https://sapulidi.site/ketua-dprd" /> 
   <meta property="og:title" content="Ketua DPRD Indramayu" /> 
-  <meta property="og:image" content="http://masturfyc.github.io/taufik-hidayat.jpg" /> 
   <meta property="og:image:url" content="https://masturfyc.github.io/taufik-hidayat.jpg" /> 
   <meta property="og:image:secure_url" content="https://masturfyc.github.io/taufik-hidayat.jpg" /> 
   <meta property="og:image:secure" content="https://masturfyc.github.io/taufik-hidayat.jpg" /> 
