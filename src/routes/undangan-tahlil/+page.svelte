@@ -106,15 +106,15 @@
 </script>
 
 <svelte:head>
-	<meta property="fb:app_id" content="1284186342222033" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://masturfyc.github.io/undangan-tahlil" />
-	<meta property="og:title" content="Mastur FYC home page" />
-	<meta property="og:image" content="https://masturfyc.github.io/background.jpg" />
-	<meta property="og:image:secure_url" content="https://masturfyc.github.io/background.jpg" />
-	<meta property="og:image:secure" content="https://masturfyc.github.io/background.jpg" />
-	<meta property="og:image:type" content="image/jpeg" />
-	<meta property="og:description" content="Mastur FYC home page" />
+	<meta property='fb:app_id' content='1284186342222033' />
+	<meta property='og:type' content='article' />
+	<meta property='og:url' content='https://masturfyc.github.io/undangan-tahlil' />
+	<meta property='og:title' content='Mastur FYC home page' />
+	<meta property='og:image' content='https://masturfyc.github.io/background.jpg' />
+	<meta property='og:image:secure_url' content='https://masturfyc.github.io/background.jpg' />
+	<meta property='og:image:secure' content='https://masturfyc.github.io/background.jpg' />
+	<meta property='og:image:type' content='image/jpeg' />
+	<meta property='og:description' content='Mastur FYC home page' />
 	<title>Undangan Tahlil</title>
 	<meta name="description" content="Home page" />
 </svelte:head>
