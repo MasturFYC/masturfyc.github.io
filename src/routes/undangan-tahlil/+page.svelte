@@ -37,14 +37,14 @@
 		const jam = dayjs().hour(19).minute(20);
 		return new UndanganTahlil(
 			false,
-			'Mega Wati',
+			'Mega Loman',
 			jam.format('YYYY-MM-DD'),
 			'mengenang 100 hari wafatnya ibunda',
 			jam.format('dddd'),
 			jam.format('HH:mm'),
 			getBada(jam),
 			'Jl. Cempaka No. 120-C Kel. Margasari Kedoya - Jakarta Selatan',
-			'Ibu Puan',
+			'Ibu Paun',
 			215.9,
 			330.3
 		);
@@ -107,7 +107,12 @@
 
 <svelte:head>
 	<title>Undangan Tahlil</title>
-	<meta name="description" content="Undangan tahlil this app" />
+	<meta name="description" content="Home page" />
+	<meta property="fb:app_id" content="1284186342222033" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://masturfyc.github.io" />
+	<meta property="og:title" content="Ketua DPRD Indramayu" />
+	<meta property="og:description" content="Ketua DPRD Indramayu dari masa ke masa" />
 </svelte:head>
 
 <section>

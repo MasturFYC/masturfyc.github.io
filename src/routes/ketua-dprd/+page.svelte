@@ -33,8 +33,8 @@
 	<meta name="description" content="Ketua DPRD Indramayu" />
 	<meta property="fb:app_id" content="1284186342222033" />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="https://sapulidi.site/ketua-dprd" />
-	<meta property="og:title" content="Ketua DPRD Indramayu" />
+	<meta property="og:url" content="https://masturfyc.github.io/ketua-dprd" />
+	<meta property="og:title" content="Ketua DPRD Indramayu dari masa ke masa" />
 	<meta property="og:image:url" content="https://masturfyc.github.io/taufik-hidayat.jpg" />
 	<meta property="og:image:secure_url" content="https://masturfyc.github.io/taufik-hidayat.jpg" />
 	<meta property="og:image:secure" content="https://masturfyc.github.io/taufik-hidayat.jpg" />
