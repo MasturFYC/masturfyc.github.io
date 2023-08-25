@@ -37,7 +37,7 @@
 	<meta property='og:image:secure_url' content='https://masturfyc.github.io/taufik-hidayat.jpg' />
 	<meta property='og:image:type' content='image/jpeg' />
 	<meta property='og:image:width' content='400' />
-	<meta property='og:image:height' content='300' />
+	<meta property='og:image:height' content='630' />
 	<meta property='og:description' content='Ketua DPRD Indramayu dari masa ke masa' />
 	<title>Ketua DPRD Indramayu dari masa ke masa</title>
 	<meta name='description' content='Ketua DPRD Indramayu' />

@@ -18,7 +18,7 @@
 	<meta property='og:image:secure_url' content='{sapulidi}' />
 	<meta property='og:image:type' content='image/jpeg' />
 	<meta property='og:image:width' content='1200' />
-	<meta property='og:image:height' content='673' />
+	<meta property='og:image:height' content='630' />
 	<meta property='og:description' content='Mengubah angka menjadi bilangan' />
 	<title>Bilangan</title>
 	<meta name='description' content='Mengubah angka menjadi bilangan' />
