@@ -1,25 +1,27 @@
 <!doctype html>
 <html lang="en" class="dark">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.png" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link rel="stylesheet" href="/bulma.css">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<link rel="modulepreload" href="/_app/immutable/entry/start.b295fedd.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/scheduler.7dbf7838.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/singletons.ae5850c1.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/index.173180a9.js">
-		<link rel="modulepreload" href="/_app/immutable/entry/app.9edc6321.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/index.12fda089.js">
-	</head>
 
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" href="/favicon.png" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="/bulma.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+		<link rel="modulepreload" href="/_app/immutable/entry/start.6882eed3.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/scheduler.7dbf7838.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/singletons.d226366b.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/index.173180a9.js">
+		<link rel="modulepreload" href="/_app/immutable/entry/app.0688cbc0.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/index.12fda089.js">
+</head>
+
+<body data-sveltekit-preload-data="hover">
+	<div id="fb-root"></div>
+	<div style="display: contents">
 			<script>
 				{
-					__sveltekit_8aij8c = {
+					__sveltekit_1dgumzd = {
 						base: "",
 						env: {}
 					};
@@ -27,13 +29,76 @@
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("/_app/immutable/entry/start.b295fedd.js"),
-						import("/_app/immutable/entry/app.9edc6321.js")
+						import("/_app/immutable/entry/start.6882eed3.js"),
+						import("/_app/immutable/entry/app.0688cbc0.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element);
 					});
 				}
 			</script>
 		</div>
-	</body>
+
+	<script>
+
+		function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+			// console.log('statusChangeCallback');
+			// console.log(response);                   // The current login status of the person.
+			if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+				testAPI();
+			} else {                                 // Not logged into your webpage or we are unable to tell.
+				document.getElementById('status').innerHTML = 'Please log ' +
+					'into this webpage.';
+			}
+		}
+
+		function checkLoginState() {               // Called when a person is finished with the Login Button.
+			FB.getLoginStatus(function (response) {   // See the onlogin handler
+				statusChangeCallback(response);
+			});
+		}
+
+		window.fbAsyncInit = function () {
+			FB.init({
+				appId: '1284186342222033',
+				cookie: true,
+				xfbml: true,
+				version: 'v17.0'
+			});
+
+			FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
+				statusChangeCallback(response);        // Returns the login status.
+			});
+		};
+
+		(function (d, s, id) {
+			var js,
+				fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = 'https://connect.facebook.net/en_US/sdk.js';
+			fjs.parentNode.insertBefore(js, fjs);
+		})(document, 'script', 'facebook-jssdk');
+
+		function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      // console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+			document.getElementById('fb-login').style.display = "none";
+    });
+  }
+
+	</script>
+
+	<script async defer crossorigin="anonymous"
+		src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v17.0&appId=1284186342222033&autoLogAppEvents=1"
+		nonce="ObQqMIS0">
+	</script>
+
+</body>
+
 </html>

@@ -5,7 +5,7 @@
 
 	const [send, receive] = crossfade({
 		duration: 200,
-		fallback: scale as ((node: Element, params: CrossfadeParams, intro: boolean) => TransitionConfig)
+		fallback: scale as (node: Element, params: CrossfadeParams, intro: boolean) => TransitionConfig
 	});
 
 	let selected: Bupati | null = null;
@@ -29,33 +29,31 @@
 </script>
 
 <svelte:head>
-  <title>Ketua DPRD Indramayu dari masa ke masa</title>
-  <meta name="description" content="Ketua DPRD Indramayu" />
-  <meta property="fb:app_id" content="185084348558317" /> 
-  <meta property="og:type" content="article" /> 
-  <meta property="og:url" content="https://sapulidi.site/ketua-dprd" /> 
-  <meta property="og:title" content="Ketua DPRD Indramayu" /> 
-  <meta property="og:image:url" content="https://masturfyc.github.io/taufik-hidayat.jpg" /> 
-  <meta property="og:image:secure_url" content="https://masturfyc.github.io/taufik-hidayat.jpg" /> 
-  <meta property="og:image:secure" content="https://masturfyc.github.io/taufik-hidayat.jpg" /> 
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="445" /> 
-  <meta property="og:image:height" content="563" /> 
-  <meta property="og:description" content="Ketua DPRD Indramayu dari masa ke masa" />  
+	<title>Ketua DPRD Indramayu dari masa ke masa</title>
+	<meta name="description" content="Ketua DPRD Indramayu" />
+	<meta property="fb:app_id" content="1284186342222033" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://sapulidi.site/ketua-dprd" />
+	<meta property="og:title" content="Ketua DPRD Indramayu" />
+	<meta property="og:image:url" content="https://masturfyc.github.io/taufik-hidayat.jpg" />
+	<meta property="og:image:secure_url" content="https://masturfyc.github.io/taufik-hidayat.jpg" />
+	<meta property="og:image:secure" content="https://masturfyc.github.io/taufik-hidayat.jpg" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content="445" />
+	<meta property="og:image:height" content="563" />
+	<meta property="og:description" content="Ketua DPRD Indramayu dari masa ke masa" />
 </svelte:head>
-
 
 <div class="container">
 	<div class="phone">
 		<h1>Ketua DPRD Indramayu dari masa ke masa</h1>
-
 		<div class="grid">
 			{#each images as image}
 				<div class="square">
 					{#if selected !== image}
 						<button
 							style="background-image:url('{image.url}');background-size:cover;background-repeat:no-repeat;background-blend-mode:multiply;background-color:{image.color}cc"
-              class="btn"
+							class="btn"
 							on:click={() => load(image)}
 							in:receive={{ key: image.id }}
 							out:send={{ key: image.id }}>{loading === image ? '...' : image.id}</button
@@ -69,11 +67,11 @@
 			{#await selected then d}
 				<div class="photo" in:receive|global={{ key: d.id }} out:send|global={{ key: d.id }}>
 					<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-					<img alt={d.name} src="{d.url}" on:click={() => (selected = null)} />
+					<img alt={d.name} src={d.url} on:click={() => (selected = null)} />
 
 					<p class="credit">
 						<a target="_blank" rel="noreferrer" href={d.url}>{d.name}</a>
-            ({d.period.from} - {d.period.to})
+						({d.period.from} - {d.period.to})
 					</p>
 				</div>
 			{/await}
@@ -93,11 +91,11 @@
 		left: 0;
 	}
 
-  .btn {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-blend-mode: difference;
-  }
+	.btn {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-blend-mode: difference;
+	}
 
 	.phone {
 		position: relative;
