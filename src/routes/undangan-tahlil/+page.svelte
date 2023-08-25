@@ -108,7 +108,7 @@
 
 <svelte:head>
 	<meta property='fb:app_id' content='1284186342222033' />
-	<meta property='og:url' content='https://masturfyc.github.io/undangan-tahlil' />
+	<meta property='og:url' content='https://masturfyc.github.io' />
 	<meta property='og:image' content={sapulidi} />
 	<meta property='og:image:secure_url' content='{sapulidi}' />
 	<meta property='og:image:type' content='image/jpeg' />
