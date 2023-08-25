@@ -17,10 +17,10 @@
 
 
 <svelte:head>
-	<title>Undangan Tahlil</title>
-	<meta name="description" content="Home page" />
 	<meta property="fb:app_id" content="1284186342222033" />
 	<meta property="og:url" content="https://masturfyc.github.io" />
+	<title>Undangan Tahlil</title>
+	<meta name="description" content="Home page" />
 </svelte:head>
 
 <div class="hero is-justify-content-space-between is-fullheight">	
