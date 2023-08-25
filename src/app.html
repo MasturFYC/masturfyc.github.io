@@ -32,7 +32,7 @@
 				statusChangeCallback(response);
 			});
 		}
-
+		
 		window.fbAsyncInit = function () {
 			FB.init({
 				appId: '1284186342222033',
@@ -59,11 +59,11 @@
 		})(document, 'script', 'facebook-jssdk');
 
 		function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      // console.log('Successful login for: ' + response.name);
+    //console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', { locale: 'id_ID', fields: 'email,name' }, function(response) {
+      //console.log('Successful login for: ' + response);
       document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+        'Thanks for logging in, <span id="username">' + response.email + '</span>!';
 			document.getElementById('fb-login').style.display = "none";
     });
   }
