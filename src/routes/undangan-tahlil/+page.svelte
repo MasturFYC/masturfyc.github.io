@@ -4,6 +4,7 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import { user } from '$lib/store';
 	import { onMount } from 'svelte';
+	import sapulidi from '$lib/images/sapulidi.png'
 
 	let is_download = false;
 	let clicked = 'no';
@@ -108,8 +109,8 @@
 <svelte:head>
 	<meta property='fb:app_id' content='1284186342222033' />
 	<meta property='og:url' content='https://masturfyc.github.io/undangan-tahlil' />
-	<meta property='og:image' content='https://masturfyc.github.io/sapulidi.png' />
-	<meta property='og:image:secure_url' content='https://masturfyc.github.io/sapulidi.png' />
+	<meta property='og:image' content="{sapulidi}" />
+	<meta property='og:image:secure_url' content="{sapulidi}" />
 	<meta property='og:image:type' content='image/png' />
 	<meta property='og:image:width' content='1200' />
 	<meta property='og:image:height' content='673' />
