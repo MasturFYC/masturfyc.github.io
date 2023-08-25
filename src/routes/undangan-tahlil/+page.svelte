@@ -107,12 +107,11 @@
 
 <svelte:head>
 	<meta property='fb:app_id' content='1284186342222033' />
-	<meta property='og:image' content='https://masturfyc.github.io/background.jpg' />
-	<meta property='og:image:secure_url' content='https://masturfyc.github.io/background.jpg' />
-	<meta property='og:image:type' content='image/jpeg' />
-	<meta property='og:image:width' content='400' />
-	<meta property='og:image:height' content='300' />
-	<meta property='og:image:alt' content='Bakcground image' />	
+	<meta property='og:image' content='https://masturfyc.github.io/sapulidi.png' />
+	<meta property='og:image:secure_url' content='https://masturfyc.github.io/sapulidi.png' />
+	<meta property='og:image:type' content='image/png' />
+	<meta property='og:image:width' content='1200' />
+	<meta property='og:image:height' content='673' />
 	<meta property='og:type' content='article' />
 	<meta property='og:url' content='https://masturfyc.github.io/undangan-tahlil' />
 	<meta property='og:title' content='Mastur FYC home page' />
