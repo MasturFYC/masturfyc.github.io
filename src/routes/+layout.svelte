@@ -19,75 +19,35 @@
 	<title>Home</title>
 </svelte:head>
 
-<div class="container">
+<div class="hero is-justify-content-space-between is-fullheight">	
 	<HeaderPage />
-	<div class="dashboard">
-		<div>
-				<div class="box">
-					<a href="/undangan-tahlil">Undangan Tahlil</a>
-				</div>
-				<div class="box">
-					<a href="/bilangan">Bilangan</a>
-				</div>
-				<div class="box">
-					<a href="/ketua-dprd">Ketua DPRD Indramayu</a>
-				</div>
-		</div>
-		<main class="main-content flex-1">
+	<div class="columns px-4 flex-1 block">
+		<aside class="column is-3">
+			<div>
+				<a href="/undangan-tahlil">Undangan Tahlil</a>
+			</div>
+			<div class="mt-2">
+				<a href="/bilangan">Bilangan</a>
+			</div>
+			<div class="mt-2">
+				<a href="/ketua-dprd">Ketua DPRD Indramayu</a>
+			</div>
+		</aside>
+		<main class="column">
 			<slot />
 		</main>
 	</div>
-  <Footer />
+	<Footer />
 </div>
 
 <style lang="scss">
-	:global(.box) {
-		text-align: center;
-		display: block;
-		border: 2px solid #999;
-		margin-bottom: 12px;
-		background-color: #f7f9f9;
-		padding: 6px 12px;
+	.flex-1 {
+		flex: 1;
 	}
-
-	.dashboard {
-		display: flex;
-		flex-direction: row;
-		column-gap: 24px;
-    flex: 1;
-	}
-
-	.container {
-		display: flex;
-		flex-direction: column;
-		justify-items: space-between;
-		padding: 0;
-		margin: 0 auto;
-		min-height: 100vh;
-		max-width: 960px;
-	}
-
-	:global(body) {
-		padding: 0;
-		margin: 0;
-	}
-
-	a {
-		//		color: #ddd;
-		text-decoration: none;
-	}
-	a:hover {
-		text-decoration: underline;
-	} 
 
 	@media screen and (max-width: 480px) {
-
-		.container {
-			 max-width: 0 calc(100% - 12px);
-			 padding: 12px;
-		}
-		.dashboard {
-			flex-wrap: wrap;
+		* :global(.pad12) {
+			padding: 0 12px;
 		}
 	}
 </style>

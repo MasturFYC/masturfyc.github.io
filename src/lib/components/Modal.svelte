@@ -63,6 +63,7 @@
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);
 	}
+	
 	dialog > div {
 		padding: 1em;
 	}
