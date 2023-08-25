@@ -12,10 +12,10 @@
 	<meta property='og:type' content='article' />
 	<meta property='og:url' content='https://masturfyc.github.io/bilangan' />
 	<meta property='og:title' content='Bilangan' />
-	<meta property='og:image:url' content='https://masturfyc.github.io/background.jpg' />
-	<meta property='og:image:secure_url' content='https://masturfyc.github.io/background.jpg' />
-	<meta property='og:image:secure' content='https://masturfyc.github.io/background.jpg' />
-	<meta property='og:image:type' content='image/jpeg' />
+	<meta property='og:image:url' content='https://masturfyc.github.io/sapulidi.png' />
+	<meta property='og:image:secure_url' content='https://masturfyc.github.io/sapulidi.png' />
+	<meta property='og:image:secure' content='https://masturfyc.github.io/sapulidi.png' />
+	<meta property='og:image:type' content='image/png' />
 	<meta property='og:image:width' content='445' />
 	<meta property='og:image:height' content='563' />
 	<meta property='og:description' content='Mengubah angka menjadi bilangan' />
