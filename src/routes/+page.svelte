@@ -14,7 +14,7 @@ import sapulidi from '$lib/images/sapulidi.jpg'
 	<meta property='og:title' content='Home page' />
 	<meta property='og:image' content="{sapulidi}" />
 	<meta property='og:image:secure_url' content="{sapulidi}" />
-	<meta property='og:image:type' content='image/jpg' />
+	<meta property='og:image:type' content='image/jpeg' />
 	<meta property='og:image:width' content='1200' />
 	<meta property='og:image:height' content='673' />
 	<meta property='og:description' content='Home page' />

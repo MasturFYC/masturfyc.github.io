@@ -111,7 +111,7 @@
 	<meta property='og:url' content='https://masturfyc.github.io/undangan-tahlil' />
 	<meta property='og:image' content={sapulidi} />
 	<meta property='og:image:secure_url' content='{sapulidi}' />
-	<meta property='og:image:type' content='image/jpg' />
+	<meta property='og:image:type' content='image/jpeg' />
 	<meta property='og:image:width' content='1200' />
 	<meta property='og:image:height' content='673' />
 	<meta property='og:type' content='website' />

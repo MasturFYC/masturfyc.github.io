@@ -30,7 +30,7 @@
 
 <svelte:head>
 	<meta property='fb:app_id' content='1284186342222033' />
-	<meta property='og:type' content='article' />
+	<meta property='og:type' content='website' />
 	<meta property='og:title' content='Ketua DPRD Indramayu dari masa ke masa' />
 	<meta property='og:url' content='https://masturfyc.github.io/ketua-dprd' />
 	<meta property='og:image' content='https://masturfyc.github.io/taufik-hidayat.jpg' />
