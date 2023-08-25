@@ -8,19 +8,19 @@
 </script>
 
 <svelte:head>
-	<title>Bilangan</title>
-	<meta name='description' content='Ketua DPRD Indramayu' />
 	<meta property='fb:app_id' content='1284186342222033' />
 	<meta property='og:type' content='article' />
 	<meta property='og:url' content='https://masturfyc.github.io/bilangan' />
-	<meta property='og:title' content='Ketua DPRD Indramayu dari masa ke masa' />
-	<meta property='og:image:url' content='https://masturfyc.github.io/taufik-hidayat.jpg' />
-	<meta property='og:image:secure_url' content='https://masturfyc.github.io/taufik-hidayat.jpg' />
-	<meta property='og:image:secure' content='https://masturfyc.github.io/taufik-hidayat.jpg' />
+	<meta property='og:title' content='Bilangan' />
+	<meta property='og:image:url' content='https://masturfyc.github.io/background.jpg' />
+	<meta property='og:image:secure_url' content='https://masturfyc.github.io/background.jpg' />
+	<meta property='og:image:secure' content='https://masturfyc.github.io/background.jpg' />
 	<meta property='og:image:type' content='image/jpeg' />
 	<meta property='og:image:width' content='445' />
 	<meta property='og:image:height' content='563' />
-	<meta property='og:description' content='Ketua DPRD Indramayu dari masa ke masa' />
+	<meta property='og:description' content='Mengubah angka menjadi bilangan' />
+	<title>Bilangan</title>
+	<meta name='description' content='Mengubah angka menjadi bilangan' />
 </svelte:head>
 
 <section>

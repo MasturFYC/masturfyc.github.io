@@ -116,9 +116,9 @@
 	<meta property='og:type' content='article' />
 	<meta property='og:url' content='https://masturfyc.github.io/undangan-tahlil' />
 	<meta property='og:title' content='Mastur FYC home page' />
-	<meta property='og:description' content='Mastur FYC home page' />
+	<meta property='og:description' content='Undangan tahlil' />
 	<title>Undangan Tahlil</title>
-	<meta name='description' content='Home page' />
+	<meta name='description' content='Undangan tahlil' />
 </svelte:head>
 
 <section>
