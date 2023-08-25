@@ -1,6 +1,6 @@
 /*! bulma.io v0.9.4 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
-@import url(../node_modules/@fontsource/fira-mono/400.css);
+@import url("https://fonts.cdnfonts.com/css/fira-mono");
 .button, .input, .textarea, .select select, .file-cta,
 .file-name, .pagination-previous,
 .pagination-next,
