@@ -9,7 +9,7 @@ import sapulidi from '$lib/images/sapulidi.jpg'
 <svelte:head>
 	<title>Home</title>
 	<meta property='fb:app_id' content='1284186342222033' />
-	<meta property='og:type' content='article' />
+	<meta property='og:type' content='website' />
 	<meta property='og:url' content='https://masturfyc.github.io' />
 	<meta property='og:title' content='Home page' />
 	<meta property='og:image' content="{sapulidi}" />

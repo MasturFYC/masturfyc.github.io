@@ -114,7 +114,7 @@
 	<meta property='og:image:type' content='image/jpg' />
 	<meta property='og:image:width' content='1200' />
 	<meta property='og:image:height' content='673' />
-	<meta property='og:type' content='article' />
+	<meta property='og:type' content='website' />
 	<meta property='og:title' content='Mastur FYC home page' />
 	<meta property='og:description' content='Undangan tahlil' />
 	<title>Undangan Tahlil</title>
