@@ -1,6 +1,8 @@
 <script>
 	import { numberToText } from '$lib/number-to-string';
 	import { cardNumber, format, getNumber } from '$lib/format';
+	import sapulidi from '$lib/images/sapulidi.jpg'
+
 
 	let value = '11000000000000000';
 
@@ -12,9 +14,9 @@
 	<meta property='og:type' content='article' />
 	<meta property='og:url' content='https://masturfyc.github.io/bilangan' />
 	<meta property='og:title' content='Bilangan' />
-	<meta property='og:image' content='https://masturfyc.github.io/sapulidi.png' />
-	<meta property='og:image:secure_url' content='https://masturfyc.github.io/sapulidi.png' />
-	<meta property='og:image:type' content='image/png' />
+	<meta property='og:image' content='{sapulidi}' />
+	<meta property='og:image:secure_url' content='{sapulidi}' />
+	<meta property='og:image:type' content='image/jpg' />
 	<meta property='og:image:width' content='1200' />
 	<meta property='og:image:height' content='673' />
 	<meta property='og:description' content='Mengubah angka menjadi bilangan' />
