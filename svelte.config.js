@@ -18,7 +18,7 @@ const config = {
 			precompress: false,
 			strict: true,
 			fallback: 'index.html'
-		})
+		})	
 		// prerender: {
 		// 	handleHttpError: ({ path, referrer, message }) => {
 		// 		// ignore deliberate link to shiny 404 page

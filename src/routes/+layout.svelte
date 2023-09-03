@@ -9,6 +9,9 @@
 	import advanced from 'dayjs/plugin/advancedFormat';
 	import locale from 'dayjs/locale/id';
 
+	import sapulidi from '$lib/images/sapulidi.jpg'
+
+
 	dayjs.locale(locale);
 	dayjs.extend(timezone);
 	dayjs.extend(utc);
@@ -19,7 +22,15 @@
 <svelte:head>
 	<meta property='fb:app_id' content='1284186342222033' />
 	<meta property='og:url' content='https://masturfyc.github.io' />
-	<meta name='description' content='Home page' />
+	<meta name='description' content='Mastur FYC Home page' />
+	<meta property='og:image' content="{sapulidi}" />
+	<meta property='og:image:secure_url' content="{sapulidi}" />
+	<meta property='og:image:type' content='image/jpeg' />
+	<meta property='og:image:width' content='1200' />
+	<meta property='og:image:height' content='630' />
+	<meta property='og:description' content='Mastur FYC  Home page' />
+	<meta property='og:type' content='website' />
+	<meta property='og:title' content='Mastur FYC Home page' />
 </svelte:head>
 
 <div class='hero is-justify-content-space-between is-fullheight'>	
@@ -34,6 +45,9 @@
 			</div>
 			<div class="mt-2">
 				<a href="/ketua-dprd">Ketua DPRD Indramayu</a>
+			</div>
+			<div class="mt-2">
+				<a href="/pdam">Kartu PDAM</a>
 			</div>
 			<div class="fb-login-button" data-width="90" data-size="32" data-button-type="button" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
 			<div>
