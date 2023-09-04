@@ -23,10 +23,11 @@
 
 	let data: PDAM[] = [];
 	let cabang: CABANG = cabangs[0];
+	let cabangName = cabang.name;
 	let selectAllData = false;
 	let textCsv = '';
 	let header = 'noSl,name,address\n';
-  let isAdmin = false;
+	let isAdmin = false;
 
 	function readFile(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		const target = e.currentTarget as HTMLInputElement;
@@ -58,15 +59,14 @@
 			});
 	}
 
-  $: if(browser) {
-    const test = document.getElementById("username")?.innerText;
-    isAdmin = test === "mastur.st12@outlook.com";
-  }
+	$: if (browser) {
+		const test = document.getElementById('username')?.innerText;
+		isAdmin = test === 'mastur.st12@outlook.com';
+	}
 
-  let is_download = false;
+	let is_download = false;
 
-
-	async function downloadCard(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) {
+	async function downloadCard(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
 		is_download = true;
 
 		const baseUrl = import.meta.env.VITE_API_URL;
@@ -79,7 +79,7 @@
 				Accept: 'application/pdf',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({"data": data.filter(f => f.selected)})
+			body: JSON.stringify({ data: data.filter((f) => f.selected) })
 		})
 			.then((response) => {
 				filename = response.headers.get('x-suggested-filename') ?? 'pdam-card.pdf';
@@ -100,17 +100,20 @@
 				is_download = false;
 				console.log(error);
 			});
-      }
+	}
+
+	$: cabang = cabangs.filter(f => f.name === cabangName)[0]
+	
 </script>
 
 <svelte:head>
-	<meta property='og:description' content='PDAM Card' />
+	<meta property="og:description" content="PDAM Card" />
 	<title>PDAM Card</title>
-	<meta name='description' content='PDAM Card' />
+	<meta name="description" content="PDAM Card" />
 </svelte:head>
 
 <section>
-  <div class="title">Kartu PDAM</div>
+	<div class="title">Kartu PDAM</div>
 	<div class="tabs is-toggle is-toggle-rounded is-small">
 		<ul>
 			<!-- svelte-ignore a11y-invalid-attribute -->
@@ -126,7 +129,7 @@
 
 	<label class="div-label">
 		<span>Cabang:</span>
-		<select class="select mb-2 mt-2 mr-4" bind:value={cabang.name}>
+		<select class="select mb-2 mt-2 mr-4" bind:value={cabangName}>
 			{#each cabangs as c}
 				<option value={c.name}>{c.name}</option>
 			{/each}
@@ -140,7 +143,8 @@
 				<textarea class="textarea column is-full" rows="10" bind:value={textCsv} />
 			</label>
 		</div>
-		<button class="button is-secondary block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button>
+		<button class="button is-secondary block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button
+		>
 	{:else}
 		<input
 			type="file"
@@ -176,10 +180,12 @@
 			{/each}
 		</tbody>
 	</table>
-  <div class="mt-4">
-    <button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)} >Download</button>
-    <p>{is_download ? "Please wait...." : ""}</p>
-  </div>
+	<div class="mt-4">
+		<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
+			>Download</button
+		>
+		<p>{is_download ? 'Please wait....' : ''}</p>
+	</div>
 </section>
 
 <style>
