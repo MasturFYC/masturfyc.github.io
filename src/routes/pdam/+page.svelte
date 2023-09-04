@@ -104,9 +104,9 @@
 </script>
 
 <svelte:head>
-	<meta property='og:description' content='Undangan tahlil' />
+	<meta property='og:description' content='PDAM Card' />
 	<title>PDAM Card</title>
-	<meta name='description' content='Undangan tahlil' />
+	<meta name='description' content='PDAM Card' />
 </svelte:head>
 
 <section>
