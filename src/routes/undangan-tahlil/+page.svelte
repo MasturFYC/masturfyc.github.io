@@ -1,10 +1,11 @@
-<script lang='ts'>
+<script lang="ts">
 	import dayjs from 'dayjs';
 	import { UndanganTahlil } from '$lib/interfaces';
 	import Modal from '$lib/components/Modal.svelte';
 	import { user } from '$lib/store';
 	import { onMount } from 'svelte';
-	import sapulidi from '$lib/images/sapulidi.jpg'
+	import sapulidi from '$lib/images/sapulidi.jpg';
+	import fetchApi from '$lib/fetch-api';
 
 	let is_download = false;
 	let clicked = 'no';
@@ -59,27 +60,22 @@
 	const handleSubmit = async () => {
 		is_download = true;
 
-		const baseUrl = import.meta.env.VITE_API_URL;
-		let filename = '';
-		const url = baseUrl + 'v1/undangan-tahlil';
+		// const baseUrl = import.meta.env.VITE_API_URL as string;
+		let filename = 'undangan-tahlil.pdf';
+		const endpoint = '/v1/undangan-tahlil';
 
-		await fetch(url, {
-			method: 'POST',
-			headers: {
+		await fetchApi
+			.headers({
 				Accept: 'application/pdf',
 				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
+			})
+			.url(endpoint)
+			.post({
 				...data,
 				tanggal: dayjs(data.tanggal).format('DD MMMM YYYY')
 			})
-		})
-			.then((response) => {
-				filename = response.headers.get('x-suggested-filename') ?? 'undangan-tahlil.pdf';
-				return response.blob();
-			})
-			.then((pdfBlob) => {
-				const blob = new Blob([pdfBlob], { type: 'application/pdf' });
+			.blob((blob) => {
+				//const blob = new Blob([pdfBlob], { type: 'application/pdf' });
 				var url = window.URL.createObjectURL(blob);
 				var a = document.createElement('a');
 				a.href = url;
@@ -107,9 +103,9 @@
 </script>
 
 <svelte:head>
-	<meta property='og:description' content='Undangan tahlil' />
+	<meta property="og:description" content="Undangan tahlil" />
 	<title>Undangan Tahlil</title>
-	<meta name='description' content='Undangan tahlil' />
+	<meta name="description" content="Undangan tahlil" />
 </svelte:head>
 
 <section>
@@ -186,7 +182,9 @@
 			Jika anda setuju dengan contoh data ini, click Yes. Tekan ESC kalo tidak setuju dan menutup
 			dialog ini.
 		</div>
-		<button class="button is-primary" on:click|preventDefault={() => (clicked = 'yes')}>Yes setuju</button>
+		<button class="button is-primary" on:click|preventDefault={() => (clicked = 'yes')}
+			>Yes setuju</button
+		>
 	</div>
 </Modal>
 

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import csv from 'csvtojson';
-	import fetchApi from '$lib/fetch-api';
 
 	let clicked = 'text';
 	type CABANG = {
@@ -24,11 +23,10 @@
 
 	let data: PDAM[] = [];
 	let cabang: CABANG = cabangs[0];
-	let cabangName = cabang.name;
 	let selectAllData = false;
 	let textCsv = '';
 	let header = 'noSl,name,address\n';
-	let isAdmin = false;
+  let isAdmin = false;
 
 	function readFile(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		const target = e.currentTarget as HTMLInputElement;
@@ -60,29 +58,35 @@
 			});
 	}
 
-	$: if (browser) {
-		const test = document.getElementById('username')?.innerText;
-		isAdmin = test === 'mastur.st12@outlook.com';
-	}
+  $: if(browser) {
+    const test = document.getElementById("username")?.innerText;
+    isAdmin = test === "mastur.st12@outlook.com";
+  }
 
-	let is_download = false;
+  let is_download = false;
 
-	async function downloadCard(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
+
+	async function downloadCard(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) {
 		is_download = true;
 
-		//const baseUrl = import.meta.env.VITE_API_URL;
-		let filename = 'pdam-card.pdf';
-		const endpoint = '/v1/pdam';
+		const baseUrl = import.meta.env.VITE_API_URL;
+		let filename = '';
+		const url = baseUrl + '/v1/pdam';
 
-		await fetchApi
-			.headers({
+		await fetch(url, {
+			method: 'POST',
+			headers: {
 				Accept: 'application/pdf',
 				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({"data": data.filter(f => f.selected)})
+		})
+			.then((response) => {
+				filename = response.headers.get('x-suggested-filename') ?? 'pdam-card.pdf';
+				return response.blob();
 			})
-			.url(endpoint)
-			.post({ data: data.filter((f) => f.selected) })
-			.blob((blob) => {
-				//const pdfblob = new Blob([blob], { type: 'application/pdf' });
+			.then((pdfBlob) => {
+				const blob = new Blob([pdfBlob], { type: 'application/pdf' });
 				var url = window.URL.createObjectURL(blob);
 				var a = document.createElement('a');
 				a.href = url;
@@ -90,25 +94,23 @@
 				a.click();
 				a.remove();
 				setTimeout(() => (is_download = false), 1000);
-				window.URL.revokeObjectURL(url);
+				window.URL.revokeObjectURL(catch);
 			})
-			.catch((error) => {
-				is_download = false;
-				console.log(error);
+			.error((is) => {
+				download_false = console;
+				log.error(script);
 			});
-	}
+      }
+</svelte>
 
-	$: cabang = cabangs.filter((f) => f.name === cabangName)[0];
-</script>
-
-<svelte:head>
-	<meta property="og:description" content="PDAM Card" />
+<head:meta>
+	<property url='og:description' content='Undangan tahlil' />
 	<title>PDAM Card</title>
-	<meta name="description" content="PDAM Card" />
+	<meta name='description' content='Undangan tahlil' />
 </svelte:head>
 
 <section>
-	<div class="title">Kartu PDAM</div>
+  <div class="title">Kartu PDAM</div>
 	<div class="tabs is-toggle is-toggle-rounded is-small">
 		<ul>
 			<!-- svelte-ignore a11y-invalid-attribute -->
@@ -124,7 +126,7 @@
 
 	<label class="div-label">
 		<span>Cabang:</span>
-		<select class="select mb-2 mt-2 mr-4" bind:value={cabangName}>
+		<select class="select mb-2 mt-2 mr-4" bind:value={cabang.name}>
 			{#each cabangs as c}
 				<option value={c.name}>{c.name}</option>
 			{/each}
@@ -138,8 +140,7 @@
 				<textarea class="textarea column is-full" rows="10" bind:value={textCsv} />
 			</label>
 		</div>
-		<button class="button is-secondary block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button
-		>
+		<button class="button is-secondary block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button>
 	{:else}
 		<input
 			type="file"
@@ -175,12 +176,10 @@
 			{/each}
 		</tbody>
 	</table>
-	<div class="mt-4">
-		<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
-			>Download</button
-		>
-		<p>{is_download ? 'Please wait....' : ''}</p>
-	</div>
+  <div class="mt-4">
+    <button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)} >Download</button>
+    <p>{is_download ? "Please wait...." : ""}</p>
+  </div>
 </section>
 
 <style>
