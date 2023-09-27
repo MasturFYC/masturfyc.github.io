@@ -54,7 +54,7 @@
 
 	function parseToJSON(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
 		csv()
-			.fromString(header + textCsv)
+			.fromString(header	 + textCsv)
 			.then((jsonObj) => {
 				data = [...data, ...jsonObj.map((m) => ({ ...m, cabang: cabang, selected: true }))];
 			});
@@ -64,7 +64,7 @@
 		const test = document.getElementById('username')?.innerText;
 		isAdmin = test === 'mastur.st12@outlook.com';
 	}
-
+	
 	let is_download = false;
 
 	async function downloadCard(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
@@ -147,6 +147,7 @@
 			accept="text/csv"
 			on:change|preventDefault={(e) => readFile(e)}
 		/>
+		<span>CSV Format ( {header})</span>
 	{/if}
 
 	<table class="table">
