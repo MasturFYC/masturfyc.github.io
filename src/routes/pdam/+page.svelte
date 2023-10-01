@@ -11,7 +11,8 @@
 
 	const cabangs: CABANG[] = [
 		{ name: 'Jatibarang', address: 'Jl. Purna Brata No. 1001 Telp. (0234)  351491' },
-		{ name: 'Sindang', address: 'Jl. Singalodra  - Sindang Telp. (0234) 277564' }
+		{ name: 'Sindang', address: 'Jl. Singalodra  - Sindang Telp. (0234) 277564' },
+		{ name: 'Indramayu', address: 'Jl. Tanjungpura No. 197 Kepandean - Indramayu Telp (0234) 271576' }
 	];
 
 	type PDAM = {
@@ -19,16 +20,21 @@
 		noSl: number;
 		name: string;
 		address: string;
-		cabang?: CABANG;
+		city: string;
+		cabang: string;
 	};
 
 	let data: PDAM[] = [];
-	let cabang: CABANG = cabangs[0];
-	let cabangName = cabang.name;
+//	let cabang: CABANG = cabangs[0];
+//	let cabangName = cabang.name;
 	let selectAllData = false;
 	let textCsv = '';
-	let header = 'noSl,name,address\n';
+	let header = 'noSl, name, address, city';
 	let isAdmin = false;
+
+	const getAddress = (city: string): string => {
+		return cabangs.filter(f => f.name === city)[0].address
+	}
 
 	function readFile(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		const target = e.currentTarget as HTMLInputElement;
@@ -41,7 +47,7 @@
 				csv()
 					.fromString(text)
 					.then((jsonObj) => {
-						data = [...data, ...jsonObj.map((m) => ({ ...m, cabang: cabang, selected: true }))];
+						data = [...data, ...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))];
 					});
 			};
 			reader.readAsText(file, 'utf-8');
@@ -54,9 +60,9 @@
 
 	function parseToJSON(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
 		csv()
-			.fromString(header	 + textCsv)
+			.fromString(header + '\n' + textCsv)
 			.then((jsonObj) => {
-				data = [...data, ...jsonObj.map((m) => ({ ...m, cabang: cabang, selected: true }))];
+				data = [...data, ...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))];
 			});
 	}
 
@@ -98,7 +104,7 @@
 			});
 	}
 
-	$: cabang = cabangs.filter((f) => f.name === cabangName)[0];
+	//$: cabang = cabangs.filter((f) => f.name === cabangName)[0];
 </script>
 
 <svelte:head>
@@ -121,7 +127,7 @@
 			</li>
 		</ul>
 	</div>
-
+<!-- 
 	<label class="div-label">
 		<span>Cabang:</span>
 		<select class="select mb-2 mt-2 mr-4" bind:value={cabangName}>
@@ -129,12 +135,12 @@
 				<option value={c.name}>{c.name}</option>
 			{/each}
 		</select>
-	</label>
+	</label> -->
 
 	{#if clicked === 'text'}
 		<div class="field block">
 			<label class="label">
-				<span>CSV Text (comma delimited):</span>
+				<span>CSV Text (comma delimited) format: ({header}):</span>
 				<textarea class="textarea column is-full" rows="10" bind:value={textCsv} />
 			</label>
 		</div>
@@ -147,7 +153,7 @@
 			accept="text/csv"
 			on:change|preventDefault={(e) => readFile(e)}
 		/>
-		<span>CSV Format ( {header})</span>
+		<span>CSV Format ({header})</span>
 	{/if}
 
 	<table class="table">
@@ -170,8 +176,8 @@
 					<td>{p.noSl}</td>
 					<td>{p.name}</td>
 					<td>{p.address}</td>
-					<td>{p.cabang?.name}</td>
-					<td>{p.cabang?.address}</td>
+					<td>{p.city}</td>
+					<td>{p.cabang}</td>
 				</tr>
 			{/each}
 		</tbody>
@@ -191,10 +197,10 @@
 		font-weight: 400;
 		line-height: 200%;
 	}
-	.div-label {
+	/* .div-label {
 		display: inline-flex;
 		flex-direction: row;
 		column-gap: 12px;
 		align-items: center;
-	}
+	} */
 </style>
