@@ -12,7 +12,7 @@
 	const cabangs: CABANG[] = [
 		{ name: 'Jatibarang', address: 'Jl. Purna Brata No. 1001 Telp. (0234)  351491' },
 		{ name: 'Sindang', address: 'Jl. Singalodra  - Sindang Telp. (0234) 277564' },
-		{ name: 'Indramayu', address: 'Jl. Tanjungpura No. 197 Kepandean - Indramayu Telp (0234) 271576' }
+		{ name: 'Indramayu', address: 'Jl. Tanjungpura No. 197 Kepandean - Indramayu Telp (0234) 7121205'} //271576' }
 	];
 
 	type PDAM = {
