@@ -1,0 +1,1 @@
+import{f as o}from"./index.01b9c5aa.js";const i=typeof window<"u"?window:typeof globalThis<"u"?globalThis:global,s="https://sapulidi.site/api",t=o(s,{mode:"cors"}).errorType("json");export{t as f,i as g};
