@@ -1,0 +1,60 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+)
+
+type HelloWorld struct {
+	Message string `json:"message"`
+}
+
+type Product struct {
+	ID      uint64 `json:"id"`
+	Name    string `json:"name"`
+	Sl      string `json:"slNo"`
+	Address string `json:"address"`
+}
+
+type Nota struct {
+	ID       uint64    `json:"id"`
+	Name     string    `json:"name"`
+	Products []Product `json:"products"`
+}
+
+func main() {
+	e := echo.New()
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:5173", "http://localhost:3000"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
+	api := e.Group("/api/v1")
+	e.GET("/hello", Greetings)
+	api.POST("/print-nota", PrintNota)
+	e.Logger.Fatal(e.Start(":3000"))
+}
+
+func Greetings(c echo.Context) error {
+	return c.JSON(http.StatusOK, HelloWorld{
+		Message: "Hello World",
+	})
+}
+
+func PrintNota(c echo.Context) error {
+
+	data := Nota{}
+	if err := c.Bind(&data); err != nil {
+		log.Println(err.Error())
+		return err
+	}
+
+	log.Printf("Print nota: # %d", data.ID)
+
+	return c.JSON(http.StatusOK, HelloWorld{
+		Message: fmt.Sprintf("Print success Nota No. %d", data.ID),
+	})
+}
