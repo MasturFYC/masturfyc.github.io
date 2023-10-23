@@ -102,3 +102,7 @@ section {
 	}
 }
  */
+/* 
+@charset "utf-8";
+@import "../static/darkstyle.css" (prefers-color-scheme: dark);
+@import "../static/lightstyle.css" (prefers-color-scheme: light) */

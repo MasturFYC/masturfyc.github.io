@@ -1,28 +1,4 @@
-:root {
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%; }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --background-color: #ffffff;
-    --fore-color: #213547;
-    --button-color: #f9f9f9;
-    --heading-color: #112231;
-    color: var(--fore-color);
-    background-color: var(--background-color); }
-  h1,
-  h2,
-  h3 {
-    color: var(--heading-color); }
-  a:hover {
-    color: #747bff; }
-  button {
-    background-color: var(--button-color); } }
-
+/*! bulma.io v0.9.4 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 .button, .input, .textarea, .select select, .file-cta,
 .file-name, .pagination-previous,

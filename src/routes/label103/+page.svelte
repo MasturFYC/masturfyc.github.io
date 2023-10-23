@@ -1,5 +1,6 @@
 <script lang="ts">
 	import csv from 'csvtojson';
+	import fetchApi from '$lib/fetch-api';
 
 	type Label103 = {
 		id: number;
@@ -112,54 +113,66 @@
 	}
 
 	const donwloadLabel = async () => {
-		await fetch('https://malvamelva.com/api/v1/label103', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Accept': 'application/pdf'
-			},
-			body: JSON.stringify({
-				opt: {...opt},
-				data: data.map(m => ({...m, id: +m.id}))
-				})
-		}).then(response => response.blob())
-		.then(blob => {
-			var url = window.URL.createObjectURL(blob);
+		const endpoint = 'https://malvamelva.com/api/v1/label103';
+		await fetchApi
+			.headers({
+				Accept: 'application/pdf',
+				'Content-Type': 'application/json'
+			})
+			.url(endpoint, true)
+			.post({
+				opt: { ...opt },
+				data: data.map((m) => ({ ...m, id: +m.id }))
+			})
+			.blob((blob) => {
+				//const pdfblob = new Blob([blob], { type: 'application/pdf' });
+				var url = window.URL.createObjectURL(blob);
 				var a = document.createElement('a');
 				a.href = url;
-				a.download = "label103.pdf";
-				document.body.appendChild(a)
+				a.download = 'label103.pdf';
 				a.click();
 				a.remove();
 				setTimeout(() => window.URL.revokeObjectURL(url), 1000);
-		});
+				//window.URL.revokeObjectURL(url);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 </script>
 
-<section class="section">
-	<h2>Label 103</h2>
+<section>
+	<div class="title">Label 103</div>
 	<div class="div-control">
 		<label>
 			<span>Data: (format data: name1, name2, job, address, city)</span>
-			<textarea rows="10" bind:value={sampleData} />
+			<textarea class="textarea is-full" rows="10" bind:value={sampleData} />
 		</label>
 	</div>
-	<button class="button is-success mb-4" on:click={() => parseToJSON(sampleData)}
-		>Parse input to JSON</button
-	>
-	<button
-		class="button is-info mb-4 ml-2"
-		on:click={() => {
-			const elem = document.getElementById('input-file');
-			elem?.click();
-		}}>Load from CSV/JSON file</button
-	>
-	<button class="button is-warning mb-4 ml-2" on:click={() => downloadObjectAsJson(data)}
-		>Save data as JSON</button
-	>
-	<button class="button is-warning mb-4 ml-2" on:click={() => donwloadLabel()}
-		>Download Label</button
-	>
+	<div class="buttons">
+		<button class="button is-success" on:click={() => parseToJSON(sampleData)}
+			>
+			<i class="fa-solid fa-wand-sparkles mr-2"></i>
+			<span>Parse input to JSON</span></button
+		>
+		<button
+			class="button is-info"
+			on:click={() => {
+				const elem = document.getElementById('input-file');
+				elem?.click();
+			}}>
+			<i class="fa-solid fa-upload mr-2"></i>
+			<span>Load from CSV/JSON file</span></button
+		>
+		<button class="button is-warning" on:click={() => downloadObjectAsJson(data)}>
+			<i class="fa-solid fa-download mr-2"></i>
+			<span>Save data as JSON</span></button
+		>
+		<button class="button is-link" on:click={() => donwloadLabel()}>
+			<i class="fa-solid fa-file-pdf mr-2"></i>
+			<span>Download Label</span>
+		</button>
+	</div>
 	<input
 		id="input-file"
 		type="file"
@@ -168,7 +181,7 @@
 		accept="text/csv,application/json"
 		on:change|preventDefault={(e) => readFile(e)}
 	/>
-	<table>
+	<table class="table is-fullwidth">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -194,10 +207,9 @@
 	</table>
 </section>
 
-<style>
+<style lang="scss">
 	textarea {
 		padding: 0.5rem 1rem;
-		width: 100%;
 	}
 
 	.div-control {
@@ -206,36 +218,6 @@
 
 	label > span {
 		margin-bottom: 0.25rem;
-		font-size: 0.9rem;
-	}
-
-	table {
-		width: 100%;
-		border-collapse: collapse;
-	}
-	td,
-	th {
-		border: 1px solid #888;
-	}
-
-	th {
-		color: #cecece;
-	}
-
-	td {
-		padding: 0.25rem 0.5rem;
-	}
-	th {
-		padding: 0.5rem;
-	}
-
-	@media (prefers-color-scheme: light) {
-		td,
-		th {
-			border: 1px solid #777;
-		}
-		th {
-			color: #333;
-		}
+		font-size: small;
 	}
 </style>

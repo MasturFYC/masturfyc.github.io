@@ -144,7 +144,7 @@
 				<textarea class="textarea column is-full" rows="10" bind:value={textCsv} />
 			</label>
 		</div>
-		<button class="button is-secondary block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button
+		<button class="button is-link block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button
 		>
 	{:else}
 		<input
@@ -191,12 +191,14 @@
 </section>
 
 <style>
+	 textarea {
+		padding: 0.5rem 1rem;
+	}	 
 	label {
-		color: #555;
 		font-size: small;
 		font-weight: 400;
-		line-height: 200%;
-	}
+		line-height: 1.75;
+	}	
 	/* .div-label {
 		display: inline-flex;
 		flex-direction: row;

@@ -109,7 +109,7 @@
 </svelte:head>
 
 <section>
-	<div class="title block">Undangan Tahlil</div>
+	<h1 class="title">Undangan Tahlil</h1>
 
 	<div class="columns">
 		<div class="column is-half">
@@ -190,10 +190,9 @@
 
 <style lang="scss">
 	label {
-		color: #555;
 		font-size: small;
 		font-weight: 400;
-		line-height: 200%;
+		line-height: 1.75;
 	}
 
 	.flex {

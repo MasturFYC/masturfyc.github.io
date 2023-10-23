@@ -64,7 +64,7 @@
 				<input class="input" type="text" use:format={cardNumber} bind:value />
 			</label>
 			<div class="block mt-5">Wanna try? Change the number.</div>
-			<div class="block p-4 has-background-light">
+			<div class="block p-4">
 				💥 <code class="has-text-grey-darker">{bilangan}</code>
 			</div>
 		</div>

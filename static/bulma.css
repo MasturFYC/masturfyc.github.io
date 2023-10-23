@@ -1,6 +1,29 @@
-/*! bulma.io v0.9.4 | MIT License | github.com/jgthms/bulma */
+:root {
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: #ffffff;
+    --fore-color: #213547;
+    --button-color: #f9f9f9;
+    --heading-color: #112231;
+    color: var(--fore-color);
+    background-color: var(--background-color); }
+  h1,
+  h2,
+  h3 {
+    color: var(--heading-color); }
+  a:hover {
+    color: #747bff; }
+  button {
+    background-color: var(--button-color); } }
+
 /* Bulma Utilities */
-@import url("https://fonts.cdnfonts.com/css/fira-mono");
 .button, .input, .textarea, .select select, .file-cta,
 .file-name, .pagination-previous,
 .pagination-next,
@@ -7876,11 +7899,3 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 .footer {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
-
-:root {
-  --font-mono: 'Fira Mono', monospace; }
-
-code,
-pre {
-  font-family: var(--font-mono);
-  font-size: 0.9em; }
