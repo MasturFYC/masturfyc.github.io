@@ -1,7 +1,6 @@
 <script lang="ts">
 	import HeaderPage from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import '../app.css';
 
 	import dayjs from 'dayjs';
 	import utc from 'dayjs/plugin/utc';

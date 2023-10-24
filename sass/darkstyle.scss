@@ -20,7 +20,7 @@ $family-primary: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxyge
 $link: hsl(32, 86%, 53%);
 $text: hsl(0, 0%, 71%);
 $scheme-main: hsl(0, 0%, 15%);
-$white: hsl(0, 0%, 10%);
+$white: hsl(0, 0%, 14%);
 $grey-darker:  hsl(0, 0%, 79%);
 $grey-lighter: hsl(0, 0%, 34%);
 $grey-light: hsl(0, 0%, 29%);
@@ -35,6 +35,8 @@ $pre-background: hsl(0, 0%, 0%);
 $pre-background: hsl(0, 0%, 0%);
 $code-background: hsl(0, 0%, 4%);
 $input-background-color: hsl(0, 0%, 10%);
+// $footer-padding: 3rem 1.5rem 6rem;
+$footer-background-color: hsl(0, 0%, 2%);
 
 :root {
   font-family: $family-primary;
