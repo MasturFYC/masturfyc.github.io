@@ -15,6 +15,8 @@
 		</li>
 
 		<li><a  target="_blank" href="https://sapulidi.site/images/kop-surat.docx">Kop Surat</a></li>
+		<li><a  target="_blank" href="https://sapulidi.site/images/denah.docx">Denah (DOCX)</a></li>
+		<li><a  target="_blank" href="https://sapulidi.site/images/denah.pdf">Denah (PDF)</a></li>
 	</ol>
 </section>
 <style lang="scss">
