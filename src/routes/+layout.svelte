@@ -11,6 +11,9 @@
 	import sapulidi from '$lib/images/sapulidi.jpg';
 	import Menu from '$lib/components/menu.svelte';
 
+	let height = 0;
+	let clientHeight = 0;
+
 	dayjs.locale(locale);
 	dayjs.extend(timezone);
 	dayjs.extend(utc);
@@ -31,27 +34,19 @@
 	<meta property="og:title" content="Mastur FYC Home page" />
 </svelte:head>
 
-<HeaderPage />
+<HeaderPage bind:clientHeight />
 <div class="hero is-fullheight-with-navbar">
 	<div class="hero-body p-0">
-		<div class="container is-align-self-flex-start is-fullhd">
-			<div class="columns is-gapless is-flex is-flex-wrap-wrap-reverse">
-				<div class="column is-one-quarter has-background-white-bis">
+		<div class="container p-2 is-fluid is-align-self-flex-start">
+			<div class="columns is-flex is-flex-wrap-wrap-reverse">
+				<div class="column is-2 has-background-white-bis" style="min-width:180px">
 					<Menu />
 				</div>
-				<main class="column">
-					<div class="m-5 div-main">
+				<main class="column m-2" style="min-width:300px;min-height:calc(100vh - {clientHeight + height + 8}px)">
 						<slot />
-					</div>
 				</main>
 			</div>
 		</div>
 	</div>
-	<Footer />
+	<Footer bind:height />
 </div>
-
-<style lang="scss">
-	.div-main {
-		min-width: 280px;
-	}
-</style>

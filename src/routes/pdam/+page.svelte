@@ -28,7 +28,7 @@
 //	let cabang: CABANG = cabangs[0];
 //	let cabangName = cabang.name;
 	let selectAllData = false;
-	let textCsv = '';
+	let textCsv = `1203006969, ERWIN,PASEKAN BLOK III RT 16/06,Sindang\n1201004409, TARSIPAN, BLOK C RT 25/05 PANYINDANGAN WETAN,Sindang\n1001018682,CASIDI,Dusun Bojong Rt/Rw 13/05,Indramayu`;
 	let header = 'noSl, name, address, city';
 	let isAdmin = false;
 
@@ -47,7 +47,8 @@
 				csv()
 					.fromString(text)
 					.then((jsonObj) => {
-						data = [...data, ...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))];
+						data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }));
+						// [...data, ...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))];
 					});
 			};
 			reader.readAsText(file, 'utf-8');
@@ -62,7 +63,8 @@
 		csv()
 			.fromString(header + '\n' + textCsv)
 			.then((jsonObj) => {
-				data = [...data, ...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))];
+				data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
+				// [...data, ...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))];
 			});
 	}
 
@@ -113,7 +115,7 @@
 	<meta name="description" content="PDAM Card" />
 </svelte:head>
 
-<section>
+<section class="container">
 	<div class="title">Kartu PDAM</div>
 	<div class="tabs is-toggle is-toggle-rounded is-small">
 		<ul>
@@ -161,8 +163,7 @@
 		/>
 		<span>CSV Format ({header})</span>
 	{/if}
-<!-- 
-	<table class="table">
+	<table class="table container is-narrow">
 		<thead>
 			<tr>
 				<th
@@ -188,13 +189,13 @@
 			{/each}
 		</tbody>
 	</table>
-	 -->
-	<div>
+	
+	<!-- <div>
 		<pre class="p-0 div-pre">{JSON.stringify(data,null,2)}</pre>
-	</div>	
+	</div>	 -->
 </section>
 
-<style>
+<style lang="scss">
 	 textarea {
 		padding: 0.5rem 1rem;
 	}	 
@@ -209,8 +210,8 @@
 		column-gap: 12px;
 		align-items: center;
 	} */
-	.div-pre {
-		overflow-x: hidden;
-		font-size: 0.75rem;
-	}	
+//	.div-pre {
+//		overflow-x: hidden;
+//		font-size: 0.75rem;
+//	}	
 </style>

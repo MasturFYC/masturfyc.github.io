@@ -1935,16 +1935,16 @@ div.icon-text {
   .table.is-fullwidth {
     width: 100%; }
   .table.is-hoverable tbody tr:not(.is-selected):hover {
-    background-color: #212121; }
+    background-color: #1a1a1a; }
   .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover {
-    background-color: #212121; }
+    background-color: #1a1a1a; }
     .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover:nth-child(even) {
       background-color: whitesmoke; }
   .table.is-narrow td,
   .table.is-narrow th {
     padding: 0.25em 0.5em; }
   .table.is-striped tbody tr:not(.is-selected):nth-child(even) {
-    background-color: #212121; }
+    background-color: #1a1a1a; }
 
 .table-container {
   -webkit-overflow-scrolling: touch;
@@ -3556,7 +3556,7 @@ button.dropdown-item {
   padding: 20px; }
 
 .navbar {
-  background-color: hwb(0 0% 100%);
+  background-color: #333333;
   min-height: 3.25rem;
   position: relative;
   z-index: 30; }
@@ -4179,7 +4179,7 @@ a.navbar-item,
   .navbar-link::after {
     display: none; }
   .navbar-menu {
-    background-color: hwb(0 0% 100%);
+    background-color: #333333;
     box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
     padding: 0.5rem 0; }
     .navbar-menu.is-active {
@@ -6180,10 +6180,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   background-color: whitesmoke !important; }
 
 .has-text-white-bis {
-  color: #212121 !important; }
+  color: #1a1a1a !important; }
 
 .has-background-white-bis {
-  background-color: #212121 !important; }
+  background-color: #1a1a1a !important; }
 
 .is-flex-direction-row {
   flex-direction: row !important; }

@@ -64,7 +64,7 @@
     FB.api('/me', { locale: 'id_ID', fields: 'email,name' }, function(response) {
       //console.log('Successful login for: ' + response);
       document.getElementById('status').innerHTML =
-        'Thanks for logging in, <span id="username">' + response.email + '</span>!';
+        'Thanks for logging in.<br /><span id="username">' + response.email + '</span>!';
 			document.getElementById('fb-login').style.display = "none";
     });
   }

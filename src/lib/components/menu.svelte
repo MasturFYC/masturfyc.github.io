@@ -1,5 +1,4 @@
-<aside class="menu">
-  <div class="mx-5 my-4">
+<aside class="menu m-2">
   <div>
     <a href="/undangan-tahlil">Undangan Tahlil</a>
   </div>
@@ -39,5 +38,4 @@
 
     <div id="status"></div>
   </div>
-</div>
 </aside>

@@ -19,7 +19,7 @@
     document.body.style.top = '';
     document.body.style.left = '';
     document.body.style.overflowY = "auto";
-    window.scrollTo(parseInt(scrollX || '0') * -1, parseInt(scrollY || '0') * -1);    
+    window.scrollTo(parseInt(scrollX || '0') * -2, parseInt(scrollY || '0') * -2);
   }
 </script>
 
@@ -58,10 +58,12 @@
 		border: none;
 		padding: 0;
 		box-shadow: 0px 10px 24px #777;
+		max-width: 480px;
+		width: calc(100% - 32px);
 	}
 
 	dialog::backdrop {
-		background: rgba(0, 0, 0, 0.3);
+		background: hsl(0,0%,10%, 35%)
 	}
 	
 	dialog > div {

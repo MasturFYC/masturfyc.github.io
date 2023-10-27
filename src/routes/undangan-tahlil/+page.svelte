@@ -110,7 +110,6 @@
 
 <section>
 	<h1 class="title">Undangan Tahlil</h1>
-
 	<div class="columns">
 		<div class="column is-half">
 			<form on:submit|preventDefault={handleSubmit}>
@@ -170,23 +169,22 @@
 			</form>
 		</div>
 	</div>
-</section>
-
-<Modal bind:showModal>
-	<div slot="header" class="subtitle block">Contoh data</div>
-	<div>
-		<pre>{JSON.stringify(contohData(), null, 2)}</pre>
-	</div>
-	<div slot="footer" class="flex">
-		<div class="flex-1">
-			Jika anda setuju dengan contoh data ini, click Yes. Tekan ESC kalo tidak setuju dan menutup
-			dialog ini.
+	<Modal bind:showModal>
+		<div slot="header" class="subtitle block">Contoh data</div>
+		<div>
+			<pre>{JSON.stringify(contohData(), null, 2)}</pre>
 		</div>
-		<button class="button is-primary" on:click|preventDefault={() => (clicked = 'yes')}
-			>Yes setuju</button
-		>
-	</div>
-</Modal>
+		<div slot="footer" class="flex">
+			<div>
+				Jika anda setuju dengan contoh data ini, click Yes. Tekan ESC kalo tidak setuju dan menutup
+				dialog ini.
+			</div>
+			<button class="button is-primary" on:click|preventDefault={() => (clicked = 'yes')}
+				>Yes setuju</button
+			>
+		</div>
+	</Modal>
+</section>
 
 <style lang="scss">
 	label {

@@ -1,13 +1,15 @@
 <script lang="ts">
 	import logo from '$assets/logo.svg'
 	let isActive = false;
-</script>
+	export let clientHeight = 0;
+</script>	
 
 	<!-- svelte-ignore a11y-no-redundant-roles -->
 	<nav		
 		class="navbar"
 		role="navigation"
 		aria-label="main navigation"
+		bind:clientHeight
 	>
 		<div class="navbar-brand">
 			<a class="navbar-item" href="/">

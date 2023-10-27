@@ -4,12 +4,12 @@
 <head>
 	<meta charset="utf-8" />
 	
-		<link rel="modulepreload" href="/_app/immutable/entry/start.f376a1ca.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/scheduler.7dbf7838.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/singletons.b80dd2df.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/index.173180a9.js">
-		<link rel="modulepreload" href="/_app/immutable/entry/app.683ad7ae.js">
-		<link rel="modulepreload" href="/_app/immutable/chunks/index.44f033d3.js">
+		<link rel="modulepreload" href="/_app/immutable/entry/start.4c00dc38.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/scheduler.28edf0f0.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/singletons.5895814c.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/index.6e71cb79.js">
+		<link rel="modulepreload" href="/_app/immutable/entry/app.fb823fb3.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/index.2c506ba6.js">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="/favicon.png" />
@@ -22,7 +22,7 @@
 	<div id="app" style="display: contents">
 			<script>
 				{
-					__sveltekit_jb83qo = {
+					__sveltekit_bjsa55 = {
 						base: "",
 						env: {}
 					};
@@ -30,8 +30,8 @@
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("/_app/immutable/entry/start.f376a1ca.js"),
-						import("/_app/immutable/entry/app.683ad7ae.js")
+						import("/_app/immutable/entry/start.4c00dc38.js"),
+						import("/_app/immutable/entry/app.fb823fb3.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element);
 					});
@@ -88,7 +88,7 @@
     FB.api('/me', { locale: 'id_ID', fields: 'email,name' }, function(response) {
       //console.log('Successful login for: ' + response);
       document.getElementById('status').innerHTML =
-        'Thanks for logging in, <span id="username">' + response.email + '</span>!';
+        'Thanks for logging in.<br /><span id="username">' + response.email + '</span>!';
 			document.getElementById('fb-login').style.display = "none";
     });
   }
