@@ -181,7 +181,7 @@
 		accept="text/csv,application/json"
 		on:change|preventDefault={(e) => readFile(e)}
 	/>
-	<table class="table is-fullwidth">
+	<!-- <table class="table is-fullwidth">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -204,7 +204,10 @@
 				</tr>
 			{/each}
 		</tbody>
-	</table>
+	</table> -->
+	<div>
+		<pre class="p-0 div-pre">{JSON.stringify(data,null,2)}</pre>
+	</div>
 </section>
 
 <style lang="scss">
@@ -219,5 +222,9 @@
 	label > span {
 		margin-bottom: 0.25rem;
 		font-size: small;
+	}
+	.div-pre {
+		overflow-x: hidden;
+		font-size: 0.75rem;
 	}
 </style>

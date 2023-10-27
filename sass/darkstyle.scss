@@ -1,9 +1,7 @@
-
 @charset "utf-8";
 
-
 // Set your brand colors
-// $purple: #8A4D76; 
+// $purple: #8A4D76;
 // $pink: #FA7C91;
 // $brown: #757763;
 // $beige-light: #D0D1CD;
@@ -12,23 +10,42 @@
 // // Update Bulma's global variables
 // $grey-dark: $brown;
 // $grey-light: $beige-light;
-// $primary: $purple; 
+// $primary: $purple;
 // $link: $beige-light;
 
 // // Update some of Bulma's component variables
-$family-primary: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-$link: hsl(32, 86%, 53%);
+$family-primary:
+	BlinkMacSystemFont,
+	-apple-system,
+	'Segoe UI',
+	'Roboto',
+	'Oxygen',
+	'Ubuntu',
+	'Cantarell',
+	'Fira Sans',
+	'Droid Sans',
+	'Helvetica Neue',
+	'Helvetica',
+	'Arial',
+	sans-serif;
+$link: hsl(204, 64%, 44%);
 $text: hsl(0, 0%, 71%);
 $scheme-main: hsl(0, 0%, 15%);
-$white: hsl(0, 0%, 14%);
-$grey-darker:  hsl(0, 0%, 79%);
+$white: hsl(0, 0%, 10%);
+$white-bis: hsl(0, 0%, 13%);
+$grey-darker: hsl(0, 0%, 79%);
 $grey-lighter: hsl(0, 0%, 34%);
 $grey-light: hsl(0, 0%, 29%);
 //$body-color: rgba(255, 255, 255, 0.75);
-$text-strong:  hsl(0, 0%, 87%);
+$text-strong: hsl(0, 0%, 87%);
 // $input-color: hsl(0, 0%, 79%);
 // $input-background-color:hsl(0, 0%, 10%);
-$title-weight:400;
+
+$menu-item-hover-color: hsl(32, 100%, 75%);
+$menu-item-hover-background-color: hsl(0, 0%, 4%);
+//$menu-item-active-color:
+$menu-item-active-background-color:hsl(32, 86%, 25%);
+$title-weight: 400;
 $code: $text;
 $pre: hsl(0, 0%, 71%);
 $pre-background: hsl(0, 0%, 0%);
@@ -37,75 +54,80 @@ $code-background: hsl(0, 0%, 4%);
 $input-background-color: hsl(0, 0%, 10%);
 // $footer-padding: 3rem 1.5rem 6rem;
 $footer-background-color: hsl(0, 0%, 2%);
+$navbar-item-color: hsl(0, 0%, 71%);
+$navbar-background-color: hwb(0 0% 100%);
+$navbar-item-hover-background-color: $link;
+$navbar-item-hover-color: hsl(0, 0%, 90%);
+$footer-background-color:hsl(0, 0%, 17%);
+//$grey-lighter: hsl(0, 0%, 7%);
 
 :root {
-  font-family: $family-primary;
-  line-height: 1.5;
-  font-weight: 400;
+	//  font-family: $family-primary;
+	// line-height: 1.5;
+	// font-weight: 400;
 
-  color-scheme: light dark;
-  // color: $body-color;
-  // background-color: $body-background-color;
+	color-scheme: light dark;
+	// color: $body-color;
+	// background-color: $body-background-color;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
 }
 
-body {
-  margin: 0;
-//  display: flex;
-//  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+// a {
+//   font-weight: 500;
+//   color: #646cff;
+//   text-decoration: inherit;
+// }
+// a:hover {
+//   color: #535bf2;
+// }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+// body {
+//   margin: 0;
+// //  display: flex;
+// //  place-items: center;
+//   min-width: 320px;
+//   min-height: 100vh;
+// }
 
-.card {
-  padding: 2em;
-}
+// h1 {
+//   font-size: 3.2em;
+//   line-height: 1.1;
+// }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-//  text-align: center;
-}
+// .card {
+//   padding: 2em;
+// }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+// #app {
+// //  max-width: 1280px;
+//   margin: 0 auto;
+//   padding: 2rem;
+// //  text-align: center;
+// }
 
+// button {
+//   border-radius: 8px;
+//   border: 1px solid transparent;
+//   padding: 0.6em 1.2em;
+//   font-size: 1em;
+//   font-weight: 500;
+//   font-family: inherit;
+//   background-color: #1a1a1a;
+//   cursor: pointer;
+//   transition: border-color 0.25s;
+// }
+// button:hover {
+//   border-color: #646cff;
+// }
+// button:focus,
+// button:focus-visible {
+//   outline: 4px auto -webkit-focus-ring-color;
+// }
 
 // Import Bulma
-@import "../node_modules/bulma/bulma.sass";
+@import '../node_modules/bulma/bulma.sass';

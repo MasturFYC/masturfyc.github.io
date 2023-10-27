@@ -45,7 +45,7 @@
 
 <div class="container">
 	<div class="phone">
-		<h1>Ketua DPRD Indramayu dari masa ke masa</h1>
+		<h1>Ketua DPRD Indramayu<br />dari masa ke masa</h1>
 		<div class="grid">
 			{#each images as image}
 				<div class="square">
@@ -111,8 +111,9 @@
 	h1 {
 		font-weight: 300;
 		text-transform: uppercase;
-		font-size: 4vmin;
+		font-size: 2.5vmin;
 		margin: 0.2em 0 0.5em 0;
+		line-height: 1.5rem;
 	}
 
 	.grid {

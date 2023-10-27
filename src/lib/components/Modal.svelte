@@ -42,7 +42,7 @@
 	</div>
 </dialog>
 
-<style>
+<style lang="scss">
   * :global(body) {
     position: fixed;
   }
@@ -53,7 +53,7 @@
     border-right: none;
   }
 	dialog {
-		max-width: 32em;
+	//	max-width: 32em;
 		border-radius: 0.2em;
 		border: none;
 		padding: 0;

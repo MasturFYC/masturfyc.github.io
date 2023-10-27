@@ -144,8 +144,14 @@
 				<textarea class="textarea column is-full" rows="10" bind:value={textCsv} />
 			</label>
 		</div>
-		<button class="button is-link block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button
-		>
+		<div class="buttons block">
+			<button class="button is-link block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button
+				>
+					<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
+				>Download</button
+			>
+			<p>{is_download ? 'Please wait....' : ''}</p>
+		</div>
 	{:else}
 		<input
 			type="file"
@@ -155,7 +161,7 @@
 		/>
 		<span>CSV Format ({header})</span>
 	{/if}
-
+<!-- 
 	<table class="table">
 		<thead>
 			<tr>
@@ -182,12 +188,10 @@
 			{/each}
 		</tbody>
 	</table>
-	<div class="mt-4">
-		<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
-			>Download</button
-		>
-		<p>{is_download ? 'Please wait....' : ''}</p>
-	</div>
+	 -->
+	<div>
+		<pre class="p-0 div-pre">{JSON.stringify(data,null,2)}</pre>
+	</div>	
 </section>
 
 <style>
@@ -205,4 +209,8 @@
 		column-gap: 12px;
 		align-items: center;
 	} */
+	.div-pre {
+		overflow-x: hidden;
+		font-size: 0.75rem;
+	}	
 </style>

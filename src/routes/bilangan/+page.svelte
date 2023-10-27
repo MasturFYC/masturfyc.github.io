@@ -54,8 +54,8 @@
 
 <section>
 	<div class="title block">Bilangan</div>
-	<div class="columns">
-		<div class="column is-half">
+	<!-- <div class="columns"> -->
+		<!-- <div class="column is-half"> -->
 			<div class="block">
 				Setelah sekian lama akhirnya saya bisa membuat penyebutan untuk bilangan sampai 11 ribu T.
 				😀
@@ -64,17 +64,17 @@
 				<input class="input" type="text" use:format={cardNumber} bind:value />
 			</label>
 			<div class="block mt-5">Wanna try? Change the number.</div>
-			<div class="block p-4">
-				💥 <code class="has-text-grey-darker">{bilangan}</code>
+			<div class="block">
+				<code>💥 {bilangan}</code>
 			</div>
-		</div>
-	</div>
-	<div>
+		<!-- </div> -->
+	<!-- </div> -->
+	<!-- <div>
 		<button on:click={() => printNota()}>Print Nota</button>
-</div>
-<div>
+</div> -->
+<!-- <div>
 		{printSuccess.message}
-</div>	
+</div>	 -->
 </section>
 <!-- 
 <style lang="scss">
