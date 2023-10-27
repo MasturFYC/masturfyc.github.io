@@ -4,7 +4,6 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import { user } from '$lib/store';
 	import { onMount } from 'svelte';
-	import sapulidi from '$lib/images/sapulidi.jpg';
 	import fetchApi from '$lib/fetch-api';
 
 	let is_download = false;
