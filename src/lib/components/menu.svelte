@@ -1,23 +1,29 @@
+<script lang="ts">
+  type Menu = {
+    id: number;
+    href: string;
+    title: string;
+  }
+  const menu: Menu[] = [
+    {id:1,href:"/undangan-tahlil",title:"Undangan Tahlil"},
+    {id:2,href:"/bilangan",title:"Bilangan"},
+    {id:3,href:"/ketua-dprd",title:"Ketua DPRD Indramayu"},
+    {id:4,href:"/pdam",title:"Kartu PDAM"},
+    {id:5,href:"/label103",title:"Label-103"},
+    {id:6,href:"/pt-gpm",title:"PT. Galuh Persada Makmur"}
+  ];
+  let currentMenu = 0;
+  
+</script>
 <aside class="menu m-2">
-  <div>
-    <a href="/undangan-tahlil">Undangan Tahlil</a>
-  </div>
-  <div class="mt-2">
-    <a href="/bilangan">Bilangan</a>
-  </div>
-  <div class="mt-2">
-    <a href="/ketua-dprd">Ketua DPRD Indramayu</a>
-  </div>
-  <div class="mt-2">
-    <a href="/pdam">Kartu PDAM</a>
-  </div>
-  <div class="mt-2">
-    <a href="/label103">Label 103</a>
-  </div>
-  <div class="mt-2">
-    <a href="/pt-gpm">PT. Galuh Persada Makmur</a>
-  </div>
-  <br />
+  <p class="menu-label mt-5">General</p>
+  <ul class="menu-list">
+  {#each menu as m (m.id)}
+  <li>
+    <a href="{m.href}" class="{m.id === currentMenu ? 'is-active':''}" on:click={() => currentMenu = m.id}>{m.title}</a>
+  </li>
+  {/each}
+</ul>
   <div
     class="fb-login-button"
     data-width="90"

@@ -1,7 +1,12 @@
 <script lang="ts">
 	import logo from '$assets/logo.svg'
-	let isActive = false;
 	export let clientHeight = 0;
+	let isActive = false;
+	let menu = [
+		{id:1,name:"Home",href:"/"},
+		{id:2,name:"ID-Card",href:"/pdam"},
+	]
+	
 </script>	
 
 	<!-- svelte-ignore a11y-no-redundant-roles -->
@@ -41,10 +46,10 @@
 			class="navbar-menu{isActive ? ' is-active' : ''}"
 		>
 			<div class="navbar-start">
-				<a class="navbar-item" href="/"> Home </a>
-
-				<a class="navbar-item" href="/"> Documentation </a>
-
+				{#each menu as c (c.id) }
+				<a class="navbar-item" href="{c.href}">{c.name}</a>	
+				{/each}
+				
 				<!-- <div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
 					<a class="navbar-link"> More </a>
 

@@ -36,7 +36,7 @@
 	<div class="hero-body p-0">
 		<div class="container p-2 is-fluid is-align-self-flex-start">
 			<div class="columns is-flex is-flex-wrap-wrap-reverse">
-				<div class="column is-2 has-background-white-bis" style="min-width:180px">
+				<div class="column is-3 has-background-white-bis" style="min-width:180px">
 					<Menu />
 				</div>
 				<main class="column m-2" style="min-width:300px;min-height:calc(100vh - {clientHeight + height + 8}px)">
