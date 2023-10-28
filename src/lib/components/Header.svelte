@@ -3,7 +3,7 @@
 	export let clientHeight = 0;
 	let isActive = false;
 	let menu = [
-		{id:1,name:"Home",href:"/"},
+		//{id:1,name:"Home",href:"/"},
     {id:2,href:"/bilangan",name:"Bilangan"},
     {id:3,href:"/ketua-dprd",name:"Ketua DPRD"},
     {id:4,href:"/pt-gpm",name:"PT. Galuh Persada Makmur"}
