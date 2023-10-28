@@ -8,7 +8,7 @@
 
 	let is_download = false;
 	let clicked = 'no';
-	let showModal = false;
+	let isActive = '';
 
 	const getBada = (e: dayjs.Dayjs) => {
 		const j = e.hour();
@@ -95,7 +95,7 @@
 	});
 
 	$: if (clicked === 'yes') {
-		showModal = false;
+		isActive = '';
 		data = contohData();
 		clicked = 'no';
 	}
@@ -158,8 +158,10 @@
 					<button class="button is-primary block mr-2" type="submit" disabled={is_download}
 						>Download</button
 					>
-					<button class="button is-info block" type="button" on:click={() => (showModal = true)}
-						>Kasih saya contoh data</button
+					<button
+						class="button is-info block"
+						type="button"
+						on:click={() => (isActive = 'is-active')}>Kasih saya contoh data</button
 					>
 					{#if is_download}
 						<div>Please wait...</div>
@@ -168,19 +170,24 @@
 			</form>
 		</div>
 	</div>
-	<Modal bind:showModal>
-		<div slot="header" class="subtitle block">Contoh data</div>
-		<div>
+
+	<Modal bind:isActive>
+		<div slot="header">Contoh data</div>
+		<div class="" slot="body">
 			<pre>{JSON.stringify(contohData(), null, 2)}</pre>
 		</div>
-		<div slot="footer" class="flex">
-			<div>
-				Jika anda setuju dengan contoh data ini, click Yes. Tekan ESC kalo tidak setuju dan menutup
-				dialog ini.
+		<div slot="footer">
+			<div class="columns">
+				<div class="column is-four-fifths">
+					Jika anda setuju dengan contoh data ini, click Yes. Tekan ESC kalo tidak setuju dan
+					menutup dialog ini.
+				</div>
+				<div class="column">
+					<button class="button is-primary" on:click|preventDefault={() => (clicked = 'yes')}
+						>Yes setuju</button
+					>
+				</div>
 			</div>
-			<button class="button is-primary" on:click|preventDefault={() => (clicked = 'yes')}
-				>Yes setuju</button
-			>
 		</div>
 	</Modal>
 </section>
@@ -192,10 +199,10 @@
 		line-height: 1.75;
 	}
 
-	.flex {
-		display: flex;
-		flex-direction: row;
-		column-gap: 16px;
-		align-items: flex-start;
-	}
+	// .flex {
+	// 	display: flex;
+	// 	flex-direction: row;
+	// 	column-gap: 16px;
+	// 	align-items: flex-start;
+	// }
 </style>

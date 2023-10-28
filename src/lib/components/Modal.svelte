@@ -1,79 +1,28 @@
 <script lang="ts">
-	export let showModal = false;
+	export let isActive = '';
 
 	let dialog: HTMLDialogElement;
-
-	$: if (dialog && showModal) {
-    dialog.showModal();
-    //document.body.style.position = '';
-    document.body.style.top = `-${window.scrollY}px`;
-    document.body.style.left = `-${window.scrollX}px`;
-    document.body.style.overflowY = "hidden";
-  }
-
-	$: if (dialog && !showModal) {
-    dialog.close();
-    const scrollY = document.body.style.top;
-    const scrollX = document.body.style.left;
-    //document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.overflowY = "auto";
-    window.scrollTo(parseInt(scrollX || '0') * -2, parseInt(scrollY || '0') * -2);
-  }
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
-<dialog
-	bind:this={dialog}
-	on:close={() => (showModal = false)}
-	on:click|self={() => dialog.close()}
->
+<div class="modal {isActive}">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div on:click|stopPropagation>
-		<slot name="header" />
-		<hr />
-		<slot />
-		<hr />
-		<!-- svelte-ignore a11y-autofocus -->
-		<slot name="footer">
-			<button autofocus on:click={() => dialog.close()}>Close</button>
-		</slot>
+	<div class="modal-background" on:click={() => (isActive = '')}></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title"><slot name="header" /></p>
+			<button class="delete has-background-danger-dark" aria-label="close" on:click={() => (isActive = '')} />
+		</header>
+		<section class="modal-card-body">
+			<slot name="body" />
+		</section>
+		<footer class="modal-card-foot">
+			<slot name="footer" />
+		</footer>
 	</div>
-</dialog>
+</div>
 
 <style lang="scss">
-  * :global(body) {
-    position: fixed;
-  }
-    
-  hr {
-    border-bottom:none;
-    border-left: none;
-    border-right: none;
-  }
-	dialog {
-	//	max-width: 32em;
-		border-radius: 0.2em;
-		border: none;
-		padding: 0;
-		box-shadow: 0px 10px 24px #777;
-		max-width: 480px;
-		width: calc(100% - 32px);
-	}
-
-	dialog::backdrop {
-		background: hsl(0,0%,10%, 35%)
-	}
-	
-	dialog > div {
-		padding: 1em;
-	}
-
-	dialog[open] {
-		animation: zoom 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-	}
-
 	@keyframes zoom {
 		from {
 			transform: scale(0.95);
@@ -82,9 +31,7 @@
 			transform: scale(1);
 		}
 	}
-	dialog[open]::backdrop {
-		animation: fade 0.2s ease-out;
-	}
+
 	@keyframes fade {
 		from {
 			opacity: 0;
@@ -92,8 +39,5 @@
 		to {
 			opacity: 1;
 		}
-	}
-	button {
-		display: block;
 	}
 </style>

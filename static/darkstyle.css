@@ -3487,7 +3487,7 @@ button.dropdown-item {
     display: flex; }
 
 .modal-background {
-  background-color: rgba(10, 10, 10, 0.86); }
+  background-color: rgba(128, 128, 128, 0.5); }
 
 .modal-content,
 .modal-card {
@@ -3521,7 +3521,7 @@ button.dropdown-item {
 .modal-card-head,
 .modal-card-foot {
   align-items: center;
-  background-color: whitesmoke;
+  background-color: #2b2b2b;
   display: flex;
   flex-shrink: 0;
   justify-content: flex-start;

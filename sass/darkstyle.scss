@@ -30,6 +30,7 @@ $family-primary:
 	sans-serif;
 $link: hsl(204, 64%, 44%);
 $text: hsl(0, 0%, 71%);
+$text-strong: hsl(0, 0%, 98%);
 $scheme-main: hsl(0, 0%, 15%);
 $white: hsl(0, 0%, 10%);
 $white-bis: hsl(0, 0%, 10%);
@@ -58,6 +59,9 @@ $navbar-background-color: hsl(0, 0%, 20%);
 $navbar-item-hover-background-color: $link;
 $navbar-item-hover-color: hsl(0, 0%, 90%);
 $footer-background-color:hsl(0, 0%, 17%);
+$modal-background-background-color: rgba(128, 128, 128, 0.5);
+//$modal-card-title-color: hsl(0, 0%, 17%);
+$modal-card-head-background-color:hsl(0, 0%, 17%);
 //$grey-lighter: hsl(0, 0%, 7%);
 
 :root {
