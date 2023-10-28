@@ -33,8 +33,8 @@
 
 <HeaderPage />
 <div class="hero is-fullheight-with-navbar">
-	<div class="hero-body p-0">
-		<div class="container is-fluid p-4 is-align-self-flex-start">
+	<div class="hero-body">
+		<div class="container is-align-self-flex-start">
 			<div class="my-div">
 				<!-- <div class="columns is-flex is-flex-wrap-wrap-reverse"> -->
 				<!-- <div class="column is-3 has-background-white-bis" style="min-width:180px">

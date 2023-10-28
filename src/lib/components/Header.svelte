@@ -1,6 +1,6 @@
 <script lang="ts">
 	import logo from '$assets/logo.svg'
-	export let clientHeight = 0;
+	// export let clientHeight = 0;
 	let isActive = false;
 	let menu = [
 		//{id:1,name:"Home",href:"/"},
@@ -20,15 +20,14 @@
 	<nav		
 		class="navbar is-fixed-top"
 		role="navigation"
-		aria-label="main navigation"
-		bind:clientHeight
+		aria-label="main navigation"		
 	>
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<div class="navbar-brand">
 			<a class="navbar-item" href="/">
 				<img
 					src="{logo}"
-					width="112"
+					width="64"
 					height="28"
 					class="is-tranparent"
 					alt="Logo"
