@@ -132,6 +132,9 @@ $modal-card-head-background-color:hsl(0, 0%, 17%);
 //   outline: 4px auto -webkit-focus-ring-color;
 // }
 $body-overflow-y: auto;
-
+html {
+	overflow: auto;
+}
 // Import Bulma
 @import '../node_modules/bulma/bulma.sass';
+
