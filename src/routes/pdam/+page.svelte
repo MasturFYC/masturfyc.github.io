@@ -12,7 +12,10 @@
 	const cabangs: CABANG[] = [
 		{ name: 'Jatibarang', address: 'Jl. Purna Brata No. 1001 Telp. (0234)  351491' },
 		{ name: 'Sindang', address: 'Jl. Singalodra  - Sindang Telp. (0234) 277564' },
-		{ name: 'Indramayu', address: 'Jl. Tanjungpura No. 197 Kepandean - Indramayu Telp (0234) 7121205'} //271576' }
+		{
+			name: 'Indramayu',
+			address: 'Jl. Tanjungpura No. 197 Kepandean - Indramayu Telp (0234) 7121205'
+		} //271576' }
 	];
 
 	type PDAM = {
@@ -25,16 +28,16 @@
 	};
 
 	let data: PDAM[] = [];
-//	let cabang: CABANG = cabangs[0];
-//	let cabangName = cabang.name;
+	//	let cabang: CABANG = cabangs[0];
+	//	let cabangName = cabang.name;
 	let selectAllData = false;
-	let textCsv = `1203006969, ERWIN,PASEKAN BLOK III RT 16/06,Sindang\n1201004409, TARSIPAN, BLOK C RT 25/05 PANYINDANGAN WETAN,Sindang\n1001018682,CASIDI,Dusun Bojong Rt/Rw 13/05,Indramayu`;
+	let textCsv = '';
 	let header = 'noSl, name, address, city';
 	let isAdmin = false;
 
 	const getAddress = (city: string): string => {
-		return cabangs.filter(f => f.name === city)[0].address
-	}
+		return cabangs.filter((f) => f.name === city)[0].address;
+	};
 
 	function readFile(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		const target = e.currentTarget as HTMLInputElement;
@@ -47,8 +50,10 @@
 				csv()
 					.fromString(text)
 					.then((jsonObj) => {
-						data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }));
-						// [...data, ...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))];
+						data = [
+							...data,
+							...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
+						];
 					});
 			};
 			reader.readAsText(file, 'utf-8');
@@ -63,8 +68,10 @@
 		csv()
 			.fromString(header + '\n' + textCsv)
 			.then((jsonObj) => {
-				data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
-				// [...data, ...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))];
+				data = [
+					...data,
+					...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
+				];
 			});
 	}
 
@@ -72,13 +79,12 @@
 		const test = document.getElementById('username')?.innerText;
 		isAdmin = test === 'mastur.st12@outlook.com';
 	}
-	
+
 	let is_download = false;
 
 	async function downloadCard(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
 		is_download = true;
 
-		//const baseUrl = import.meta.env.VITE_API_URL;
 		let filename = 'pdam-card.pdf';
 		const endpoint = '/v1/pdam';
 
@@ -115,7 +121,7 @@
 	<meta name="description" content="PDAM Card" />
 </svelte:head>
 
-<section class="container">
+<section>
 	<div class="title">Kartu PDAM</div>
 	<div class="tabs is-toggle is-toggle-rounded is-small">
 		<ul>
@@ -129,7 +135,7 @@
 			</li>
 		</ul>
 	</div>
-<!-- 
+	<!-- 
 	<label class="div-label">
 		<span>Cabang:</span>
 		<select class="select mb-2 mt-2 mr-4" bind:value={cabangName}>
@@ -146,14 +152,6 @@
 				<textarea class="textarea column is-full" rows="10" bind:value={textCsv} />
 			</label>
 		</div>
-		<div class="buttons block">
-			<button class="button is-link block" on:click={(e) => parseToJSON(e)}>Parse to JSON</button
-				>
-					<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
-				>Download</button
-			>
-			<p>{is_download ? 'Please wait....' : ''}</p>
-		</div>
 	{:else}
 		<input
 			type="file"
@@ -163,55 +161,56 @@
 		/>
 		<span>CSV Format ({header})</span>
 	{/if}
-	<table class="table container is-narrow">
-		<thead>
-			<tr>
-				<th
-					><input type="checkbox" bind:checked={selectAllData} on:input={(e) => selectAll(e)} /></th
-				>
-				<th>No. SL</th>
-				<th>NAMA</th>
-				<th>ALAMAT</th>
-				<th>CABANG</th>
-				<th>ALAMAT CABANG</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each data as p}
-				<tr>
-					<td><input type="checkbox" bind:checked={p.selected} /></td>
-					<td>{p.noSl}</td>
-					<td>{p.name}</td>
-					<td>{p.address}</td>
-					<td>{p.city}</td>
-					<td>{p.cabang}</td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
-	
-	<!-- <div>
-		<pre class="p-0 div-pre">{JSON.stringify(data,null,2)}</pre>
-	</div>	 -->
+	<div class="buttons block">
+		<button
+			disabled={clicked !== 'text'}
+			class="button is-link block"
+			on:click={(e) => parseToJSON(e)}>Parse to JSON</button
+		>
+		<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
+			>Download</button
+		>
+	</div>
 </section>
 
-<style lang="scss">
-	 textarea {
+<table class="table">
+	<thead>
+		<tr>
+			<th><input type="checkbox" bind:checked={selectAllData} on:input={(e) => selectAll(e)} /></th>
+			<th>No. SL</th>
+			<th>NAMA</th>
+			<th>ALAMAT</th>
+			<th>CABANG</th>
+			<th>ALAMAT CABANG</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#each data as p}
+			<tr>
+				<td><input type="checkbox" bind:checked={p.selected} /></td>
+				<td>{p.noSl}</td>
+				<td>{p.name}</td>
+				<td>{p.address}</td>
+				<td>{p.city}</td>
+				<td>{p.cabang}</td>
+			</tr>
+		{/each}
+	</tbody>
+</table>
+
+<style>
+	textarea {
 		padding: 0.5rem 1rem;
-	}	 
+	}
 	label {
 		font-size: small;
 		font-weight: 400;
 		line-height: 1.75;
-	}	
+	}
 	/* .div-label {
 		display: inline-flex;
 		flex-direction: row;
 		column-gap: 12px;
 		align-items: center;
 	} */
-//	.div-pre {
-//		overflow-x: hidden;
-//		font-size: 0.75rem;
-//	}	
 </style>
