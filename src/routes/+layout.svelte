@@ -8,10 +8,10 @@
 	import advanced from 'dayjs/plugin/advancedFormat';
 	import locale from 'dayjs/locale/id';
 
-	import Menu from '$lib/components/menu.svelte';
+	//import Menu from '$lib/components/menu.svelte';
 
-	let height = 0;
-	let clientHeight = 0;
+	// let height = 0;
+	// let clientHeight = 0;
 
 	dayjs.locale(locale);
 	dayjs.extend(timezone);
@@ -31,7 +31,7 @@
 	<meta property="og:title" content="Mastur FYC Home page" />
 </svelte:head>
 
-<HeaderPage bind:clientHeight />
+<HeaderPage />
 <div class="hero is-fullheight-with-navbar">
 	<div class="hero-body p-0">
 		<div class="container is-fluid p-4 is-align-self-flex-start">
@@ -47,7 +47,7 @@
 			</div>
 		</div>
 	</div>
-	<Footer bind:height />
+	<Footer />
 </div>
 
 <style lang="scss">

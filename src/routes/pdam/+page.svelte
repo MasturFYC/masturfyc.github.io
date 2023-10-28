@@ -33,7 +33,7 @@
 	let selectAllData = false;
 	let textCsv = '';
 	let header = 'noSl, name, address, city';
-	let isAdmin = false;
+	//let isAdmin = false;
 
 	const getAddress = (city: string): string => {
 		return cabangs.filter((f) => f.name === city)[0].address;
@@ -75,10 +75,10 @@
 			});
 	}
 
-	$: if (browser) {
-		const test = document.getElementById('username')?.innerText;
-		isAdmin = test === 'mastur.st12@outlook.com';
-	}
+//	$: if (browser) {
+//		const test = document.getElementById('username')?.innerText;
+		//isAdmin = test === 'mastur.st12@outlook.com';
+//	}
 
 	let is_download = false;
 
