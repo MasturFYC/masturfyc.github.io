@@ -24,7 +24,8 @@
 	>
 		<!-- svelte-ignore a11y-missing-attribute -->
 		<div class="navbar-brand">
-			<a class="navbar-item" href="/">
+			<a class="navbar-item" href="/"
+			on:click={() => (isActive = false)}>
 				<img
 					src="{logo}"
 					width="64"

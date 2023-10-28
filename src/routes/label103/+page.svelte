@@ -146,7 +146,7 @@
 	<div class="div-control">
 		<label>
 			<span>Data: (format data: name1, name2, job, address, city)</span>
-			<textarea class="textarea is-full" rows="10" bind:value={sampleData} />
+			<textarea class="textarea is-full" rows="6" bind:value={sampleData} />
 		</label>
 	</div>
 	<div class="buttons">

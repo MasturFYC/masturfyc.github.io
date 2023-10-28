@@ -149,7 +149,7 @@
 		<div class="field block">
 			<label class="label">
 				<span>CSV Text (comma delimited) format: ({header}):</span>
-				<textarea class="textarea column is-full" rows="10" bind:value={textCsv} />
+				<textarea class="textarea" rows="6" bind:value={textCsv} />
 			</label>
 		</div>
 	{:else}

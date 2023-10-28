@@ -53,8 +53,8 @@
 <style lang="scss">
 	@media screen and (min-width: 640px) {
 		.my-div {
-			max-width: 960px;
-			margin: 12px auto;
+			max-width: 1024px;
+			margin: 0 auto;
 //			border: 1px solid #ccc;
 		}
 	}
