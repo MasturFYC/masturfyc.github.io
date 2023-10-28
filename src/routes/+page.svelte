@@ -9,7 +9,7 @@
 	<title>Home page</title>
 </svelte:head>
 
-<section class="mx-6">
+<section>
 	<div class="title">Meraba Jalan Terang di Negeri Konoha</div>
 	<div class="content">
 		<p>
@@ -38,3 +38,4 @@
 		<p>Terima kasih Rabbku... 🥰</p>
 	</div>
 </section>
+

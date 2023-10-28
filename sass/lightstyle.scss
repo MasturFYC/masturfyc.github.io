@@ -1,6 +1,9 @@
 
 @charset "utf-8";
 
+$link: hsl(204, 64%, 44%);
 $modal-background-background-color: rgba(0, 0, 0, 0.25);
-
+$navbar-background-color: hsl(0, 0%, 90%);
+$navbar-item-hover-background-color: $link;
+$navbar-item-hover-color: hsl(0, 0%, 90%);
 @import "../node_modules/bulma/bulma.sass";

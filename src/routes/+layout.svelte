@@ -34,16 +34,28 @@
 <HeaderPage bind:clientHeight />
 <div class="hero is-fullheight-with-navbar">
 	<div class="hero-body p-0">
-		<div class="container p-2 is-fluid is-align-self-flex-start">
-			<div class="columns is-flex is-flex-wrap-wrap-reverse">
-				<div class="column is-3 has-background-white-bis" style="min-width:180px">
+		<div class="container is-fluid p-4 is-align-self-flex-start">
+			<div class="my-div">
+				<!-- <div class="columns is-flex is-flex-wrap-wrap-reverse"> -->
+				<!-- <div class="column is-3 has-background-white-bis" style="min-width:180px">
 					<Menu />
 				</div>
 				<main class="column m-2" style="min-width:300px;min-height:calc(100vh - {clientHeight + height + 8}px)">
-						<slot />
 				</main>
+			</div> -->
+				<slot />
 			</div>
 		</div>
 	</div>
 	<Footer bind:height />
 </div>
+
+<style lang="scss">
+	@media screen and (min-width: 640px) {
+		.my-div {
+			max-width: 960px;
+			margin: 12px auto;
+//			border: 1px solid #ccc;
+		}
+	}
+</style>

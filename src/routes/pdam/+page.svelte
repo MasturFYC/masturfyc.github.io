@@ -167,7 +167,7 @@
 			class="button is-link block"
 			on:click={(e) => parseToJSON(e)}>Parse to JSON</button
 		>
-		<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
+		<button class="button block is-primary" on:click={(e) => downloadCard(e)}
 			>Download</button
 		>
 	</div>
