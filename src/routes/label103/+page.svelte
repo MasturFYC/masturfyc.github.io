@@ -141,6 +141,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Label-103</title>
+</svelte:head>
+
 <section>
 	<div class="title">Label 103</div>
 	<div class="div-control">

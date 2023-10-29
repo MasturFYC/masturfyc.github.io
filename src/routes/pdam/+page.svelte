@@ -33,7 +33,7 @@
 	let selectAllData = false;
 	let textCsv = '';
 	let header = 'noSl, name, address, city';
-	//let isAdmin = false;
+	let isAdmin = false;
 
 	const getAddress = (city: string): string => {
 		return cabangs.filter((f) => f.name === city)[0].address;
@@ -75,11 +75,6 @@
 			});
 	}
 
-//	$: if (browser) {
-//		const test = document.getElementById('username')?.innerText;
-		//isAdmin = test === 'mastur.st12@outlook.com';
-//	}
-
 	let is_download = false;
 
 	async function downloadCard(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
@@ -113,6 +108,11 @@
 	}
 
 	//$: cabang = cabangs.filter((f) => f.name === cabangName)[0];
+	$: if (browser) {
+		const test = document.getElementById('username')?.innerText;
+		isAdmin = test === 'mastur.st12@outlook.com';
+	}
+
 </script>
 
 <svelte:head>
@@ -167,7 +167,7 @@
 			class="button is-link block"
 			on:click={(e) => parseToJSON(e)}>Parse to JSON</button
 		>
-		<button class="button block is-primary" on:click={(e) => downloadCard(e)}
+		<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
 			>Download</button
 		>
 	</div>

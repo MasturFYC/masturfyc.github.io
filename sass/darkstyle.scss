@@ -28,7 +28,7 @@ $family-primary:
 	'Helvetica',
 	'Arial',
 	sans-serif;
-$link: hsl(204, 64%, 44%);
+$link: hsl(32, 100%, 50%);
 $text: hsl(0, 0%, 71%);
 $text-strong: hsl(0, 0%, 98%);
 $scheme-main: hsl(0, 0%, 15%);
@@ -54,14 +54,27 @@ $code-background: hsl(0, 0%, 4%);
 $input-background-color: hsl(0, 0%, 10%);
 // $footer-padding: 3rem 1.5rem 6rem;
 $footer-background-color: hsl(0, 0%, 2%);
-$navbar-item-color: hsl(0, 0%, 71%);
+
 $navbar-background-color: hsl(0, 0%, 20%);
-$navbar-item-hover-background-color: $link;
+
+$navbar-item-color: hsl(0, 0%, 71%);
+// $navbar-item-hover-color: $link;
 $navbar-item-hover-color: hsl(0, 0%, 90%);
+$navbar-item-hover-background-color: hsl(0, 0%, 7%);
+
+$navbar-item-active-color: hsl(0, 0%, 98%);
+// $navbar-item-active-background-color: $link;
+
+$navbar-tab-active-color: hsl(0, 0%, 90%);
+$navbar-tab-active-background-color: hsl(0,0%, 7%);
+$navbar-tab-hover-background-color: $navbar-tab-active-background-color;
+
 $footer-background-color:hsl(0, 0%, 17%);
 $modal-background-background-color: rgba(128, 128, 128, 0.5);
 //$modal-card-title-color: hsl(0, 0%, 17%);
 $modal-card-head-background-color:hsl(0, 0%, 17%);
+
+$navbar-dropdown-background-color: hsl(0, 0%, 25%);
 //$grey-lighter: hsl(0, 0%, 7%);
 
 :root {
