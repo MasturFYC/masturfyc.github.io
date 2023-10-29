@@ -114,7 +114,7 @@
 	<meta name="description" content="PDAM Card" />
 </svelte:head>
 
-<div class="section">
+<section>
 	<div class="title">Kartu PDAM</div>
 	<div class="tabs is-small is-toggle">
 		<ul>
@@ -157,10 +157,8 @@
 		</div>
 	{/if}
 	<div class="buttons block">
-		<button
-			disabled={clicked !== 'text'}
-			class="button is-link"
-			on:click={(e) => parseToJSON(e)}>Parse to JSON</button
+		<button disabled={clicked !== 'text'} class="button is-link" on:click={(e) => parseToJSON(e)}
+			>Parse to JSON</button
 		>
 		<button disabled={!isAdmin} class="button is-primary" on:click={(e) => downloadCard(e)}
 			>Download</button
@@ -198,7 +196,7 @@
 			</tbody>
 		</table>
 	</div>
-</div>
+</section>
 
 <style>
 	textarea {
