@@ -6,6 +6,14 @@ $modal-background-background-color: rgba(0, 0, 0, 0.25);
 $navbar-background-color: hsl(0, 0%, 98%);
 // $navbar-item-hover-background-color: $link;
 // $navbar-item-hover-color: hsl(0, 0%, 10%);
+
+$navbar-item-color: hsl(0, 0%, 29%);
+// $navbar-item-hover-color: $link;
+$navbar-item-hover-color: hsl(0, 0%, 10%);
+$navbar-item-hover-background-color: hsl(0, 0%, 93%);
+
+$navbar-item-active-color: hsl(0, 0%, 98%);
+
 $navbar-tab-active-color: hsl(0, 0%, 10%);
 $navbar-tab-active-background-color: hsl(0, 0%, 95%);
 $navbar-tab-hover-background-color: $navbar-tab-active-background-color;
