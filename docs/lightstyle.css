@@ -4638,8 +4638,8 @@ label.panel-block {
   white-space: nowrap; }
   .tabs a {
     align-items: center;
-    border-bottom-color: #dbdbdb;
-    border-bottom-style: solid;
+    border-bottom-color: #4a4a4a;
+    border-bottom-style: "solid";
     border-bottom-width: 1px;
     color: #4a4a4a;
     display: flex;
@@ -4657,8 +4657,8 @@ label.panel-block {
       color: #485fc7; }
   .tabs ul {
     align-items: center;
-    border-bottom-color: #dbdbdb;
-    border-bottom-style: solid;
+    border-bottom-color: #4a4a4a;
+    border-bottom-style: "solid";
     border-bottom-width: 1px;
     display: flex;
     flex-grow: 1;

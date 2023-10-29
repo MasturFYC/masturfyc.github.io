@@ -18,6 +18,9 @@ $navbar-tab-active-color: hsl(0, 0%, 10%);
 $navbar-tab-active-background-color: hsl(0, 0%, 95%);
 $navbar-tab-hover-background-color: $navbar-tab-active-background-color;
 
+$tabs-border-bottom-color: $navbar-item-color;
+$tabs-border-bottom-style: "solid";
+
 $body-overflow-y: auto;
 
 html {

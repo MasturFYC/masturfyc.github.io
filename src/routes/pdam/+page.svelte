@@ -50,7 +50,7 @@
 				csv()
 					.fromString(text)
 					.then((jsonObj) => {
-						data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
+						data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }));
 					});
 			};
 			reader.readAsText(file, 'utf-8');
@@ -65,7 +65,7 @@
 		csv()
 			.fromString(header + '\n' + textCsv)
 			.then((jsonObj) => {
-				data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
+				data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }));
 			});
 	}
 
@@ -106,7 +106,6 @@
 		const test = document.getElementById('username')?.innerText;
 		isAdmin = test === 'mastur.st12@outlook.com';
 	}
-
 </script>
 
 <svelte:head>
@@ -115,9 +114,9 @@
 	<meta name="description" content="PDAM Card" />
 </svelte:head>
 
-<section>
+<div class="section">
 	<div class="title">Kartu PDAM</div>
-	<div class="tabs is-toggle is-toggle-rounded is-small">
+	<div class="tabs is-small is-toggle">
 		<ul>
 			<!-- svelte-ignore a11y-invalid-attribute -->
 			<li class={clicked === 'text' ? 'is-active' : ''}>
@@ -147,50 +146,59 @@
 			</label>
 		</div>
 	{:else}
-		<input
-			type="file"
-			class="mb-4 mt-2"
-			accept="text/csv"
-			on:change|preventDefault={(e) => readFile(e)}
-		/>
-		<span>CSV Format ({header})</span>
+		<div class="block">
+			<input
+				type="file"
+				class="mb-4 mt-2"
+				accept="text/csv"
+				on:change|preventDefault={(e) => readFile(e)}
+			/>
+			<span>CSV Format ({header})</span>
+		</div>
 	{/if}
 	<div class="buttons block">
 		<button
 			disabled={clicked !== 'text'}
-			class="button is-link block"
+			class="button is-link"
 			on:click={(e) => parseToJSON(e)}>Parse to JSON</button
 		>
-		<button disabled={!isAdmin} class="button block is-primary" on:click={(e) => downloadCard(e)}
+		<button disabled={!isAdmin} class="button is-primary" on:click={(e) => downloadCard(e)}
 			>Download</button
 		>
 	</div>
-</section>
-
-<table class="table">
-	<thead>
-		<tr>
-			<th><input type="checkbox" bind:checked={selectAllData} on:input={(e) => selectAll(e)} /></th>
-			<th>No. SL</th>
-			<th>NAMA</th>
-			<th>ALAMAT</th>
-			<th>CABANG</th>
-			<th>ALAMAT CABANG</th>
-		</tr>
-	</thead>
-	<tbody>
-		{#each data as p}
-			<tr>
-				<td><input type="checkbox" bind:checked={p.selected} /></td>
-				<td>{p.noSl}</td>
-				<td>{p.name}</td>
-				<td>{p.address}</td>
-				<td>{p.city}</td>
-				<td>{p.cabang}</td>
-			</tr>
-		{/each}
-	</tbody>
-</table>
+	<div class="block">
+		<table class="table is-narrow">
+			<thead>
+				<tr>
+					<th
+						><input
+							type="checkbox"
+							bind:checked={selectAllData}
+							on:input={(e) => selectAll(e)}
+						/></th
+					>
+					<th>No. SL</th>
+					<th>NAMA</th>
+					<th>ALAMAT</th>
+					<th>CABANG</th>
+					<th>ALAMAT CABANG</th>
+				</tr>
+			</thead>
+			<tbody>
+				{#each data as p}
+					<tr>
+						<td><input type="checkbox" bind:checked={p.selected} /></td>
+						<td>{p.noSl}</td>
+						<td>{p.name}</td>
+						<td>{p.address}</td>
+						<td>{p.city}</td>
+						<td>{p.cabang}</td>
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
+</div>
 
 <style>
 	textarea {
