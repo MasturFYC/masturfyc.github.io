@@ -50,10 +50,7 @@
 				csv()
 					.fromString(text)
 					.then((jsonObj) => {
-						data = [
-							...data,
-							...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
-						];
+						data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
 					});
 			};
 			reader.readAsText(file, 'utf-8');
@@ -68,10 +65,7 @@
 		csv()
 			.fromString(header + '\n' + textCsv)
 			.then((jsonObj) => {
-				data = [
-					...data,
-					...jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
-				];
+				data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }))
 			});
 	}
 
