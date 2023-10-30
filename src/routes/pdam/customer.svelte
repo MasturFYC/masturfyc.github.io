@@ -3,7 +3,7 @@
 	import type { PDAMBranch, PDAMCustomer } from '$lib/interfaces';
 	import fetchApi from '$lib/fetch-api';
 	import FormCustomer from './form-customer.svelte';
-	import { onMount } from 'svelte';
+	import dayjs from 'dayjs';
 
 	const client = useQueryClient();
 
@@ -15,11 +15,21 @@
 
 	export let branchs: PDAMBranch[] = [];
 
+	let page = 0;
+	let limit = 5;
+	let limits: number[] = [50, 25, 20, 10, 5];
 	let isUpdating = 0;
-	const fetchCustomer = async (): Promise<PDAMCustomer[]> => {
-		const data = await fetchApi.get('/v2/pdam/customer/').json<PDAMCustomer[]>();
+	const fetchCustomer = async (p: number, l: number): Promise<PDAMCustomer[]> => {
+		const data = await fetchApi
+			.get(`/v2/pdam/customer/list/${l}/${l * p}`)
+			.json<PDAMCustomer[]>();
 
 		return data;
+	};
+	const prefetchNextPage = async (data: PDAMCustomer[]) => {
+		if (data && data.length === limit) {
+			await client.prefetchQuery(['pdam', 'customer', 'list', page + 1], () => fetchCustomer(page + 1, limit));
+		}
 	};
 
 	const fetchUpdateData = async (e: PDAMCustomer): Promise<PDAMCustomer> =>
@@ -46,12 +56,12 @@
 			await client.cancelQueries();
 
 			// Snapshot the previous value
-			const previousData = client.getQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list']);
+			const previousData = client.getQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list', page, limit]);
 
 			// Optimistically update to the new value
 			if (previousData) {
 				client.setQueryData<PDAMCustomer[]>(
-					['pdam', 'customer', 'list'],
+					['pdam', 'customer', 'list', page, limit],
 					[
 						...previousData
 						//e
@@ -71,7 +81,10 @@
 
 		onError: (err: any, variables: any, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list'], context.previousData);
+				client.setQueryData<PDAMCustomer[]>(
+					['pdam', 'customer', 'list', page, limit],
+					context.previousData
+				);
 			}
 			//      selectedCategoryId.set($category.id)
 			isUpdating = 0;
@@ -83,7 +96,7 @@
 			variables: PDAMCustomer,
 			context: PDAMCustomer[] | undefined
 		) => {
-			await client.invalidateQueries(['pdam', 'customer', 'list']);
+			await client.invalidateQueries(['pdam', 'customer', 'list', page, limit]);
 		}
 	});
 
@@ -93,11 +106,11 @@
 			await client.cancelQueries();
 
 			// Snapshot the previous value
-			const previousData = client.getQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list']);
+			const previousData = client.getQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list', page, limit]);
 
 			// Optimistically update to the new value
 			if (previousData) {
-				client.setQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list'], previousData);
+				client.setQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list', page, limit], previousData);
 			}
 
 			return previousData;
@@ -111,7 +124,10 @@
 
 		onError: (err: any, variables: any, context: any) => {
 			if (context?.previousData) {
-				client.setQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list'], context.previousData);
+				client.setQueryData<PDAMCustomer[]>(
+					['pdam', 'customer', 'list', page, limit],
+					context.previousData
+				);
 				//        selectedCategoryId.set($category.id)
 			}
 			isUpdating = 0;
@@ -122,7 +138,7 @@
 			variables: PDAMCustomer,
 			context: PDAMCustomer[] | undefined
 		) => {
-			await client.invalidateQueries(['pdam', 'customer', 'list']);
+			await client.invalidateQueries(['pdam', 'customer', 'list', page, limit]);
 		}
 	});
 
@@ -142,24 +158,49 @@
 		if (d.isNew) {
 			$createData.mutate(d);
 		} else {
-			$updateData.mutate(d);
+			$updateData.mutate({...d, createdAt: dayjs().format()});
 		}
 		isActive = '';
+	}
+
+	const setPage = (newPage: number) => {
+		page = newPage;
+	};
+
+	const limitChanged = (l: number) => {
+	 	setPage(0);
 	}
 
 	// onMount(async() => {
 	// 	branchs = await fetchBranch();
 	// })
+	$: limitChanged(limit);
 
 	$: queryOptions = {
-		queryKey: ['pdam', 'customer', 'list'],
-		queryFn: () => fetchCustomer(),
+		queryKey: ['pdam', 'customer', 'list', page, limit],
+		queryFn: () => fetchCustomer(page, limit),
+		onSuccess: () => prefetchNextPage,
 		keepPreviousData: true
 	};
+
+
 </script>
 
 <div class="container fluid">
-	<div class="subtitle block">Customer</div>
+	<div class="columns">
+		<div class="column">
+			<div class="subtitle block">Customer</div>
+		</div>
+		<div class="column is-narrow">
+			<button
+				class="button is-success"
+				on:click={() => {
+					data = { ...initData };
+					isActive = 'is-active';
+				}}>+ New</button
+			>
+		</div>
+	</div>
 	<Query options={queryOptions}>
 		<div slot="query" let:queryResult>
 			{#if queryResult.status === 'loading'}
@@ -185,7 +226,7 @@
 								<div class="column pb-0 is-narrow">{c.slId}</div>
 							</div>
 							<div class="column is-5 py-0">{c.address}</div>
-							<div class="column py-0 columns is-mobile">
+							<div class="column py-0 columns is-narrow is-mobile">
 								<div class="column">{c.branchName ?? '-'}</div>
 								<div class="column is-narrow">
 									<button
@@ -203,20 +244,44 @@
 				<!-- </tbody>
 				</table> -->
 				<!-- </div> -->
+				<hr class="p-0 m-0 my-2" />
+				<div class="columns">
+					<div class="column is-narrow">
+						<div class="select">
+							<select bind:value={limit}>
+								{#each limits as c}
+									<option value={c}>{c}</option>
+								{/each}
+							</select>
+						</div>
+					</div>
+					<div class="column is-narrow">
+						<button
+							disabled={page === 0}
+							class="button"
+							on:click={() => setPage(Math.max(page - 1, 0))}>&lt; Previous</button
+						>
+					</div>
+					<div class="column is-narrow">
+						<div class="column">{page+1}</div>
+					</div>
+					<div class="column is-narrow">
+						<button
+							class="button"
+							disabled={queryResult.data && !(queryResult.data.length === limit)}
+							on:click={() => {
+								setPage(queryResult.data && !(queryResult.data.length === limit) ? page : page + 1);
+							}}>Next &gt;</button
+						>
+					</div>
+					<div class="column">
+						{#if queryResult.isFetching}Loading...{/if}
+					</div>
+				</div>
 			{/if}
 		</div>
-	</Query>
-	<hr class="p-0 m-0 my-2" />
-	<div class="block mt-3">
-		<button
-			class="button is-success"
-			on:click={() => {
-				data = { ...initData };
-				isActive = 'is-active';
-			}}>+ New</button
-		>
-	</div>
+	</Query>	
 	{#if isActive === 'is-active'}
-	<FormCustomer {branchs} data={{ ...data }} bind:isActive on:onSave={onSave} />
+		<FormCustomer {branchs} data={{ ...data }} bind:isActive on:onSave={onSave} />
 	{/if}
 </div>

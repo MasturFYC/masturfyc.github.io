@@ -155,11 +155,11 @@
 					{#each queryResult.data ?? [] as c (c.id)}
 						<hr class="p-0 m-0 my-2" />
 						<div class="columns p-0 m-0">
-							<div class="column py-0 columns is-mobile">
-								<div class="column pb-0 is-narrow">{c.id}.</div>
-								<div class="column pb-0 has-text-weight-bold">{c.name}</div>
-							</div>
-							<div class="column is-6 py-0">{c.address}</div>
+							<!-- <div class="column py-0 columns is-mobile"> -->
+								<!-- <div class="column pb-0 is-narrow">{c.id}.</div> -->
+								<div class="column py-0 has-text-weight-bold">{c.name}</div>
+							<!-- </div> -->
+							<div class="column is-8 py-0">{c.address}</div>
 							<div class="column py-0 is-narrow">
 								<button
 									class="button is-small is-link is-outlined"

@@ -14,5 +14,6 @@ export type PDAMCustomer = {
   branchName?: string;
   branchAddress?: string;
   isNew?: boolean;
-  oldSlId?: string
+  oldSlId?: string;
+  createdAt?: string;
 }

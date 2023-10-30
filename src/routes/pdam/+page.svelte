@@ -5,11 +5,16 @@
 	import Menu from './menu.svelte';
 	import Branch from './branch.svelte';
 	import Customer from './customer.svelte';
+	import ImportCustomer from './import-customer.svelte';
 	import type { PDAMBranch } from '$lib/interfaces';
 	import { onMount } from 'svelte';
+	import { useQuery, useQueryClient } from '@sveltestack/svelte-query';
 
 	let clicked = 'text';
 	let branchs: PDAMBranch[] = [];
+
+	const client = useQueryClient();
+
 	type CABANG = {
 		name: string;
 		address: string;
@@ -115,6 +120,11 @@
 		return data;
 	};	
 
+	const query = useQuery<PDAMBranch[]>({
+		queryKey: ['pdam', 'branch', 'list'],
+		queryFn: async() => await fetchBranch()
+	});
+
 	//$: cabang = cabangs.filter((f) => f.name === cabangName)[0];
 	$: if (browser) {
 		const test = document.getElementById('username')?.innerText;
@@ -122,7 +132,7 @@
 	}
 
 	onMount(async() => {
-		branchs = await fetchBranch();
+		query.subscribe(v => (branchs = v.data ?? []))
 	})
 
 	// $: queryOptions = {
@@ -132,6 +142,12 @@
 	// };
 
 
+
+
+	function onImportSucces(e: CustomEvent<any>): void {
+		client.invalidateQueries(['pdam', 'customer', 'list'])
+		currentMenu = 1;
+	}
 </script>
 
 <svelte:head>
@@ -149,6 +165,8 @@
 				<Branch />
 			{:else if currentMenu === 1}
 				<Customer {branchs} />
+				{:else if currentMenu === 3}
+				<ImportCustomer {branchs} {header} on:success={onImportSucces} />
 			{:else}
 				<div class="block">
 					<div class="tabs is-small is-toggle">
