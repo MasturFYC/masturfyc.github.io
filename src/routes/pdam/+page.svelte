@@ -2,12 +2,20 @@
 	import { browser } from '$app/environment';
 	import csv from 'csvtojson';
 	import fetchApi from '$lib/fetch-api';
+	import Menu from './menu.svelte';
+	import Branch from './branch.svelte';
+	import Customer from './customer.svelte';
+	import type { PDAMBranch } from '$lib/interfaces';
+	import { onMount } from 'svelte';
 
 	let clicked = 'text';
+	let branchs: PDAMBranch[] = [];
 	type CABANG = {
 		name: string;
 		address: string;
 	};
+
+	let currentMenu = 1;
 
 	const cabangs: CABANG[] = [
 		{ name: 'Jatibarang', address: 'Jl. Purna Brata No. 1001 Telp. (0234)  351491' },
@@ -101,11 +109,29 @@
 			});
 	}
 
+	const fetchBranch = async (): Promise<PDAMBranch[]> => {
+		const data = await fetchApi.get('/v2/pdam/branch/').json<PDAMBranch[]>();
+
+		return data;
+	};	
+
 	//$: cabang = cabangs.filter((f) => f.name === cabangName)[0];
 	$: if (browser) {
 		const test = document.getElementById('username')?.innerText;
 		isAdmin = test === 'mastur.st12@outlook.com';
 	}
+
+	onMount(async() => {
+		branchs = await fetchBranch();
+	})
+
+	// $: queryOptions = {
+	// 	queryKey: ['pdam', 'branch', 'list'],
+	// 	queryFn: () => fetchBranch(),
+	// 	keepPreviousData: true
+	// };
+
+
 </script>
 
 <svelte:head>
@@ -116,19 +142,95 @@
 
 <section>
 	<div class="title">Kartu PDAM</div>
-	<div class="tabs is-small is-toggle">
-		<ul>
-			<!-- svelte-ignore a11y-invalid-attribute -->
-			<li class={clicked === 'text' ? 'is-active' : ''}>
-				<a href="#" on:click={() => (clicked = 'text')}>CSV Text</a>
-			</li>
-			<!-- svelte-ignore a11y-invalid-attribute -->
-			<li class={clicked === 'file' ? 'is-active' : ''}>
-				<a href="#" on:click={() => (clicked = 'file')}>File</a>
-			</li>
-		</ul>
+	<div class="columns">
+		<div class="column is-narrow is-one-fifth"><Menu bind:currentMenu /></div>
+		<div class="column">
+			{#if currentMenu === 2}
+				<Branch />
+			{:else if currentMenu === 1}
+				<Customer {branchs} />
+			{:else}
+				<div class="block">
+					<div class="tabs is-small is-toggle">
+						<ul>
+							<!-- svelte-ignore a11y-invalid-attribute -->
+							<li class={clicked === 'text' ? 'is-active' : ''}>
+								<a href="#" on:click={() => (clicked = 'text')}>CSV Text</a>
+							</li>
+							<!-- svelte-ignore a11y-invalid-attribute -->
+							<li class={clicked === 'file' ? 'is-active' : ''}>
+								<a href="#" on:click={() => (clicked = 'file')}>File</a>
+							</li>
+						</ul>
+					</div>
+
+					{#if clicked === 'text'}
+						<div class="field block">
+							<label class="label">
+								<span>CSV Text (comma delimited) format: ({header}):</span>
+								<textarea class="textarea" rows="6" bind:value={textCsv} />
+							</label>
+						</div>
+					{:else}
+						<div class="block">
+							<input
+								type="file"
+								class="mb-4 mt-2"
+								accept="text/csv"
+								on:change|preventDefault={(e) => readFile(e)}
+							/>
+							<span>CSV Format ({header})</span>
+						</div>
+					{/if}
+					<div class="buttons block">
+						<button
+							disabled={clicked !== 'text'}
+							class="button is-link"
+							on:click={(e) => parseToJSON(e)}>Parse to JSON</button
+						>
+						<button disabled={!isAdmin} class="button is-primary" on:click={(e) => downloadCard(e)}
+							>Download</button
+						>
+					</div>
+					<div class="block">
+						<table class="table is-narrow">
+							<thead>
+								<tr>
+									<th
+										><input
+											type="checkbox"
+											bind:checked={selectAllData}
+											on:input={(e) => selectAll(e)}
+										/></th
+									>
+									<th>No. SL</th>
+									<th>NAMA</th>
+									<th>ALAMAT</th>
+									<th>CABANG</th>
+									<th>ALAMAT CABANG</th>
+								</tr>
+							</thead>
+							<tbody>
+								{#each data as p}
+									<tr>
+										<td><input type="checkbox" bind:checked={p.selected} /></td>
+										<td>{p.noSl}</td>
+										<td>{p.name}</td>
+										<td>{p.address}</td>
+										<td>{p.city}</td>
+										<td>{p.cabang}</td>
+									</tr>
+								{/each}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{/if}
+		</div>
 	</div>
-	<!-- 
+</section>
+
+<!-- 
 	<label class="div-label">
 		<span>Cabang:</span>
 		<select class="select mb-2 mt-2 mr-4" bind:value={cabangName}>
@@ -137,66 +239,6 @@
 			{/each}
 		</select>
 	</label> -->
-
-	{#if clicked === 'text'}
-		<div class="field block">
-			<label class="label">
-				<span>CSV Text (comma delimited) format: ({header}):</span>
-				<textarea class="textarea" rows="6" bind:value={textCsv} />
-			</label>
-		</div>
-	{:else}
-		<div class="block">
-			<input
-				type="file"
-				class="mb-4 mt-2"
-				accept="text/csv"
-				on:change|preventDefault={(e) => readFile(e)}
-			/>
-			<span>CSV Format ({header})</span>
-		</div>
-	{/if}
-	<div class="buttons block">
-		<button disabled={clicked !== 'text'} class="button is-link" on:click={(e) => parseToJSON(e)}
-			>Parse to JSON</button
-		>
-		<button disabled={!isAdmin} class="button is-primary" on:click={(e) => downloadCard(e)}
-			>Download</button
-		>
-	</div>
-	<div class="block">
-		<table class="table is-narrow">
-			<thead>
-				<tr>
-					<th
-						><input
-							type="checkbox"
-							bind:checked={selectAllData}
-							on:input={(e) => selectAll(e)}
-						/></th
-					>
-					<th>No. SL</th>
-					<th>NAMA</th>
-					<th>ALAMAT</th>
-					<th>CABANG</th>
-					<th>ALAMAT CABANG</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each data as p}
-					<tr>
-						<td><input type="checkbox" bind:checked={p.selected} /></td>
-						<td>{p.noSl}</td>
-						<td>{p.name}</td>
-						<td>{p.address}</td>
-						<td>{p.city}</td>
-						<td>{p.cabang}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</div>
-</section>
 
 <style>
 	textarea {

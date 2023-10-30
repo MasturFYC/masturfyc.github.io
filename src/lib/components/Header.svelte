@@ -15,8 +15,8 @@
 		{ id: 2, href: '/pdam', name: 'Kartu PDAM' },
 		{ id: 3, href: '/label103', name: 'Label-103' }
 	];
-	let redirectUri = import.meta.env.VITE_FB_REDIRECTURI;
-	let status = '';
+	// let redirectUri = import.meta.env.VITE_FB_REDIRECTURI;
+	// let status = '';
 </script>
 
 <svelte:head>

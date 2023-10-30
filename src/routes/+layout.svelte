@@ -7,6 +7,7 @@
 	import timezone from 'dayjs/plugin/timezone';
 	import advanced from 'dayjs/plugin/advancedFormat';
 	import locale from 'dayjs/locale/id';
+	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 
 	//import Menu from '$lib/components/menu.svelte';
 
@@ -17,6 +18,16 @@
 	dayjs.extend(timezone);
 	dayjs.extend(utc);
 	dayjs.extend(advanced);
+
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				refetchOnWindowFocus: false,
+				retry: false
+				//staleTime: 5 * 60 * 1000
+			}
+		}
+	});
 </script>
 
 <svelte:head>
@@ -30,32 +41,33 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Mastur FYC Home page" />
 </svelte:head>
-
-<HeaderPage />
-<div class="hero is-fullheight-with-navbar">
-	<div class="hero-body">
-		<div class="container is-align-self-flex-start">
-			<div class="my-div">
-				<!-- <div class="columns is-flex is-flex-wrap-wrap-reverse"> -->
-				<!-- <div class="column is-3 has-background-white-bis" style="min-width:180px">
+<QueryClientProvider client={queryClient}>
+	<HeaderPage />
+	<div class="hero is-fullheight-with-navbar">
+		<div class="hero-body">
+			<div class="container is-align-self-flex-start">
+				<div class="my-div">
+					<!-- <div class="columns is-flex is-flex-wrap-wrap-reverse"> -->
+					<!-- <div class="column is-3 has-background-white-bis" style="min-width:180px">
 					<Menu />
 				</div>
 				<main class="column m-2" style="min-width:300px;min-height:calc(100vh - {clientHeight + height + 8}px)">
 				</main>
 			</div> -->
-				<slot />
+					<slot />
+				</div>
 			</div>
 		</div>
+		<Footer />
 	</div>
-	<Footer />
-</div>
+</QueryClientProvider>
 
 <style lang="scss">
 	@media screen and (min-width: 640px) {
 		.my-div {
 			max-width: 1024px;
 			margin: 0 auto;
-//			border: 1px solid #ccc;
+			//			border: 1px solid #ccc;
 		}
 	}
 </style>
