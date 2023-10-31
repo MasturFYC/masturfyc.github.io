@@ -232,7 +232,7 @@
 		</div>
 		<div class="column is-narrow">
 			<button
-				class="button is-success"
+				class="button is-success is-light"
 				on:click={() => {
 					data = { ...initData };
 					isActive = 'is-active';
@@ -246,9 +246,9 @@
 				<div>Loading customer...</div>
 			{:else}
 			<div>
-				<hr class="p-0 m-0 my-2" />
 				{#each queryResult.data ?? [] as c, i (c.slId)}
-					<div class="columns">
+				<hr class="p-0 m-0 my-2 is-bordered" />
+				<div class="columns">
 						<div class="column pb-0 columns is-mobile is-5 is-gapless">
 							<div class="column pb-0 has-text-weight-bold">{c.name}</div>
 							<div class="column pb-0 is-narrow">
@@ -264,7 +264,7 @@
 								<div class="column pb-0">{c.branchName ?? '-'}</div>
 								<div class="column pb-0 is-narrow">
 									<button
-										class="button is-small is-link is-outlined"
+										class="button is-small is-link is-light"
 										on:click={() => {
 											data = { ...c, isNew: false, oldSlId: c.slId };
 											isActive = 'is-active';
@@ -274,8 +274,8 @@
 							</div>
 						</div>
 					</div>
-					<hr class="p-0 m-0 my-2" />
 				{/each}
+				<hr class="p-0 m-0 my-2" />
 			</div>
 				<div class="block mt-4">
 					<div class="columns">

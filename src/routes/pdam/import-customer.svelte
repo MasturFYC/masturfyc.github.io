@@ -56,7 +56,7 @@
 </script>
 
 <div>
-	<div class="subtitle">Import data pelanggan dari file .csv</div>
+	<div>Import data pelanggan dari file .csv</div>
 	<div class="block">
 		<div class="columns">
 			<div class="column">

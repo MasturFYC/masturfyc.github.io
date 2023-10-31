@@ -10,7 +10,7 @@
 </svelte:head>
 
 <section>
-	<div class="title">Meraba Jalan Terang di Negeri Konoha</div>
+	<div class="title is-size-1 has-text-weight-light">Meraba Jalan Terang di Negeri Konoha</div>
 	<div class="content">
 		<p>
 			Setengah abad sudah hidup di negeri ini. Belum pernah aku semasygul ini. Belum pernah

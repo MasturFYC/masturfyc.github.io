@@ -1,5 +1,12 @@
+@import url("https://use.typekit.net/end3rqq.css");
 html {
   overflow: auto; }
+
+.title, .subtitle {
+  font-family: source-serif-pro, serif; }
+
+.modal-card-title {
+  font-family: source-serif-pro, serif; }
 
 /*! bulma.io v0.9.4 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
@@ -2094,8 +2101,7 @@ div.icon-text {
 a.tag:hover {
   text-decoration: underline; }
 
-.title,
-.subtitle {
+.title, .subtitle {
   word-break: break-word; }
   .title em,
   .title span,

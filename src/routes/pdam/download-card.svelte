@@ -70,7 +70,7 @@
 <div class="block columns">
 	<div class="column">Ada {data.length} pelanggan yang akan dicetak kartunya.</div>
 	<div class="column is-narrow columns is-mobile">
-		<div class="column">
+		<div class="column pr-0">
 			<button
 				disabled={data.length === 0}
 				title="Remove from print request"
@@ -78,7 +78,6 @@
 				on:click={() => dispatch('removeAllItem', true)}>Remove All</button
 			>
 		</div>
-
 		<div class="column is-narrow">
 			<button disabled={!isAdmin} class="button is-primary" on:click={downloadCard}>Download</button
 			>

@@ -151,7 +151,7 @@
 		</div>
 		<div class="column is-narrow">
 			<button
-			class="button is-success"
+			class="button is-success is-light"
 			on:click={() => {
 				data = { ...initData };
 				isActive = 'is-active';
@@ -176,7 +176,7 @@
 							<div class="column is-8 pb-0">{c.address}</div>
 							<div class="column is-narrow  pb-0">
 								<button
-									class="button is-small is-link is-outlined"
+									class="button is-small is-link is-light"
 									on:click={() => {
 										data = c;
 										isActive = 'is-active';
@@ -190,5 +190,7 @@
 			{/if}
 		</div>
 	</Query>
+	{#if isActive === 'is-active'}
 	<FormBranch data={{ ...data }} bind:isActive on:onSave={onSave} />
+	{/if}
 </div>

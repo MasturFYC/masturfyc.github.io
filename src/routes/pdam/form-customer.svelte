@@ -1,5 +1,5 @@
 <script lang="ts">
-	import fetchApi from '$lib/fetch-api';
+	//import fetchApi from '$lib/fetch-api';
 	import type { PDAMBranch, PDAMCustomer } from '$lib/interfaces';
 	import { createEventDispatcher, onMount } from 'svelte';
 
@@ -13,7 +13,7 @@
 
 	onMount(async () => {
 		ref.focus();
-		ref.select();
+		// ref.select();
 	});
 
 	const setBranchName = (id: number) => {
@@ -36,7 +36,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="modal-background" on:click={() => (isActive = '')}></div>
-	<div class="modal-card">
+	<div class="modal-card box is-paddingless">
 		<header class="modal-card-head">
 			<p class="modal-card-title">{data.isNew ? 'Pelanggan Baru' : data.name}</p>
 			<button
@@ -106,13 +106,13 @@
 				<div class="column">
 					<button
 					disabled={data.isNew}
-					class="button is-danger is-outlined"
+					class="button is-danger is-light"
 					on:click={() => dispatch('removeCustomer', data)}>Remove</button
 				>
 				</div>
 				<div class="column is-narrow">
 				<div class="buttons">
-					<button class="button is-outlined is-link" on:click={() => (isActive = '')}>Cancel</button
+					<button class="button is-link is-light" on:click={() => (isActive = '')}>Cancel</button
 					>
 					<button
 						disabled={isNotValid}
