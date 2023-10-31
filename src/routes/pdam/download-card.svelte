@@ -69,35 +69,36 @@
 
 <div class="block columns">
 	<div class="column">Ada {data.length} pelanggan yang akan dicetak kartunya.</div>
-	<div class="column is-narrow">
-		<button
-			disabled={data.length === 0}
-			title="Remove from print request"
-			class="button is-danger"
-			on:click={() => dispatch('removeAllItem', true)}>Remove All</button
-		>
-	</div>
+	<div class="column is-narrow columns is-mobile">
+		<div class="column">
+			<button
+				disabled={data.length === 0}
+				title="Remove from print request"
+				class="button is-danger"
+				on:click={() => dispatch('removeAllItem', true)}>Remove All</button
+			>
+		</div>
 
-	<div class="column is-narrow">
-		<button disabled={!isAdmin} class="button is-primary" on:click={downloadCard}>Download</button>
-		<!-- <button class="button is-primary" on:click={downloadCard}>Download</button> -->
+		<div class="column is-narrow">
+			<button disabled={!isAdmin} class="button is-primary" on:click={downloadCard}>Download</button
+			>
+			<!-- <button class="button is-primary" on:click={downloadCard}>Download</button> -->
+		</div>
 	</div>
 </div>
 <div class="block">
-	<div class="container box">
+	<hr class="p-0 m-0 my-2" />
+	<div class="container is-outlined is-primary">
 		{#each data as c, i (c.noSl)}
-			{#if i > 0}
-				<hr class="p-0 m-0 my-2" />
-			{/if}
-			<div class="columns p-0 m-0">
-				<div class="column py-0 columns is-mobile">
+			<div class="columns">
+				<div class="column pb-0 columns is-mobile is-gapless">
 					<div class="column pb-0 has-text-weight-bold">{c.name}</div>
 					<div class="column pb-0 is-narrow">{c.noSl}</div>
 				</div>
-				<div class="column py-0">{c.address}</div>
-				<div class="column py-0 is-4 columns is-mobile">
-					<div class="column">{c.city}</div>
-					<div class="column is-narrow">
+				<div class="column pb-0">{c.address}</div>
+				<div class="column pb-0 is-4 columns is-mobile is-gapless">
+					<div class="column pb-0">{c.city}</div>
+					<div class="column pb-0 is-narrow">
 						<button
 							title="Remove from print request"
 							class="button is-small is-warning"
@@ -106,6 +107,7 @@
 					</div>
 				</div>
 			</div>
-		{/each}
+			<hr class="p-0 m-0 my-2" />
+			{/each}
 	</div>
 </div>

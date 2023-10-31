@@ -245,13 +245,11 @@
 			{#if queryResult.status === 'loading'}
 				<div>Loading customer...</div>
 			{:else}
-			<div class="box">
-				{#each queryResult.data ?? [] as c, i (c.slId)}
-				{#if i > 0}
+			<div>
 				<hr class="p-0 m-0 my-2" />
-				{/if}
-					<div class="columns p-0 m-0">
-						<div class="column py-0 columns is-mobile is-5">
+				{#each queryResult.data ?? [] as c, i (c.slId)}
+					<div class="columns">
+						<div class="column pb-0 columns is-mobile is-5 is-gapless">
 							<div class="column pb-0 has-text-weight-bold">{c.name}</div>
 							<div class="column pb-0 is-narrow">
 								<label>
@@ -260,11 +258,11 @@
 								</label>
 							</div>
 						</div>
-						<div class="column is-4 py-0">{c.address}</div>
-						<div class="column py-0 is-3">
-							<div class="columns is-mobile">
-								<div class="column">{c.branchName ?? '-'}</div>
-								<div class="column is-narrow">
+						<div class="column pb-0 is-4">{c.address}</div>
+						<div class="column pb-0 is-3">
+							<div class="columns is-mobile is-gapless">
+								<div class="column pb-0">{c.branchName ?? '-'}</div>
+								<div class="column pb-0 is-narrow">
 									<button
 										class="button is-small is-link is-outlined"
 										on:click={() => {
@@ -276,9 +274,10 @@
 							</div>
 						</div>
 					</div>
+					<hr class="p-0 m-0 my-2" />
 				{/each}
 			</div>
-				<div class="block">
+				<div class="block mt-4">
 					<div class="columns">
 						<div class="column">
 							<div class="columns is-mobile">

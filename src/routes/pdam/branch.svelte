@@ -145,7 +145,7 @@
 </script>
 
 <div class="container fluid">
-	<div class="columns">
+	<div class="columns is-mobile">
 		<div class="column">
 			<div class="subtitle block">Cabang</div>
 		</div>
@@ -164,19 +164,17 @@
 			{#if queryResult.status === 'loading'}
 				<div>Loading branch...</div>
 			{:else}
-				<div class="container box">
+				<div class="container">
+					<hr class="p-0 m-0 my-2" />
 					{#each queryResult.data ?? [] as c, i (c.id)}
-						{#if i > 0}
-							<hr class="p-0 m-0 my-2" />
-						{/if}
 
-						<div class="columns p-0 m-0">
+						<div class="columns">
 							<!-- <div class="column py-0 columns is-mobile"> -->
 							<!-- <div class="column pb-0 is-narrow">{c.id}.</div> -->
-							<div class="column py-0 has-text-weight-bold">{c.name}</div>
+							<div class="column has-text-weight-bold  pb-0">{c.name}</div>
 							<!-- </div> -->
-							<div class="column is-8 py-0">{c.address}</div>
-							<div class="column py-0 is-narrow">
+							<div class="column is-8 pb-0">{c.address}</div>
+							<div class="column is-narrow  pb-0">
 								<button
 									class="button is-small is-link is-outlined"
 									on:click={() => {
@@ -186,7 +184,8 @@
 								>
 							</div>
 						</div>
-					{/each}
+						<hr class="p-0 m-0 my-2" />
+						{/each}
 				</div>
 			{/if}
 		</div>
