@@ -8,7 +8,7 @@
 	export let header = '';
 	let data: PDAMCustomer[] = [];
 	const dispatch = createEventDispatcher();
-	
+
 	const getBranch = (name: string): number => {
 		const d = branchs.filter((f) => f.name === name)[0];
 		if (d) return d.id;
@@ -56,7 +56,7 @@
 </script>
 
 <div>
-	<div class="subtitle">Import customer from file</div>
+	<div class="subtitle">Import data pelanggan dari file .csv</div>
 	<div class="block">
 		<div class="columns">
 			<div class="column">
@@ -70,12 +70,10 @@
 			<div class="column">
 				<span>CSV Format ({header})</span>
 			</div>
-				<div class="column is-narrow">
-					<button
-						on:click={importNow}
-						disabled={data.length === 0}
-						class="button is-primary">Import Now</button
-					>
+			<div class="column is-narrow">
+				<button on:click={importNow} disabled={data.length === 0} class="button is-primary"
+					>Import Now</button
+				>
 			</div>
 		</div>
 		<div>

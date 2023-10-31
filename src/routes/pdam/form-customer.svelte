@@ -101,10 +101,17 @@
 				</label>
 			</div>
 		</section>
-		<footer class="modal-card-foot">
-			<div class="is-flex is-flex-direction-row container">
-				<div class="is-flex-grow-1"></div>
-				<div class="buttons is-flex-grow-0">
+		<footer class="modal-card-foot py-4">
+			<div class="columns container is-mobile">
+				<div class="column">
+					<button
+					disabled={data.isNew}
+					class="button is-danger is-outlined"
+					on:click={() => dispatch('removeCustomer', data)}>Remove</button
+				>
+				</div>
+				<div class="column is-narrow">
+				<div class="buttons">
 					<button class="button is-outlined is-link" on:click={() => (isActive = '')}>Cancel</button
 					>
 					<button
@@ -114,6 +121,7 @@
 					>
 				</div>
 			</div>
+		</div>
 		</footer>
 	</div>
 </div>

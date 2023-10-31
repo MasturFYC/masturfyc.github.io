@@ -1,16 +1,14 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import csv from 'csvtojson';
 	import fetchApi from '$lib/fetch-api';
 	import Menu from './menu.svelte';
 	import Branch from './branch.svelte';
 	import Customer from './customer.svelte';
 	import ImportCustomer from './import-customer.svelte';
-	import type { PDAMBranch } from '$lib/interfaces';
+	import type { PDAM, PDAMBranch, PDAMCustomer } from '$lib/interfaces';
+	import DownloadCard from './download-card.svelte';
 	import { onMount } from 'svelte';
 	import { useQuery, useQueryClient } from '@sveltestack/svelte-query';
 
-	let clicked = 'text';
 	let branchs: PDAMBranch[] = [];
 
 	const client = useQueryClient();
@@ -31,27 +29,21 @@
 		} //271576' }
 	];
 
-	type PDAM = {
-		selected?: boolean;
-		noSl: number;
-		name: string;
-		address: string;
-		city: string;
-		cabang: string;
-	};
-
 	let data: PDAM[] = [];
-	//	let cabang: CABANG = cabangs[0];
-	//	let cabangName = cabang.name;
-	let selectAllData = false;
-	let textCsv = '';
+
+	// let selectAllData = false;
+	// let textCsv = '';
 	let header = 'noSl, name, address, city';
-	let isAdmin = false;
 
 	const getAddress = (city: string): string => {
-		return cabangs.filter((f) => f.name === city)[0].address;
+		return branchs.filter((f) => f.name === city)[0].address;
 	};
 
+	const getAddress2 = (id: number): string => {
+		return branchs.filter((f) => f.id === id)[0].address;
+	};
+
+	/*
 	function readFile(e: Event & { currentTarget: EventTarget & HTMLInputElement }) {
 		const target = e.currentTarget as HTMLInputElement;
 		if (target && target.files && target.files[0]) {
@@ -69,7 +61,6 @@
 			reader.readAsText(file, 'utf-8');
 		}
 	}
-
 	function selectAll(e: Event & { currentTarget: EventTarget & HTMLInputElement }): any {
 		data = data.map((m) => ({ ...m, selected: !selectAllData }));
 	}
@@ -81,10 +72,10 @@
 				data = jsonObj.map((m) => ({ ...m, cabang: getAddress(m.city), selected: true }));
 			});
 	}
-
+*/
 	let is_download = false;
 
-	async function downloadCard(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
+	async function downloadCard() {
 		is_download = true;
 
 		let filename = 'pdam-card.pdf';
@@ -96,7 +87,7 @@
 				'Content-Type': 'application/json'
 			})
 			.url(endpoint)
-			.post({ data: data.filter((f) => f.selected) })
+			.post(data) //{ data: data.filter((f) => f.selected) })
 			.blob((blob) => {
 				//const pdfblob = new Blob([blob], { type: 'application/pdf' });
 				var url = window.URL.createObjectURL(blob);
@@ -118,22 +109,18 @@
 		const data = await fetchApi.get('/v2/pdam/branch/').json<PDAMBranch[]>();
 
 		return data;
-	};	
+	};
 
 	const query = useQuery<PDAMBranch[]>({
 		queryKey: ['pdam', 'branch', 'list'],
-		queryFn: async() => await fetchBranch()
+		queryFn: async () => await fetchBranch()
 	});
 
 	//$: cabang = cabangs.filter((f) => f.name === cabangName)[0];
-	$: if (browser) {
-		const test = document.getElementById('username')?.innerText;
-		isAdmin = test === 'mastur.st12@outlook.com';
-	}
 
-	onMount(async() => {
-		query.subscribe(v => (branchs = v.data ?? []))
-	})
+	onMount(async () => {
+		query.subscribe((v) => (branchs = v.data ?? []));
+	});
 
 	// $: queryOptions = {
 	// 	queryKey: ['pdam', 'branch', 'list'],
@@ -141,12 +128,48 @@
 	// 	keepPreviousData: true
 	// };
 
-
-
-
 	function onImportSucces(e: CustomEvent<any>): void {
-		client.invalidateQueries(['pdam', 'customer', 'list'])
+		client.invalidateQueries(['pdam', 'customer', 'list']);
 		currentMenu = 1;
+	}
+
+	function selectCustomer(e: CustomEvent<PDAMCustomer>): void {
+		const test = data.filter((f) => f.noSl === e.detail.slId)[0];
+		if (test) {
+			data = data.filter((f) => f.noSl != test.noSl);
+			return;
+		}
+		data = [
+			...data,
+			{
+				address: e.detail.address,
+				cabang: getAddress2(e.detail.branchId),
+				city: e.detail.branchName ?? '',
+				name: e.detail.name,
+				noSl: e.detail.slId
+			}
+		];
+	}
+
+	function removeItem(e: CustomEvent<PDAM>): void {
+		data = data.filter((f) => f.noSl != e.detail.noSl);
+	}
+
+	function selectAll(e: CustomEvent<PDAMCustomer[] | undefined>): void {
+		if (e.detail) {
+
+			const filter = data.map(m => m.noSl);
+
+			const test = e.detail.map(m => ({
+						address: m.address,
+						cabang: getAddress2(m.branchId),
+						city: m.branchName ?? '',
+						name: m.name,
+						noSl: m.slId
+					})).filter(f => !filter.includes(f.noSl));
+
+			data = [...data, ...test];
+		}
 	}
 </script>
 
@@ -164,113 +187,12 @@
 			{#if currentMenu === 2}
 				<Branch />
 			{:else if currentMenu === 1}
-				<Customer {branchs} />
-				{:else if currentMenu === 3}
+				<Customer {branchs} on:selectCustomer={selectCustomer} on:selectAll={selectAll} />
+			{:else if currentMenu === 3}
 				<ImportCustomer {branchs} {header} on:success={onImportSucces} />
 			{:else}
-				<div class="block">
-					<div class="tabs is-small is-toggle">
-						<ul>
-							<!-- svelte-ignore a11y-invalid-attribute -->
-							<li class={clicked === 'text' ? 'is-active' : ''}>
-								<a href="#" on:click={() => (clicked = 'text')}>CSV Text</a>
-							</li>
-							<!-- svelte-ignore a11y-invalid-attribute -->
-							<li class={clicked === 'file' ? 'is-active' : ''}>
-								<a href="#" on:click={() => (clicked = 'file')}>File</a>
-							</li>
-						</ul>
-					</div>
-
-					{#if clicked === 'text'}
-						<div class="field block">
-							<label class="label">
-								<span>CSV Text (comma delimited) format: ({header}):</span>
-								<textarea class="textarea" rows="6" bind:value={textCsv} />
-							</label>
-						</div>
-					{:else}
-						<div class="block">
-							<input
-								type="file"
-								class="mb-4 mt-2"
-								accept="text/csv"
-								on:change|preventDefault={(e) => readFile(e)}
-							/>
-							<span>CSV Format ({header})</span>
-						</div>
-					{/if}
-					<div class="buttons block">
-						<button
-							disabled={clicked !== 'text'}
-							class="button is-link"
-							on:click={(e) => parseToJSON(e)}>Parse to JSON</button
-						>
-						<button disabled={!isAdmin} class="button is-primary" on:click={(e) => downloadCard(e)}
-							>Download</button
-						>
-					</div>
-					<div class="block">
-						<table class="table is-narrow">
-							<thead>
-								<tr>
-									<th
-										><input
-											type="checkbox"
-											bind:checked={selectAllData}
-											on:input={(e) => selectAll(e)}
-										/></th
-									>
-									<th>No. SL</th>
-									<th>NAMA</th>
-									<th>ALAMAT</th>
-									<th>CABANG</th>
-									<th>ALAMAT CABANG</th>
-								</tr>
-							</thead>
-							<tbody>
-								{#each data as p}
-									<tr>
-										<td><input type="checkbox" bind:checked={p.selected} /></td>
-										<td>{p.noSl}</td>
-										<td>{p.name}</td>
-										<td>{p.address}</td>
-										<td>{p.city}</td>
-										<td>{p.cabang}</td>
-									</tr>
-								{/each}
-							</tbody>
-						</table>
-					</div>
-				</div>
+				<DownloadCard {data} on:downloadCaard={() => downloadCard()} on:removeItem={removeItem} />
 			{/if}
 		</div>
 	</div>
 </section>
-
-<!-- 
-	<label class="div-label">
-		<span>Cabang:</span>
-		<select class="select mb-2 mt-2 mr-4" bind:value={cabangName}>
-			{#each cabangs as c}
-				<option value={c.name}>{c.name}</option>
-			{/each}
-		</select>
-	</label> -->
-
-<style>
-	textarea {
-		padding: 0.5rem 1rem;
-	}
-	label {
-		font-size: small;
-		font-weight: 400;
-		line-height: 1.75;
-	}
-	/* .div-label {
-		display: inline-flex;
-		flex-direction: row;
-		column-gap: 12px;
-		align-items: center;
-	} */
-</style>

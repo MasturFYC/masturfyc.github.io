@@ -4,6 +4,9 @@
 	import fetchApi from '$lib/fetch-api';
 	import FormCustomer from './form-customer.svelte';
 	import dayjs from 'dayjs';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 
 	const client = useQueryClient();
 
@@ -20,15 +23,15 @@
 	let limits: number[] = [50, 25, 20, 10, 5];
 	let isUpdating = 0;
 	const fetchCustomer = async (p: number, l: number): Promise<PDAMCustomer[]> => {
-		const data = await fetchApi
-			.get(`/v2/pdam/customer/list/${l}/${l * p}`)
-			.json<PDAMCustomer[]>();
+		const data = await fetchApi.get(`/v2/pdam/customer/list/${l}/${l * p}`).json<PDAMCustomer[]>();
 
 		return data;
 	};
 	const prefetchNextPage = async (data: PDAMCustomer[]) => {
 		if (data && data.length === limit) {
-			await client.prefetchQuery(['pdam', 'customer', 'list', page + 1], () => fetchCustomer(page + 1, limit));
+			await client.prefetchQuery(['pdam', 'customer', 'list', page + 1], () =>
+				fetchCustomer(page + 1, limit)
+			);
 		}
 	};
 
@@ -50,13 +53,28 @@
 			.post(e, '/v2/pdam/customer/')
 			.json();
 
+	const fetchDelte = async (e: string) =>
+		await fetchApi
+			.headers({
+				'Content-Type': 'application/json',
+				Accept: 'application/json'
+			})
+			.delete(`/v2/pdam/customer/${e}`)
+			.json<{ id: number; message: string }>();
+
 	const createData = useMutation(fetchCreateData, {
 		onMutate: async (e: PDAMCustomer) => {
 			// Cancel any outgoing refetches (so they don't overwrite our optimistic update)
 			await client.cancelQueries();
 
 			// Snapshot the previous value
-			const previousData = client.getQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list', page, limit]);
+			const previousData = client.getQueryData<PDAMCustomer[]>([
+				'pdam',
+				'customer',
+				'list',
+				page,
+				limit
+			]);
 
 			// Optimistically update to the new value
 			if (previousData) {
@@ -106,11 +124,20 @@
 			await client.cancelQueries();
 
 			// Snapshot the previous value
-			const previousData = client.getQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list', page, limit]);
+			const previousData = client.getQueryData<PDAMCustomer[]>([
+				'pdam',
+				'customer',
+				'list',
+				page,
+				limit
+			]);
 
 			// Optimistically update to the new value
 			if (previousData) {
-				client.setQueryData<PDAMCustomer[]>(['pdam', 'customer', 'list', page, limit], previousData);
+				client.setQueryData<PDAMCustomer[]>(
+					['pdam', 'customer', 'list', page, limit],
+					previousData
+				);
 			}
 
 			return previousData;
@@ -142,6 +169,11 @@
 		}
 	});
 
+	const deleteMutation = useMutation(fetchDelte, {
+		onSuccess: async () => console.log('Delete Success'),
+		onSettled: async () => await client.invalidateQueries(['pdam', 'customer', 'list', page, limit])
+	});
+
 	const initData: PDAMCustomer = {
 		slId: '',
 		name: '',
@@ -158,7 +190,7 @@
 		if (d.isNew) {
 			$createData.mutate(d);
 		} else {
-			$updateData.mutate({...d, createdAt: dayjs().format()});
+			$updateData.mutate({ ...d, createdAt: dayjs().format() });
 		}
 		isActive = '';
 	}
@@ -168,7 +200,16 @@
 	};
 
 	const limitChanged = (l: number) => {
-	 	setPage(0);
+		setPage(0);
+	};
+
+	function onCheckedChanged(e: PDAMCustomer) {
+		dispatch('selectCustomer', e);
+	}
+
+	function removeCustomer(e: CustomEvent<PDAMCustomer>): void {
+		$deleteMutation.mutate(e.detail.slId);
+		isActive = '';
 	}
 
 	// onMount(async() => {
@@ -182,12 +223,10 @@
 		onSuccess: () => prefetchNextPage,
 		keepPreviousData: true
 	};
-
-
 </script>
 
-<div class="container fluid">
-	<div class="columns">
+<div class="container">
+	<div class="columns is-mobile">
 		<div class="column">
 			<div class="subtitle block">Customer</div>
 		</div>
@@ -206,27 +245,21 @@
 			{#if queryResult.status === 'loading'}
 				<div>Loading customer...</div>
 			{:else}
-				<!-- <table class="table is-narrow">
-					<thead>
-						<tr>
-							<th>SLID</th>
-							<th>NAME</th>
-							<th>ADDRESS</th>
-							<th>CABANG</th>
-              <th></th>
-						</tr>
-					</thead>
-					<tbody> -->
-				<div class="container">
-					{#each queryResult.data ?? [] as c (c.slId)}
-						<hr class="p-0 m-0 my-2" />
-						<div class="columns p-0 m-0">
-							<div class="column py-0 columns is-mobile">
-								<div class="column pb-0 has-text-weight-bold">{c.name}</div>
-								<div class="column pb-0 is-narrow">{c.slId}</div>
+				{#each queryResult.data ?? [] as c (c.slId)}
+					<hr class="p-0 m-0 my-2" />
+					<div class="columns p-0 m-0">
+						<div class="column py-0 columns is-mobile is-5">
+							<div class="column pb-0 has-text-weight-bold">{c.name}</div>
+							<div class="column pb-0 is-narrow">
+								<label>
+									<input type="checkbox" on:click={() => onCheckedChanged(c)} />
+									<span class="ml-2">{c.slId}</span>
+								</label>
 							</div>
-							<div class="column is-5 py-0">{c.address}</div>
-							<div class="column py-0 columns is-narrow is-mobile">
+						</div>
+						<div class="column is-4 py-0">{c.address}</div>
+						<div class="column py-0 is-3">
+							<div class="columns is-mobile">
 								<div class="column">{c.branchName ?? '-'}</div>
 								<div class="column is-narrow">
 									<button
@@ -239,49 +272,69 @@
 								</div>
 							</div>
 						</div>
-					{/each}
-				</div>
-				<!-- </tbody>
-				</table> -->
-				<!-- </div> -->
+					</div>
+				{/each}
+
 				<hr class="p-0 m-0 my-2" />
-				<div class="columns">
-					<div class="column is-narrow">
-						<div class="select">
-							<select bind:value={limit}>
-								{#each limits as c}
-									<option value={c}>{c}</option>
-								{/each}
-							</select>
+				<div class="block">
+					<div class="columns">
+						<div class="column">
+							<div class="columns is-mobile">
+								<div class="column">
+									<div class="select">
+										<select bind:value={limit}>
+											{#each limits as c}
+												<option value={c}>{c}</option>
+											{/each}
+										</select>
+									</div>
+								</div>
+								<div class="column is-narrow">
+									<button
+										title="Select all customer to print request"
+										class="button"
+										disabled={queryResult.data && queryResult.data.length === 0}
+										on:click={() => dispatch('selectAll', queryResult.data)}>Select All</button
+									>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="column is-narrow">
-						<button
-							disabled={page === 0}
-							class="button"
-							on:click={() => setPage(Math.max(page - 1, 0))}>&lt; Previous</button
-						>
-					</div>
-					<div class="column is-narrow">
-						<div class="column">{page+1}</div>
-					</div>
-					<div class="column is-narrow">
-						<button
-							class="button"
-							disabled={queryResult.data && !(queryResult.data.length === limit)}
-							on:click={() => {
-								setPage(queryResult.data && !(queryResult.data.length === limit) ? page : page + 1);
-							}}>Next &gt;</button
-						>
-					</div>
-					<div class="column">
-						{#if queryResult.isFetching}Loading...{/if}
+						<div class="column is-narrow columns is-mobile">
+							<div class="column is-narrow">
+								<button
+									disabled={page === 0}
+									class="button"
+									on:click={() => setPage(Math.max(page - 1, 0))}>&lt; Previous</button
+								>
+							</div>
+							<div class="column"><div class="has-text-centered">{page + 1}</div></div>
+							<div class="column is-narrow">
+								<button
+									class="button"
+									disabled={queryResult.data && !(queryResult.data.length === limit)}
+									on:click={() => {
+										setPage(
+											queryResult.data && !(queryResult.data.length === limit) ? page : page + 1
+										);
+									}}>Next &gt;</button
+								>
+							</div>
+							<!-- <div class="column">
+							{#if queryResult.isFetching}Loading...{/if}
+						</div> -->
+						</div>
 					</div>
 				</div>
 			{/if}
 		</div>
-	</Query>	
+	</Query>
 	{#if isActive === 'is-active'}
-		<FormCustomer {branchs} data={{ ...data }} bind:isActive on:onSave={onSave} />
+		<FormCustomer
+			{branchs}
+			data={{ ...data }}
+			bind:isActive
+			on:onSave={onSave}
+			on:removeCustomer={removeCustomer}
+		/>
 	{/if}
 </div>

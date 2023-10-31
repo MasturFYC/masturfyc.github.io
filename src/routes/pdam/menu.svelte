@@ -2,7 +2,8 @@
 	const menu = [
 		{ id: 1, name: 'Customer' },
 		{ id: 2, name: 'Cabang' },
-		{ id: 3, name: 'Import' }
+		{ id: 3, name: 'Import' },
+		{ id: 4, name: 'Download Card' }
 	];
 	export let currentMenu = 1;
 </script>

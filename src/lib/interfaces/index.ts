@@ -17,3 +17,12 @@ export type PDAMCustomer = {
   oldSlId?: string;
   createdAt?: string;
 }
+
+export type PDAM = {
+		selected?: boolean;
+		noSl: string;
+		name: string;
+		address: string;
+		city: string;
+		cabang: string;
+	};
