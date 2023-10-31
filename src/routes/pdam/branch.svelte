@@ -145,19 +145,35 @@
 </script>
 
 <div class="container fluid">
-	<div class="subtitle block">Cabang</div>
+	<div class="columns">
+		<div class="column">
+			<div class="subtitle block">Cabang</div>
+		</div>
+		<div class="column is-narrow">
+			<button
+			class="button is-success"
+			on:click={() => {
+				data = { ...initData };
+				isActive = 'is-active';
+			}}>+ New</button
+		>
+		</div>
+	</div>
 	<Query options={queryOptions}>
 		<div slot="query" let:queryResult>
 			{#if queryResult.status === 'loading'}
 				<div>Loading branch...</div>
 			{:else}
-				<div class="container">
-					{#each queryResult.data ?? [] as c (c.id)}
-						<hr class="p-0 m-0 my-2" />
+				<div class="container box">
+					{#each queryResult.data ?? [] as c, i (c.id)}
+						{#if i > 0}
+							<hr class="p-0 m-0 my-2" />
+						{/if}
+
 						<div class="columns p-0 m-0">
 							<!-- <div class="column py-0 columns is-mobile"> -->
-								<!-- <div class="column pb-0 is-narrow">{c.id}.</div> -->
-								<div class="column py-0 has-text-weight-bold">{c.name}</div>
+							<!-- <div class="column pb-0 is-narrow">{c.id}.</div> -->
+							<div class="column py-0 has-text-weight-bold">{c.name}</div>
 							<!-- </div> -->
 							<div class="column is-8 py-0">{c.address}</div>
 							<div class="column py-0 is-narrow">
@@ -175,16 +191,5 @@
 			{/if}
 		</div>
 	</Query>
-	<hr class="p-0 m-0 my-2" />
-
-	<div class="block mt-3">
-		<button
-			class="button is-success"
-			on:click={() => {
-				data = { ...initData };
-				isActive = 'is-active';
-			}}>+ New</button
-		>
-	</div>
 	<FormBranch data={{ ...data }} bind:isActive on:onSave={onSave} />
 </div>

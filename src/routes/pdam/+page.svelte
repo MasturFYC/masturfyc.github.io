@@ -35,9 +35,9 @@
 	// let textCsv = '';
 	let header = 'noSl, name, address, city';
 
-	const getAddress = (city: string): string => {
-		return branchs.filter((f) => f.name === city)[0].address;
-	};
+	// const getAddress = (city: string): string => {
+	// 	return branchs.filter((f) => f.name === city)[0].address;
+	// };
 
 	const getAddress2 = (id: number): string => {
 		return branchs.filter((f) => f.id === id)[0].address;
@@ -180,9 +180,11 @@
 </svelte:head>
 
 <section>
-	<div class="title">Kartu PDAM</div>
 	<div class="columns">
-		<div class="column is-narrow is-one-fifth"><Menu bind:currentMenu /></div>
+		<div class="column is-narrow is-one-fifth">
+			<div class="title">PDAM</div>
+			<Menu bind:currentMenu />
+		</div>
 		<div class="column">
 			{#if currentMenu === 2}
 				<Branch />
@@ -191,7 +193,7 @@
 			{:else if currentMenu === 3}
 				<ImportCustomer {branchs} {header} on:success={onImportSucces} />
 			{:else}
-				<DownloadCard {data} on:downloadCaard={() => downloadCard()} on:removeItem={removeItem} />
+				<DownloadCard {data} on:downloadCaard={() => downloadCard()} on:removeItem={removeItem} on:removeAllItem={() => data = []} />
 			{/if}
 		</div>
 	</div>

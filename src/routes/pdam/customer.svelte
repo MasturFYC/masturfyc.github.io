@@ -20,7 +20,7 @@
 
 	let page = 0;
 	let limit = 5;
-	let limits: number[] = [50, 25, 20, 10, 5];
+	let limits: number[] = [5,10,25,50,100];
 	let isUpdating = 0;
 	const fetchCustomer = async (p: number, l: number): Promise<PDAMCustomer[]> => {
 		const data = await fetchApi.get(`/v2/pdam/customer/list/${l}/${l * p}`).json<PDAMCustomer[]>();
@@ -245,8 +245,11 @@
 			{#if queryResult.status === 'loading'}
 				<div>Loading customer...</div>
 			{:else}
-				{#each queryResult.data ?? [] as c (c.slId)}
-					<hr class="p-0 m-0 my-2" />
+			<div class="box">
+				{#each queryResult.data ?? [] as c, i (c.slId)}
+				{#if i > 0}
+				<hr class="p-0 m-0 my-2" />
+				{/if}
 					<div class="columns p-0 m-0">
 						<div class="column py-0 columns is-mobile is-5">
 							<div class="column pb-0 has-text-weight-bold">{c.name}</div>
@@ -274,8 +277,7 @@
 						</div>
 					</div>
 				{/each}
-
-				<hr class="p-0 m-0 my-2" />
+			</div>
 				<div class="block">
 					<div class="columns">
 						<div class="column">
