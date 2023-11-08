@@ -17,6 +17,7 @@
 	];
 	let drop2 = [
 		{ id: 1, href: '/php-error-13', name: 'php8.2-fpm Error 13' },
+		{ id: 2, href: '/tailscale-up', name: 'Networking menggunakan tailscale' },
 	];
 	// let redirectUri = import.meta.env.VITE_FB_REDIRECTURI;
 	// let status = '';
