@@ -1,4 +1,4 @@
-<div>
+<section>
 	<div class="title">php8.2-fpm Error 13 (Permission denied / File not found)</div>
 	<div class="content">
 		<p>
@@ -36,4 +36,12 @@ $ sudo systemctl restart php8.2-fpm</pre>
 		</ol>
     <p>Terima kasih semoga bermanfaat.</p>
 	</div>
-</div>
+</section>
+
+
+<style lang="scss">
+	section {
+		max-width: 640px;
+		margin: 0 auto;
+	}
+</style>

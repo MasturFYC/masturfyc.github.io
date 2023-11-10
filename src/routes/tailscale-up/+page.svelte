@@ -1,4 +1,4 @@
-<setion>
+<section>
 	<div class="title">Akses Komputer Jarak Jauh menggunakan TAILSCALE</div>
 	<div class="content">
 		<p>
@@ -15,7 +15,7 @@
 		<p>
 			Download key ring tailscale sesuai dengan distro yang anda pasang di sistem, kebetulan saya
 			menggunakan distro <code>debian bookworm</code>, jadi saya download key ring
-			<code>tailscape</code> dari debian menggunakan terminal.
+			<code>tailscale</code> dari debian menggunakan terminal.
 		</p>
 		<pre>$ curl -fsSL https://pkgs.tailscale.com/stable/debian/bookworm.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null</pre>
 		<p>Simpan PPA dan key ring ke dalam list update system:</p>
@@ -44,4 +44,11 @@
 			device yang anda scale up dari manapun, semoga bermanfaat.
 		</p>
 	</div>
-</setion>
+</section>
+
+<style lang="scss">
+	section {
+		max-width: 640px;
+		margin: 0 auto;
+	}
+</style>
