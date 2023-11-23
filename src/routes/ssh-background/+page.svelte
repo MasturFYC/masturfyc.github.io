@@ -1,0 +1,29 @@
+<section>
+	<div class="title">Run ssh connection in background</div>
+	<div class="content">
+		<p>
+			Koneksi yang aman antar komputer baik intranet atau local
+      sebaiknya menggunakan <code>ssh connection</code>, apalagi untuk
+      koneksi database karena <code>ssh</code> sudah menggunakan TLS enkripsi.
+		</p>
+    <p>Berikut ini adalah bagaimana caranya koneksi remote komputer menggunakan <code>ssh</code>
+      sehingga koneksi tersebut bisa berjalan secara background:
+    </p>
+    <p class="is-size-4">Contoh Koneksi postgresql di remote server dengan <code>ssh</code></p>
+    <pre>$ ssh -f -L 1111:localhost:5432 -N user@example.com</pre>
+    <p><code>-f</code> force background</p>
+    <p><code>-L</code> opsion setting local computer</p>
+    <p><code>1111</code> port yang akan digunakan di local</p>
+    <p><code>localhost</code> local computer</p>
+    <p><code>5432</code> remote port</p>
+    <p><code>-N</code> perintah dijalankan di local, bukan di remote computer</p>
+    <p><code>user@example.com</code> remote computer</p>
+	</div>
+</section>
+
+<style lang="scss">
+	section {
+		max-width: 640px;
+		margin: 0 auto;
+	}
+</style>

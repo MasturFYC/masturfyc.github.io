@@ -19,6 +19,7 @@
 		{ id: 1, href: '/php-error-13', name: 'php8.2-fpm Error 13' },
 		{ id: 2, href: '/tailscale-up', name: 'Networking menggunakan tailscale' },
 		{ id: 3, href: '/nginx-php-fpm-config', name: 'Nginx + PHP-FPM Configuration' },
+		{ id: 4, href: '/ssh-background', name: 'Run shh connection in background' },
 	];
 	// let redirectUri = import.meta.env.VITE_FB_REDIRECTURI;
 	// let status = '';
