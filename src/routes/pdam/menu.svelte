@@ -5,7 +5,7 @@
 		{ id: 1, name: 'Customer' },
 		{ id: 4, name: 'Download Card' }
 	];
-	export let currentMenu = 1;
+  export let currentMenu = 1;
 </script>
 
 <aside class="menu">
@@ -14,7 +14,7 @@
 			<li>
 				<a
 					href="#{m.id}"
-					class={m.id === currentMenu ? 'is-active' : ''}
+					class={m.id ===  currentMenu ? 'is-active' : ''}
 					on:click={() => (currentMenu = m.id)}>{m.name}</a
 				>
 			</li>

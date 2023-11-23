@@ -20,6 +20,7 @@
 		{ id: 2, href: '/tailscale-up', name: 'Networking menggunakan tailscale' },
 		{ id: 3, href: '/nginx-php-fpm-config', name: 'Nginx + PHP-FPM Configuration' },
 		{ id: 4, href: '/ssh-background', name: 'Run shh connection in background' },
+		{ id: 5, href: '/zram', name: 'Configure zram in Ubuntu 22.04' },
 	];
 	// let redirectUri = import.meta.env.VITE_FB_REDIRECTURI;
 	// let status = '';
