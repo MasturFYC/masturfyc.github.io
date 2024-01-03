@@ -22,6 +22,9 @@
 		{ id: 4, href: '/ssh-background', name: 'Run shh connection in background' },
 		{ id: 5, href: '/zram', name: 'Configure zram in Ubuntu 22.04' },
 	];
+	let drop3 = [
+		{ id: 1, href: '/mikrotik', name: 'User Status' }
+	];
 	// let redirectUri = import.meta.env.VITE_FB_REDIRECTURI;
 	// let status = '';
 </script>
@@ -142,6 +145,7 @@
 					{/each}
 				</div>
 			</div>
+
 			<div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
 				<!-- svelte-ignore a11y-missing-attribute -->
 				<a class="navbar-link is-arrowless">Blog</a>
@@ -159,7 +163,25 @@
 					{/each}
 				</div>
 			</div>			
-		</div>
+			<div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<a class="navbar-link is-arrowless">Mikrotik</a>
+	
+				<div class="navbar-dropdown">
+					{#each drop3 as d (d.id)}
+						<a
+							class="navbar-item"
+							on:click={() => {
+								isActive = false;
+								itemActive = '';
+							}}
+							href={d.href}>{d.name}</a
+						>
+					{/each}
+				</div>
+			</div>
+			</div>
+
 
 		<div class="navbar-end">
 			<div class="navbar-item">

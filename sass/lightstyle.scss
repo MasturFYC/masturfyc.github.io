@@ -2,39 +2,40 @@
 @charset "utf-8";
 
 @import url('https://use.typekit.net/end3rqq.css');
-// $link: hsl(204, 64%, 44%);
-// $family-sans-serif: source-serif-pro, serif; 
-$modal-background-background-color: rgba(0, 0, 0, 0.25);
-$navbar-background-color: hsl(0, 0%, 98%);
-// $navbar-item-hover-background-color: $link;
+
+// // $link: hsl(204, 64%, 44%);
+// // $family-sans-serif: source-serif-pro, serif; 
+// $modal-background-background-color: rgba(0, 0, 0, 0.25);
+// $navbar-background-color: hsl(0, 0%, 98%);
+// // $navbar-item-hover-background-color: $link;
+// // $navbar-item-hover-color: hsl(0, 0%, 10%);
+
+// $navbar-item-color: hsl(0, 0%, 29%);
+// // $navbar-item-hover-color: $link;
 // $navbar-item-hover-color: hsl(0, 0%, 10%);
+// $navbar-item-hover-background-color: hsl(0, 0%, 93%);
 
-$navbar-item-color: hsl(0, 0%, 29%);
-// $navbar-item-hover-color: $link;
-$navbar-item-hover-color: hsl(0, 0%, 10%);
-$navbar-item-hover-background-color: hsl(0, 0%, 93%);
+// $navbar-item-active-color: hsl(0, 0%, 98%);
 
-$navbar-item-active-color: hsl(0, 0%, 98%);
+// $navbar-tab-active-color: hsl(0, 0%, 10%);
+// $navbar-tab-active-background-color: hsl(0, 0%, 95%);
+// $navbar-tab-hover-background-color: $navbar-tab-active-background-color;
 
-$navbar-tab-active-color: hsl(0, 0%, 10%);
-$navbar-tab-active-background-color: hsl(0, 0%, 95%);
-$navbar-tab-hover-background-color: $navbar-tab-active-background-color;
+// $tabs-border-bottom-color: $navbar-item-color;
+// $tabs-border-bottom-style: "solid";
 
-$tabs-border-bottom-color: $navbar-item-color;
-$tabs-border-bottom-style: "solid";
+// $body-overflow-y: auto;
 
-$body-overflow-y: auto;
+// html {
+//   overflow: auto;
+// }
 
-html {
-  overflow: auto;
-}
+// .title, .subtitle {
+//   font-family: source-serif-pro, serif;
+// }
 
-.title, .subtitle {
-  font-family: source-serif-pro, serif;
-}
-
-.modal-card-title {
-  font-family: source-serif-pro, serif;
-}
+// .modal-card-title {
+//   font-family: source-serif-pro, serif;
+// }
 
 @import "../node_modules/bulma/bulma.sass";

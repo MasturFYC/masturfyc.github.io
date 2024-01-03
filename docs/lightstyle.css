@@ -1,13 +1,4 @@
 @import url("https://use.typekit.net/end3rqq.css");
-html {
-  overflow: auto; }
-
-.title, .subtitle {
-  font-family: source-serif-pro, serif; }
-
-.modal-card-title {
-  font-family: source-serif-pro, serif; }
-
 /*! bulma.io v0.9.4 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 .button, .input, .textarea, .select select, .file-cta,
@@ -290,7 +281,7 @@ html {
   -webkit-font-smoothing: antialiased;
   min-width: 300px;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   text-rendering: optimizeLegibility;
   text-size-adjust: 100%; }
 
@@ -2101,7 +2092,8 @@ div.icon-text {
 a.tag:hover {
   text-decoration: underline; }
 
-.title, .subtitle {
+.title,
+.subtitle {
   word-break: break-word; }
   .title em,
   .title span,
@@ -3488,7 +3480,7 @@ button.dropdown-item {
     display: flex; }
 
 .modal-background {
-  background-color: rgba(0, 0, 0, 0.25); }
+  background-color: rgba(10, 10, 10, 0.86); }
 
 .modal-content,
 .modal-card {
@@ -3557,7 +3549,7 @@ button.dropdown-item {
   padding: 20px; }
 
 .navbar {
-  background-color: #fafafa;
+  background-color: white;
   min-height: 3.25rem;
   position: relative;
   z-index: 30; }
@@ -4116,8 +4108,8 @@ a.navbar-item,
   .navbar-link:focus-within,
   .navbar-link:hover,
   .navbar-link.is-active {
-    background-color: #ededed;
-    color: #1a1a1a; }
+    background-color: #fafafa;
+    color: #485fc7; }
 
 .navbar-item {
   flex-grow: 0;
@@ -4134,14 +4126,14 @@ a.navbar-item,
     min-height: 3.25rem;
     padding-bottom: calc(0.5rem - 1px); }
     .navbar-item.is-tab:focus, .navbar-item.is-tab:hover {
-      background-color: #f2f2f2;
+      background-color: transparent;
       border-bottom-color: #485fc7; }
     .navbar-item.is-tab.is-active {
-      background-color: #f2f2f2;
+      background-color: transparent;
       border-bottom-color: #485fc7;
       border-bottom-style: solid;
       border-bottom-width: 3px;
-      color: #1a1a1a;
+      color: #485fc7;
       padding-bottom: calc(0.5rem - 3px); }
 
 .navbar-content {
@@ -4180,7 +4172,7 @@ a.navbar-item,
   .navbar-link::after {
     display: none; }
   .navbar-menu {
-    background-color: #fafafa;
+    background-color: white;
     box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
     padding: 0.5rem 0; }
     .navbar-menu.is-active {
@@ -4340,12 +4332,12 @@ a.navbar-item,
     padding-bottom: 5.25rem; }
   a.navbar-item.is-active,
   .navbar-link.is-active {
-    color: #fafafa; }
+    color: #0a0a0a; }
   a.navbar-item.is-active:not(:focus):not(:hover),
   .navbar-link.is-active:not(:focus):not(:hover) {
     background-color: transparent; }
   .navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
-    background-color: #ededed; } }
+    background-color: #fafafa; } }
 
 .hero.is-fullheight-with-navbar {
   min-height: calc(100vh - 3.25rem); }
@@ -4644,8 +4636,8 @@ label.panel-block {
   white-space: nowrap; }
   .tabs a {
     align-items: center;
-    border-bottom-color: #4a4a4a;
-    border-bottom-style: "solid";
+    border-bottom-color: #dbdbdb;
+    border-bottom-style: solid;
     border-bottom-width: 1px;
     color: #4a4a4a;
     display: flex;
@@ -4663,8 +4655,8 @@ label.panel-block {
       color: #485fc7; }
   .tabs ul {
     align-items: center;
-    border-bottom-color: #4a4a4a;
-    border-bottom-style: "solid";
+    border-bottom-color: #dbdbdb;
+    border-bottom-style: solid;
     border-bottom-width: 1px;
     display: flex;
     flex-grow: 1;
