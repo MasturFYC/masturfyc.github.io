@@ -1,4 +1,4 @@
-import{s as P,f as o,a as C,l as y,g as l,h,u as E,c as $,m as b,d as c,j as m,i as j,v as r,x as _}from"../chunks/scheduler.a1a79cf5.js";import{S as k,i as I}from"../chunks/index.f0883218.js";function w(f){let e,t,u="Nginx-FPM + PHP Configuration",p,a,n,v=`server {
+import{s as P,f as o,a as C,l as y,g as l,h,u as E,c as $,m as b,d as c,j as m,i as j,v as r,x as _}from"../chunks/scheduler.53f6c1ea.js";import{S as k,i as I}from"../chunks/index.ed74fbf5.js";function w(f){let e,t,u="Nginx-FPM + PHP Configuration",p,a,n,v=`server {
 
   listen 80 default_server;
   listen [::]:80 default_server;

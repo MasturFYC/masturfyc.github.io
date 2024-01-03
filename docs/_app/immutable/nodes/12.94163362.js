@@ -1,4 +1,4 @@
-import{s as l,f as r,g as d,u as p,j as u,i as o,x as n,d as g}from"../chunks/scheduler.a1a79cf5.js";import{S as k,i as c}from"../chunks/index.f0883218.js";function m(i){let a,t=`<div class="title">Akses Komputer Jarak Jauh menggunakan TAILSCALE</div> <div class="content"><p>Untuk dapat mengakses komputer kantor, rumah, atau device pribadi dari luar jaringan yang kita
+import{s as l,f as r,g as d,u as p,j as u,i as o,x as n,d as g}from"../chunks/scheduler.53f6c1ea.js";import{S as k,i as c}from"../chunks/index.ed74fbf5.js";function m(i){let a,t=`<div class="title">Akses Komputer Jarak Jauh menggunakan TAILSCALE</div> <div class="content"><p>Untuk dapat mengakses komputer kantor, rumah, atau device pribadi dari luar jaringan yang kita
 			miliki tentu membutuhkan router / PVN yang bisa diakses melalui internet dari provider yang
 			berbayar dan mahal tentunya.</p> <p>Tapi tenang saja, sekarang ada provider yang memungkin anda bisa melakukan itu tanpa berbayar
 			sedikitpun alias gratis dan tidak harus menggunakan ip static public. Berikut ini adalah
