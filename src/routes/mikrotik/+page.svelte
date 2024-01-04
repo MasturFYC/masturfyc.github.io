@@ -49,7 +49,7 @@
 	const filterActiveUser = (search: string): iUserActive[] => {
 		let condition = new RegExp(search);
 		if (is_grouped) {
-			if(search === "{All}") {
+			if (search === '{All}') {
 				return active_user.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 			} else {
 				return active_user
@@ -142,13 +142,21 @@
 {/if}
 {#if innerWidth >= 640}
 	<div class="columns is-gapless my-1 p-1 has-background-light">
-		<div class="column is-1">ID</div>
-		<div class="column is-2">NAME</div>
-		<div class="column is-2">COMMENT</div>
-		<div class="column is-1">SERVICE</div>
-		<div class="column is-2">{currentTab === 1 ? 'PROFILE' : 'SESSION'}</div>
-		<div class="column is-2">ADDRESS</div>
-		<div class="column is-2">MAC</div>
+		<div class="column is-5">
+			<div class="columns is-gapless">
+				<div class="column is-2">ID</div>
+				<div class="column is-4">NAME</div>
+				<div class="column is-6">COMMENT</div>
+			</div>
+		</div>
+		<div class="column is-7">
+			<div class="columns is-gapless">
+				<div class="column is-2">SERVICE</div>
+				<div class="column is-3">{currentTab === 1 ? 'PROFILE' : 'SESSION'}</div>
+				<div class="column is-4">ADDRESS</div>
+				<div class="column is-3">MAC</div>
+			</div>
+		</div>
 	</div>
 {/if}
 {#if currentTab === 1}
