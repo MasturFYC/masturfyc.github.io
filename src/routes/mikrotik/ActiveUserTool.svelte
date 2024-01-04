@@ -50,8 +50,8 @@
 
 <div class="columns">
 	<div class="column is-narrow">
-		<div class="control has-icons-left is-fullwidth">
-			<div class="select">
+		<div class="control has-icons-left">
+			<div class="select is-fullwidth">
 				<select
 					bind:value={comment}
 					placeholder="Select comment"
