@@ -17,3 +17,4 @@
   <div class="column is-2">{d.callerId}</div>
 </div>
 {/each}
+<div class="mt-4">Total: {users.length}</div>

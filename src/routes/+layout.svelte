@@ -46,7 +46,7 @@
 	<div class="hero is-fullheight-with-navbar">
 		<div class="hero-body">
 			<div class="container is-align-self-flex-start">
-				<div class="my-div">
+				<!-- <div class="my-div"> -->
 					<!-- <div class="columns is-flex is-flex-wrap-wrap-reverse"> -->
 					<!-- <div class="column is-3 has-background-white-bis" style="min-width:180px">
 					<Menu />
@@ -55,7 +55,7 @@
 				</main>
 			</div> -->
 					<slot />
-				</div>
+				<!-- </div> -->
 			</div>
 		</div>
 		<Footer />
@@ -63,10 +63,15 @@
 </QueryClientProvider>
 
 <style lang="scss">
+	.my-div {
+		margin: 0;
+		padding: 0;
+	}
 	@media screen and (min-width: 640px) {
 		.my-div {
 			max-width: 960px;
 			margin: 0 auto;
+			padding: 0;
 			//			border: 1px solid #ccc;
 		}
 	}
