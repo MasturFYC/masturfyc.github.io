@@ -1,5 +1,5 @@
-<section>
-	<div class="title">Run ssh connection in background</div>
+<section class="container is-max-desktop">
+	<div class="title is-family-secondary">Run ssh connection in background</div>
 	<div class="content">
 		<p>
 			Koneksi yang aman antar komputer baik intranet atau local
@@ -9,7 +9,7 @@
     <p>Berikut ini adalah bagaimana caranya koneksi remote komputer menggunakan <code>ssh</code>
       sehingga koneksi tersebut bisa berjalan secara background:
     </p>
-    <p class="is-size-4">Contoh Koneksi postgresql di remote server dengan <code>ssh</code></p>
+    <p class="subtitle is-family-secondary">Contoh Koneksi postgresql di remote server dengan <code>ssh</code></p>
     <pre>$ ssh -f -L 1111:localhost:5432 -N user@example.com</pre>
     <p><code>-f</code> force background</p>
     <p><code>-L</code> opsion setting local computer</p>
@@ -20,10 +20,3 @@
     <p><code>user@example.com</code> remote computer</p>
 	</div>
 </section>
-
-<style lang="scss">
-	section {
-		max-width: 640px;
-		margin: 0 auto;
-	}
-</style>

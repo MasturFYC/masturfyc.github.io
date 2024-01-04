@@ -1,13 +1,13 @@
 <script lang="ts">
-	import HeaderPage from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import HeaderPage from '$lib/components/Header.svelte';
 
-	import dayjs from 'dayjs';
-	import utc from 'dayjs/plugin/utc';
-	import timezone from 'dayjs/plugin/timezone';
-	import advanced from 'dayjs/plugin/advancedFormat';
-	import locale from 'dayjs/locale/id';
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+	import dayjs from 'dayjs';
+	import locale from 'dayjs/locale/id';
+	import advanced from 'dayjs/plugin/advancedFormat';
+	import timezone from 'dayjs/plugin/timezone';
+	import utc from 'dayjs/plugin/utc';
 
 	//import Menu from '$lib/components/menu.svelte';
 
@@ -29,50 +29,14 @@
 		}
 	});
 </script>
-
-<svelte:head>
-	<meta property="fb:app_id" content="1284186342222033" />
-	<meta property="og:url" content="https://masturfyc.github.io" />
-	<meta name="description" content="Mastur FYC Home page" />
-	<meta property="og:image:type" content="image/jpeg" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
-	<meta property="og:description" content="Mastur FYC  Home page" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Mastur FYC Home page" />
-</svelte:head>
 <QueryClientProvider client={queryClient}>
 	<HeaderPage />
 	<div class="hero is-fullheight-with-navbar">
-		<div class="hero-body">
-			<div class="container is-align-self-flex-start">
-				<!-- <div class="my-div"> -->
-					<!-- <div class="columns is-flex is-flex-wrap-wrap-reverse"> -->
-					<!-- <div class="column is-3 has-background-white-bis" style="min-width:180px">
-					<Menu />
-				</div>
-				<main class="column m-2" style="min-width:300px;min-height:calc(100vh - {clientHeight + height + 8}px)">
-				</main>
-			</div> -->
-					<slot />
-				<!-- </div> -->
+		<div class="hero-body px-4">
+			<div class="container is-widescreen is-align-self-flex-start">
+				<slot />
 			</div>
 		</div>
 		<Footer />
 	</div>
 </QueryClientProvider>
-
-<style lang="scss">
-	.my-div {
-		margin: 0;
-		padding: 0;
-	}
-	@media screen and (min-width: 640px) {
-		.my-div {
-			max-width: 960px;
-			margin: 0 auto;
-			padding: 0;
-			//			border: 1px solid #ccc;
-		}
-	}
-</style>

@@ -1,5 +1,5 @@
-<section>
-	<div class="title">Akses Komputer Jarak Jauh menggunakan TAILSCALE</div>
+<section class="container is-max-desktop">
+	<div class="title is-family-secondary">Akses Komputer Jarak Jauh menggunakan TAILSCALE</div>
 	<div class="content">
 		<p>
 			Untuk dapat mengakses komputer kantor, rumah, atau device pribadi dari luar jaringan yang kita
@@ -45,10 +45,3 @@
 		</p>
 	</div>
 </section>
-
-<style lang="scss">
-	section {
-		max-width: 640px;
-		margin: 0 auto;
-	}
-</style>

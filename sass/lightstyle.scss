@@ -1,8 +1,9 @@
 
 @charset "utf-8";
 
-@import url('https://use.typekit.net/end3rqq.css');
-
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url("https://use.typekit.net/hxc3qpw.css");
 // // $link: hsl(204, 64%, 44%);
 // // $family-sans-serif: source-serif-pro, serif; 
 // $modal-background-background-color: rgba(0, 0, 0, 0.25);
@@ -38,7 +39,42 @@
 //   font-family: source-serif-pro, serif;
 // }
 
-$body-size: 16px !default;
+$body-size: 14px !default;
+$title-size: 2.5rem;
+$title-weight: 400;
+$title-color:hsl(0, 0%, 31%);
+$hr-height: 1px;
+$hr-background-color: hsl(0, 0%, 96%);
+$family-sans-serif: "Open Sans", sans-serif;
+$family-secondary: "Kalam", sans-serif;
+// $tabs-border-bottom-color: hsl(0, 0%, 50%);
+// $tabs-border-bottom-style: "solid";
+// $tabs-border-bottom-width: "2px";
+// $tabs-link-active-border-bottom-color: hsl(229, 53%,  50%);
+
+$purple: #8A4D76;
+$pink: #FA7C91;
+$brown: #757763;
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+$grey-dark: $brown;
+$grey-light: $beige-light;
+$primary: $purple;
+$link: $pink;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+$input-hover-border-color: hsl(0, 0%, 68%);
+$input-color: hsl(0, 0%, 35%);
+$input-hover-color: hsl(0, 0%, 21%);
+
+// Update some of Bulma's component variables
+// $body-background-color: $beige-lighter;
+// $control-border-width: 2px;
+// $input-border-color: transparent;
+// $input-shadow: none;
 
 @import "../node_modules/bulma/bulma.sass";
 

@@ -1,5 +1,5 @@
 <section>
-	<div class="title">PT. Galuh Persada Makmur</div>
+	<div class="title is-family-secondary">PT. Galuh Persada Makmur</div>
 	<div>Download dokumen:</div>
 	<ol>
 		<li>

@@ -6,11 +6,11 @@
 </script>
 
 <svelte:head>
-	<title>Home page</title>
+	<title>Mastur FYC  Home page</title>
 </svelte:head>
 
-<section>
-	<div class="title is-size-1 has-text-weight-light">Meraba Jalan Terang di Negeri Konoha</div>
+<div class="container is-max-desktop">
+	<div class="title is-family-secondary">Meraba Jalan Terang di Negeri Konoha</div>
 	<div class="content">
 		<p>
 			Setengah abad sudah hidup di negeri ini. Belum pernah aku semasygul ini. Belum pernah
@@ -37,5 +37,5 @@
 		</p>
 		<p>Terima kasih Rabbku... 🥰</p>
 	</div>
-</section>
+</div>
 

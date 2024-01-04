@@ -1,5 +1,5 @@
-<section>
-	<div class="title">php8.2-fpm Error 13 (Permission denied / File not found)</div>
+<section class="container is-max-desktop">
+	<div class="title is-family-secondary">php8.2-fpm Error 13 (Permission denied / File not found)</div>
 	<div class="content">
 		<p>
 			Error seperti ini bisanya terjadi karena <code>root</code> site berada di user yang berbeda
@@ -37,11 +37,3 @@ $ sudo systemctl restart php8.2-fpm</pre>
     <p>Terima kasih semoga bermanfaat.</p>
 	</div>
 </section>
-
-
-<style lang="scss">
-	section {
-		max-width: 640px;
-		margin: 0 auto;
-	}
-</style>

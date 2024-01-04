@@ -1,10 +1,10 @@
 <script lang="ts">
-	import dayjs from 'dayjs';
-	import { UndanganTahlil } from '$lib/interfaces';
 	import Modal from '$lib/components/Modal.svelte';
-	import { user } from '$lib/store';
-	import { onMount } from 'svelte';
 	import fetchApi from '$lib/fetch-api';
+	import { UndanganTahlil } from '$lib/interfaces';
+	import { user } from '$lib/store';
+	import dayjs from 'dayjs';
+	import { onMount } from 'svelte';
 
 	let is_download = false;
 	let clicked = 'no';
@@ -107,8 +107,8 @@
 	<meta name="description" content="Undangan tahlil" />
 </svelte:head>
 
-<section>
-	<h1 class="title">Undangan Tahlil</h1>
+<section class="container is-max-desktop">
+	<div class="title is-family-secondary">Undangan Tahlil</div>
 	<div class="columns">
 		<div class="column is-half">
 			<form on:submit|preventDefault={handleSubmit}>

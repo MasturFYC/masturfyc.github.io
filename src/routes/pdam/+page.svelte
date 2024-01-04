@@ -1,13 +1,13 @@
 <script lang="ts">
 	import fetchApi from '$lib/fetch-api';
-	import Menu from './menu.svelte';
+	import type { PDAM, PDAMBranch, PDAMCustomer } from '$lib/interfaces';
+	import { useQuery, useQueryClient } from '@sveltestack/svelte-query';
+	import { onMount } from 'svelte';
 	import Branch from './branch.svelte';
 	import Customer from './customer.svelte';
-	import ImportCustomer from './import-customer.svelte';
-	import type { PDAM, PDAMBranch, PDAMCustomer } from '$lib/interfaces';
 	import DownloadCard from './download-card.svelte';
-	import { onMount } from 'svelte';
-	import { useQuery, useQueryClient } from '@sveltestack/svelte-query';
+	import ImportCustomer from './import-customer.svelte';
+	import Menu from './menu.svelte';
 
 	let branchs: PDAMBranch[] = [];
 
@@ -179,10 +179,10 @@
 	<meta name="description" content="PDAM Card" />
 </svelte:head>
 
-<section>
+<section class="container is-max-desktop">
 	<div class="columns">
 		<div class="column is-narrow is-one-fifth">
-			<div class="title">PDAM</div>
+			<div class="title is-family-secondary">PDAM</div>
 			<Menu bind:currentMenu />
 		</div>
 		<div class="column">

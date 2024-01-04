@@ -1,6 +1,6 @@
 <script>
-	import { numberToText } from '$lib/number-to-string';
 	import { cardNumber, format, getNumber } from '$lib/format';
+	import { numberToText } from '$lib/number-to-string';
 	import wretch from 'wretch';
 
 	let value = '11000000000000000';
@@ -50,7 +50,7 @@
 </svelte:head>
 
 <section>
-	<div class="title block">Bilangan</div>
+	<div class="title is-family-secondary">Bilangan</div>
 	<div class="columns">
 		<div class="column is-half">
 			<div class="block">

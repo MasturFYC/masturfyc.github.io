@@ -8,9 +8,9 @@
 {#each users as d, i (d.id)}
 	<div
 		class="columns is-mobile is-gapless {innerWidth <= 640
-			? 'p-2 has-background-light'
+			? 'p-2 message message-body'
 			: i % 2 === 1
-			? 'my-1 p-1 has-background-light'
+			? 'my-1 p-1 message'
 			: 'px-1 my-1'}"
 	>
 		<div class="column is-5">

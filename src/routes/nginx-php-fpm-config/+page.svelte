@@ -1,5 +1,5 @@
-<div class="section p-0">
-  <h1 class="is-size-3 pb-4">Nginx-FPM + PHP Configuration</h1>
+<div class="container is-max-desktop">
+  <h1 class="title is-family-secondary">Nginx-FPM + PHP Configuration</h1>
   <div class="content">
     <pre>{`server {
 

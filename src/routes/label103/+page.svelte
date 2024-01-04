@@ -1,6 +1,6 @@
 <script lang="ts">
-	import csv from 'csvtojson';
 	import fetchApi from '$lib/fetch-api';
+	import csv from 'csvtojson';
 
 	type Label103 = {
 		id: number;
@@ -146,7 +146,7 @@
 </svelte:head>
 
 <section>
-	<div class="title">Label 103</div>
+	<div class="title is-family-secondary">Label 103</div>
 	<div class="div-control">
 		<label>
 			<span>Data: (format data: name1, name2, job, address, city)</span>

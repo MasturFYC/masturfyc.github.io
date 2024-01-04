@@ -1,5 +1,5 @@
-<section>
-	<div class="title">Configure zram in Ubuntu 22.04</div>
+<section class="container is-max-desktop">
+	<div class="title is-family-secondary">Configure zram in Ubuntu 22.04</div>
 	<div class="content">
 		<p>Apa itu <code>zram</code>. zram biasa disebut <code>compcache</code> (<b>compressed cache</b>)
       adalah sebuah blok kompresi device pada modul kernel di linux dalam suatu <code>ram</code>.
@@ -34,9 +34,3 @@ done</pre>
 	</div>
 </section>
 
-<style lang="scss">
-	section {
-		max-width: 640px;
-		margin: 0 auto;
-	}
-</style>
