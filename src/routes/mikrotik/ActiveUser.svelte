@@ -32,7 +32,7 @@
 			}
 //		}
 
-		selectedUser = {...data, isAssociated: user && user.member_id != 0};
+		selectedUser = {...data, customer: customers.filter(f => f.id === user.member_id)[0]};
 		isActive = 'is-active';
 	}
 

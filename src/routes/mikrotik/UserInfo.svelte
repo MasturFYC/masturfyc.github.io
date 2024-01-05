@@ -33,9 +33,9 @@
 		'/v3/routers/insert')
 		.json<iUserActive>();
 	
-		if(result) {
-			data.isAssociated = true;
-		}
+		// if(result) {
+		// 	data.isAssociated = true;
+		// }
 
 		setTimeout(() => {
 			isLoading = false;
@@ -63,7 +63,7 @@
 		.json<iUserActive>();
 	
 		if(result) {
-			data.isAssociated = false;
+			data.customer = undefined;
 			dispatch("reloadMember", 0);
 		}
 
@@ -113,16 +113,20 @@
 								<span class="icon is-small is-left">
 									<i class="fas fa-user"></i>
 								</span>
-								{#if data.isAssociated}
+								{#if data.customer}
 								<span class="icon is-small is-right">
 									<i class="fas fa-check"></i>
 								</span>
 								{/if}
 							</p>
 						</div>
+						{#if data.customer}
+						<p class="help">Association with: {data.customer.name} - {data.customer.unit_name}{data.customer.phone?', '+data.customer.phone:''} ({data.customer.paket_name})</p>
+						{/if}
 					</div>
 				</div>
 			</div>
+
 
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
@@ -192,7 +196,7 @@
 				</div>
 			</div>
 
-      {#if !data.isAssociated}
+      {#if !data.customer}
       <div class="field is-horizontal">
         <div class="field-label">
           <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -218,7 +222,7 @@
 		<footer class="modal-card-foot py-4">
 			<div class="columns container is-mobile">
 				<div class="column">
-					<button disabled={!data.isAssociated || isRemoving || isLoading}
+					<button disabled={!data.customer || isRemoving || isLoading}
 						class="button is-danger is-light {isRemoving ? 'is-loading':''}"
 						on:click={removeAssociation}>Remove Association</button
 					>
