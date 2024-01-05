@@ -1,6 +1,6 @@
 <script lang="ts">
 	import fetchApi from '$lib/fetch-api';
-	import type { iUserActive, iUserSecret } from '$lib/interfaces';
+	import type { iCustomer, iUserActive, iUserSecret } from '$lib/interfaces';
 	import { onMount } from 'svelte';
 
 	import ActiveUser from './ActiveUser.svelte';
@@ -18,6 +18,7 @@
 
 	let inactive_user: iUserSecret[] = [];
 	let active_user: iUserActive[] = [];
+	let customers: iCustomer[] = [];
 	let currentTab = 1;
 	let isLoaded = 'is-loading';
 	let txt = '';
@@ -187,6 +188,6 @@
 	{#if currentTab === 1}
 		<InactiveUser users={inactive_user} bind:innerWidth />
 	{:else}
-		<ActiveUser users={filterActiveUser(txt)} bind:innerWidth />
+		<ActiveUser users={filterActiveUser(txt)} bind:innerWidth bind:customers={customers} />
 	{/if}
 </div>
