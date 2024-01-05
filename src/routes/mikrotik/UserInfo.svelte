@@ -48,7 +48,7 @@
 			await associatedUserWithMember(data.name, customerId, data.comment);			
 		}
 		
-		dispatch('onSave', data);
+		dispatch('onSave', customerId);
 	}
 	
 	async function removeAssociation(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) {

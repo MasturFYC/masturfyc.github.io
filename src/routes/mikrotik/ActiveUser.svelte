@@ -37,8 +37,15 @@
 		isActive = 'is-active';
 	}
 
-	function onSave(e: CustomEvent<iUserActive>): void {
+	function onSave(e: CustomEvent<number>): void {
 		isActive = '';
+
+		const i = customers.findIndex(f => f.id === e.detail);
+
+		if(i >= 0) {
+			customers.splice(i,1);
+		}
+//		customers = customers.filter(f => f.id !== e.detail);
 		//console.log(e.detail);
 	}
 
