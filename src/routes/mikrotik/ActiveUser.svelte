@@ -26,21 +26,23 @@
 	async function show_user_info(data: iUserActive) {
 		const user  = await getUserRouter(data.name);
 
-		if(user.member_id === 0) {
+//		if(user.member_id === 0) {
 			if(customers.length === 0) {
 				customers = await loadMemberNotAssociated();
 			}
-		}
+//		}
 
-		selectedUser = {...data, isAssociated: user.member_id != 0};
+		selectedUser = {...data, isAssociated: user && user.member_id != 0};
 		isActive = 'is-active';
 	}
 
-
 	function onSave(e: CustomEvent<iUserActive>): void {
 		isActive = '';
-		console.log(e.detail);
+		//console.log(e.detail);
+	}
 
+	async function reloadMember(e: CustomEvent<any>): Promise<void> {
+		customers = await loadMemberNotAssociated();
 	}
 </script>
 
@@ -82,6 +84,7 @@
 	data={{ ...selectedUser }}
 	bind:isActive
 	on:onSave={onSave}
+	on:reloadMember={reloadMember}
 	customers={customers}
 />
 

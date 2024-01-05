@@ -1,4 +1,5 @@
 <script lang="ts">
+	import fetchApi from '$lib/fetch-api';
 	import type { iCustomer, iUserActive } from '$lib/interfaces';
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
@@ -6,7 +7,76 @@
 	export let isActive = '';
 	export let data: iUserActive;
   export let customers: iCustomer[] = [];
-  //export let customer: iCustomer;
+  let customer: iCustomer | undefined = undefined;
+	let customerId: number = 0;
+	let isLoading = false;
+	let isRemoving = false;
+
+	const setSelectedCustomer = (id: number) => {
+		if(id > 0) {
+			customer = customers.filter(f => f.id === id)[0];
+		}
+	}
+
+	const associatedUserWithMember = async (userName: string, customerId: number, comment: string) => {
+
+		const result = await fetchApi
+		.headers({
+			'Content-Type': "application/json;charset=utf-8",
+			'Accept': 'application/json'
+		})
+		.post({
+			name: userName,
+			member_id: customerId,
+			comment: comment
+		},
+		'/v3/routers/insert')
+		.json<iUserActive>();
+	
+		if(result) {
+			data.isAssociated = true;
+		}
+
+		setTimeout(() => {
+			isLoading = false;
+		}, 500);
+	}
+
+	async function doSave(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) {
+		if(customerId > 0) {
+			isLoading = true;
+			await associatedUserWithMember(data.name, customerId, data.comment);			
+		}
+		
+		dispatch('onSave', data);
+	}
+	
+	async function removeAssociation(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) {
+		
+		isRemoving = true;
+
+		const result = await fetchApi
+		.headers({
+			'Accept': 'application/json'
+		})
+		.delete(`/v3/routers/delete/${data.name}`)
+		.json<iUserActive>();
+	
+		if(result) {
+			data.isAssociated = false;
+			dispatch("reloadMember", 0);
+		}
+
+		setTimeout(() => {
+			isRemoving = false;
+		}, 500);
+
+	}
+
+
+	$: setSelectedCustomer(customerId);
+
+
 
 </script>
 
@@ -38,11 +108,16 @@
 									{data.id}
 								</a>
 							</p>
-							<p class="control is-expanded has-icons-left">
+							<p class="control is-expanded has-icons-left has-icons-right">
 								<input type="text" maxlength={50} class="input" bind:value={data.name} />
 								<span class="icon is-small is-left">
 									<i class="fas fa-user"></i>
 								</span>
+								{#if data.isAssociated}
+								<span class="icon is-small is-right">
+									<i class="fas fa-check"></i>
+								</span>
+								{/if}
 							</p>
 						</div>
 					</div>
@@ -127,7 +202,7 @@
           <div class="field is-expanded">
             <div class="control">
               <div class="select is-fullwidth">
-                <select>
+                <select bind:value={customerId}>
                   {#each customers as c}
                     <option value="{c.id}">{c.name} - {c.unit_name} ({c.paket_name})</option>
                   {/each}
@@ -137,27 +212,21 @@
           </div>
         </div>
       </div>
-      {:else}
-        <!-- <div>Database info: <strong>{customer.name}</strong> - 
-          {customer.address}, {customer.unit_name} 
-          ({customer.paket_name}).
-        </div> -->
-        <div>User <strong>{data.name}</strong> sudah diasosiasikan dengan database.</div>
       {/if}
 
 		</section>
 		<footer class="modal-card-foot py-4">
 			<div class="columns container is-mobile">
 				<div class="column">
-					<!-- <button disabled
-						class="button is-danger is-light"
-						on:click={() => dispatch('removeCustomer', data)}>Remove</button
-					> -->
+					<button disabled={!data.isAssociated || isRemoving || isLoading}
+						class="button is-danger is-light {isRemoving ? 'is-loading':''}"
+						on:click={removeAssociation}>Remove Association</button
+					>
 				</div>
 				<div class="column is-narrow">
 					<div class="buttons">
 						<!-- <button disabled class="button is-link is-light" on:click={() => (isActive = '')}>Cancel</button> -->
-						<button class="button is-primary" on:click={() => dispatch('onSave', data)}>Done</button
+						<button disabled={isLoading || isRemoving} class="button is-primary {isLoading ? 'is-loading':''}" on:click={doSave}>Done</button
 						>
 					</div>
 				</div>
