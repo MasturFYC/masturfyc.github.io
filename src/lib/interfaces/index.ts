@@ -62,7 +62,7 @@ export type iUserActive = {
 	service: string;
 	sessionId: string;
 	uptime: string;
-	customer?: iCustomer;
+	customerId?: number;
 };
 
 export type iMember = {

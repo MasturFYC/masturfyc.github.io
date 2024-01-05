@@ -32,7 +32,8 @@
 			}
 //		}
 
-		selectedUser = {...data, customer: customers.filter(f => f.id === user.member_id)[0]};
+//		const customer = customers.filter(f => f.id === user.member_id)[0];
+		selectedUser = {...data, customerId: user.member_id};
 		isActive = 'is-active';
 	}
 

@@ -63,7 +63,7 @@
 		.json<iUserActive>();
 	
 		if(result) {
-			data.customer = undefined;
+			data.customerId = undefined;
 			dispatch("reloadMember", 0);
 		}
 
@@ -113,15 +113,15 @@
 								<span class="icon is-small is-left">
 									<i class="fas fa-user"></i>
 								</span>
-								{#if data.customer}
+								{#if data.customerId}
 								<span class="icon is-small is-right">
 									<i class="fas fa-check"></i>
 								</span>
 								{/if}
 							</p>
 						</div>
-						{#if data.customer}
-						<p class="help">Association with: {data.customer.name} - {data.customer.unit_name}{data.customer.phone?', '+data.customer.phone:''} ({data.customer.paket_name})</p>
+						{#if data.customerId}
+						<p class="help">Association with: {data.customerId}</p>
 						{/if}
 					</div>
 				</div>
@@ -196,7 +196,7 @@
 				</div>
 			</div>
 
-      {#if !data.customer}
+      {#if !data.customerId}
       <div class="field is-horizontal">
         <div class="field-label">
           <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -222,7 +222,7 @@
 		<footer class="modal-card-foot py-4">
 			<div class="columns container is-mobile">
 				<div class="column">
-					<button disabled={!data.customer || isRemoving || isLoading}
+					<button disabled={!data.customerId || isRemoving || isLoading}
 						class="button is-danger is-light {isRemoving ? 'is-loading':''}"
 						on:click={removeAssociation}>Remove Association</button
 					>
