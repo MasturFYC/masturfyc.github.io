@@ -1,4 +1,4 @@
-<section>
+<section class="container is-max-desktop">
 	<div class="title is-family-secondary">PT. Galuh Persada Makmur</div>
 	<div>Download dokumen:</div>
 	<ol>

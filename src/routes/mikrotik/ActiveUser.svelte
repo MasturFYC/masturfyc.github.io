@@ -97,3 +97,38 @@
 />
 
 {/if}
+
+<style lang="scss">
+	@media
+	only screen and (max-width: 640px) {
+		.column:nth-of-type(1) .column:nth-of-type(1):before {
+			content: 'ID:';
+			margin-right: 12px;
+		}
+		.column:nth-of-type(2) .column:nth-of-type(1):before {
+			content: 'Service:';
+			display: inline-block;
+			min-width: 45px;
+			font-size: x-small;
+		}
+		.column:nth-of-type(2) .column:nth-of-type(2):before {
+			content: 'Session:';
+			display: inline-block;
+			font-size: x-small;
+			min-width: 45px;
+		}
+		.column:nth-of-type(2) .column:nth-of-type(3):before {
+			content: 'IP:';
+			font-weight: 400;
+			display: inline-block;
+			min-width: 45px;
+			font-size: x-small;
+		}
+		.column:nth-of-type(2) .column:nth-of-type(4):before {
+			content: 'MAC:';
+			display: inline-block;
+			min-width: 45px;
+			font-size: x-small;
+		}
+}
+</style>

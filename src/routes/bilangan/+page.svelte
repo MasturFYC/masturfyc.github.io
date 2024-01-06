@@ -49,7 +49,7 @@
 	<meta name="description" content="Mengubah angka menjadi bilangan" />
 </svelte:head>
 
-<section>
+<section class="container is-max-desktop">
 	<div class="title is-family-secondary">Bilangan</div>
 	<div class="columns">
 		<div class="column is-half">

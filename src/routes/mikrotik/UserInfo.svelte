@@ -80,7 +80,7 @@
 
 </script>
 
-<div class="modal {isActive} px-4">
+<div class="modal {isActive} px-3 is-warning">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="modal-background" on:click={() => (isActive = '')}></div>
@@ -93,11 +93,11 @@
 				on:click={() => (isActive = '')}
 			/>
 		</header>
-		<section class="modal-card-body">
+		<section class="modal-card-body is-size-7-tablet">
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label class="label">Name</label>
+					<label class="label min-w120">Name</label>
 				</div>
 				<div class="field-body">
 					<div class="field is-expanded">
@@ -131,7 +131,7 @@
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label class="label">Comment</label>
+					<label class="label min-w120">Comment</label>
 				</div>
 				<div class="field-body">
 					<div class="field">
@@ -149,7 +149,7 @@
 			<div class="field is-horizontal">
 				<div class="field-label is-normal">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label class="label">IP, MAC</label>
+					<label class="label min-w120">IP, MAC</label>
 				</div>
 				<div class="field-body">
 					<div class="field">
@@ -162,7 +162,7 @@
 					</div>
 					<div class="field">
 						<p class="control is-expanded has-icons-left is-fixed">
-							<input type="text" maxlength={50} readonly class="input is-danger" bind:value={data.callerId} />
+							<input type="text" maxlength={50} readonly class="input" bind:value={data.callerId} />
 							<span class="icon is-small is-left">
 								<i class="fa-solid fa-desktop"></i>
 							</span>
@@ -174,12 +174,12 @@
       <div class="field is-horizontal">
 				<div class="field-label">
 					<!-- svelte-ignore a11y-label-has-associated-control -->
-					<label class="label">Service, Session</label>
+					<label class="label min-w120">Service, Session</label>
 				</div>
 				<div class="field-body">
 					<div class="field">
 						<p class="control has-icons-left">
-							<input type="text" maxlength={50} readonly class="input is-danger" bind:value={data.service} />
+							<input type="text" maxlength={50} readonly class="input" bind:value={data.service} />
 							<span class="icon is-small is-left">
 								<i class="fa-brands fa-servicestack"></i>
 							</span>
@@ -187,7 +187,7 @@
 					</div>
 					<div class="field">
 						<p class="control is-expanded has-icons-left">
-							<input type="text" maxlength={50} readonly class="input is-danger" bind:value={data.sessionId} />
+							<input type="text" maxlength={50} readonly class="input" bind:value={data.sessionId} />
 							<span class="icon is-small is-left">
 								<i class="fa-solid fa-key"></i>
 							</span>
@@ -200,7 +200,7 @@
       <div class="field is-horizontal">
         <div class="field-label">
           <!-- svelte-ignore a11y-label-has-associated-control -->
-          <label class="label">Associated with member</label>
+          <label class="label min-w120">Associated with member</label>
         </div>
         <div class="field-body">
           <div class="field is-expanded">
@@ -223,7 +223,7 @@
 			<div class="columns container is-mobile">
 				<div class="column">
 					<button disabled={!data.customerId || isRemoving || isLoading}
-						class="button is-danger is-light {isRemoving ? 'is-loading':''}"
+						class="button is-light {isRemoving ? 'is-loading':''}"
 						on:click={removeAssociation}>Remove Association</button
 					>
 				</div>
@@ -238,9 +238,3 @@
 		</footer>
 	</div>
 </div>
-<!-- 
-<style lang="scss">
-  label {
-    min-width: 110px;
-  }
-</style> -->

@@ -41,12 +41,14 @@
 
 $body-size: 14px !default;
 $title-size: 2.5rem;
-$title-weight: 400;
+$title-weight: 500;
 $title-color:hsl(0, 0%, 31%);
 $hr-height: 1px;
 $hr-background-color: hsl(0, 0%, 96%);
 $family-sans-serif: "Open Sans", sans-serif;
-$family-secondary: "Kalam", sans-serif;
+$family-primary: $family-sans-serif;
+$family-secondary: "Kalam", cursive;
+// $label-weight: 400;
 // $tabs-border-bottom-color: hsl(0, 0%, 50%);
 // $tabs-border-bottom-style: "solid";
 // $tabs-border-bottom-width: "2px";
@@ -87,3 +89,7 @@ $input-hover-color: hsl(0, 0%, 21%);
 //     font-size: 16px;
 //   }
 // }
+
+.min-w120 {
+  margin-top: 4px;
+}

@@ -2102,7 +2102,7 @@ a.tag:hover {
 .title {
   color: #4f4f4f;
   font-size: 2.5rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.125; }
   .title strong {
     color: inherit;
@@ -6599,7 +6599,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   font-family: "Open Sans", sans-serif !important; }
 
 .is-family-secondary {
-  font-family: "Kalam", sans-serif !important; }
+  font-family: "Kalam", cursive !important; }
 
 .is-family-sans-serif {
   font-family: "Open Sans", sans-serif !important; }
@@ -7315,3 +7315,6 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 .footer {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
+
+.min-w120 {
+  margin-top: 4px; }

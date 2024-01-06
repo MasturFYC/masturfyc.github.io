@@ -1,4 +1,4 @@
-import{s as g,a as m,f as d,x as k,d as t,c as h,g as o,r as p,j as c,i as l,w as s}from"../chunks/scheduler.0ae656ff.js";import{S as b,i as y}from"../chunks/index.e58d7550.js";function f(u){let n,a,r=`<div class="title is-family-secondary">Meraba Jalan Terang di Negeri Konoha</div> <div class="content"><p>Setengah abad sudah hidup di negeri ini. Belum pernah aku semasygul ini. Belum pernah
+import{s as g,a as m,f as d,v as k,d as t,c as h,g as o,r as p,j as c,i as l,u as s}from"../chunks/scheduler.6ec384de.js";import{S as b,i as y}from"../chunks/index.2b0a6367.js";function f(u){let n,a,r=`<div class="title is-family-secondary">Meraba Jalan Terang di Negeri Konoha</div> <div class="content"><p>Setengah abad sudah hidup di negeri ini. Belum pernah aku semasygul ini. Belum pernah
 			aku sebertanya ini. Belum pernah aku semengerti ini, mengapa negeriku Kau jadikan seperti
 			ini??</p> <p>Belum pernah aku sebahagia ini kembali &quot;pulang&quot; ke pelukan keluargaku. Setelah sekian lama
 			mengembara di gurun <i>laissez faire</i>, di mana &quot;aturannya adalah tiada aturan&quot; semua boleh

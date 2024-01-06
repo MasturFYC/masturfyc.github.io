@@ -145,7 +145,7 @@
 	<title>Label-103</title>
 </svelte:head>
 
-<section>
+<section class="container is-max-desktop">
 	<div class="title is-family-secondary">Label 103</div>
 	<div class="div-control">
 		<label>

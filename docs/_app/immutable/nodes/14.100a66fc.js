@@ -1,4 +1,4 @@
-import{s as r,f as c,g as n,r as m,j as d,i as l,w as o,d as p}from"../chunks/scheduler.0ae656ff.js";import{S as u,i as h}from"../chunks/index.e58d7550.js";function g(t){let e,s=`<div class="title is-family-secondary">Configure zram in Ubuntu 22.04</div> <div class="content"><p>Apa itu <code>zram</code>. zram biasa disebut <code>compcache</code> (<b>compressed cache</b>)
+import{s as r,f as c,g as n,r as m,j as d,i as l,u as o,d as p}from"../chunks/scheduler.6ec384de.js";import{S as u,i as h}from"../chunks/index.2b0a6367.js";function g(t){let e,s=`<div class="title is-family-secondary">Configure zram in Ubuntu 22.04</div> <div class="content"><p>Apa itu <code>zram</code>. zram biasa disebut <code>compcache</code> (<b>compressed cache</b>)
       adalah sebuah blok kompresi device pada modul kernel di linux dalam suatu <code>ram</code>.
       Blok device yang dibuat oleh zram ini dapat digunakan sebagai <code>swap</code>
       atau biasa dikenal dengan nama <code>RAM disk</code>.</p> <p>Kegunaan zram secara umum adalah tempat temporary file (<code>/tmp</code>)

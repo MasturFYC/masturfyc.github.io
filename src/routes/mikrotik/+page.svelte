@@ -24,7 +24,7 @@
 	let txt = '';
 	let searchText = '';
 	let is_grouped = false;
-	let selectedGroup='';
+	let selectedGroup = '';
 
 	let tabs: iUserTab[] = [
 		{ id: 1, name: 'Inactive user', isActive: 'is-active', icon: 'fa-power-off' },
@@ -111,7 +111,8 @@
 </svelte:head>
 <svelte:window bind:innerWidth />
 
-<div class="container is-max-desktop">
+<!-- <section class="container is-max-desktop"> -->
+<section class="container is-max-desktop">
 	<div class="columns is-align-items-end">
 		<div class="column is-4">
 			<div class="title is-family-secondary">Sapulidi users</div>
@@ -141,53 +142,63 @@
 			</div>
 		</div>
 	</div>
-	<hr class="p-0 m-0" />
-	<div class="tabs">
-		<ul>
-			{#each tabs as t}
-				<li class={t.isActive}>
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<!-- svelte-ignore a11y-no-static-element-interactions -->
-					<!-- svelte-ignore a11y-missing-attribute -->
-					<a on:click={() => changeActiveTab(t)}>
-						<span class="icon is-small">
-							<i class="fa {t.icon}"></i>
-						</span>
-						<span>{t.name}</span>
-					</a>
-				</li>
-			{/each}
-		</ul>
-	</div>
-	{#if currentTab === 2}
-		<ActiveUserTool on:searchUser={searchUser} 
-		users={active_user} on:groupComment={groupComment}
-		selectedGroup={selectedGroup}
-		txt={searchText}
-		 />
-	{/if}
-	{#if innerWidth >= 640}
-		<div class="columns is-gapless my-1 p-1 has-background-light has-text-weight-semibold">
-			<div class="column is-5">
-				<div class="columns is-gapless">
-					<div class="column is-2">ID</div>
-					<div class="column is-4">NAME</div>
-					<div class="column is-6">COMMENT</div>
-				</div>
+	<hr class="m-0 mb-6" />
+
+	<!-- <div class="columns">
+		<div class="column is-narrow">MENU</div>
+
+		<div class="column"> -->
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<div class="tabs">
+				<ul>
+					{#each tabs as t}
+						<li class={t.isActive}>
+							<a on:click={() => changeActiveTab(t)}>
+								<span class="icon is-small">
+									<i class="fa {t.icon}" aria-hidden="true"></i>
+								</span>
+								<span>{t.name}</span>
+							</a>
+						</li>
+					{/each}
+				</ul>
 			</div>
-			<div class="column is-7">
-				<div class="columns is-gapless">
-					<div class="column is-2">SERVICE</div>
-					<div class="column is-3">{currentTab === 1 ? 'PROFILE' : 'SESSION'}</div>
-					<div class="column is-4">ADDRESS</div>
-					<div class="column is-3">MAC</div>
+
+			{#if currentTab === 2}
+				<ActiveUserTool
+					on:searchUser={searchUser}
+					users={active_user}
+					on:groupComment={groupComment}
+					{selectedGroup}
+					txt={searchText}
+				/>
+			{/if}
+			{#if innerWidth >= 640}
+				<div class="columns is-gapless my-1 p-1 has-background-light has-text-weight-semibold">
+					<div class="column is-5">
+						<div class="columns is-gapless">
+							<div class="column is-2">ID</div>
+							<div class="column is-4">NAME</div>
+							<div class="column is-6">COMMENT</div>
+						</div>
+					</div>
+					<div class="column is-7">
+						<div class="columns is-gapless">
+							<div class="column is-2">SERVICE</div>
+							<div class="column is-3">{currentTab === 1 ? 'PROFILE' : 'SESSION'}</div>
+							<div class="column is-4">ADDRESS</div>
+							<div class="column is-3">MAC</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	{/if}
-	{#if currentTab === 1}
-		<InactiveUser users={inactive_user} bind:innerWidth />
-	{:else}
-		<ActiveUser users={filterActiveUser(txt)} bind:innerWidth bind:customers={customers} />
-	{/if}
-</div>
+			{/if}
+			{#if currentTab === 1}
+				<InactiveUser users={inactive_user} bind:innerWidth />
+			{:else}
+				<ActiveUser users={filterActiveUser(txt)} bind:innerWidth bind:customers />
+			{/if}
+		</section>
+	<!-- </div>
+</div> -->

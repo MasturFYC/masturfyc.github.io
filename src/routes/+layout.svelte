@@ -28,15 +28,19 @@
 			}
 		}
 	});
+	let height:number;
 </script>
+
 <QueryClientProvider client={queryClient}>
-	<HeaderPage />
-	<div class="hero is-fullheight-with-navbar">
-		<div class="hero-body px-4">
-			<div class="container is-widescreen is-align-self-flex-start">
+	<HeaderPage bind:height />
+	<div class="columns is-gapless is-flex-direction-column m-0 p-0" style="height: calc(100vh - {height}px);">
+		<div class="column mx-5">
+			<main class="my-6 is-fullwidth">
 				<slot />
-			</div>
+			</main>
 		</div>
-		<Footer />
+		<div class="column is-narrow">
+			<Footer />
+		</div>
 	</div>
 </QueryClientProvider>

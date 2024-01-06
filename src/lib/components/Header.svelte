@@ -20,13 +20,12 @@
 		{ id: 2, href: '/tailscale-up', name: 'Networking menggunakan tailscale' },
 		{ id: 3, href: '/nginx-php-fpm-config', name: 'Nginx + PHP-FPM Configuration' },
 		{ id: 4, href: '/ssh-background', name: 'Run shh connection in background' },
-		{ id: 5, href: '/zram', name: 'Configure zram in Ubuntu 22.04' },
+		{ id: 5, href: '/zram', name: 'Configure zram in Ubuntu 22.04' }
 	];
-	let drop3 = [
-		{ id: 1, href: '/mikrotik', name: 'User Status' }
-	];
+	let drop3 = [{ id: 1, href: '/mikrotik', name: 'User Status' }];
 	// let redirectUri = import.meta.env.VITE_FB_REDIRECTURI;
 	// let status = '';
+	export let height;
 </script>
 
 <svelte:head>
@@ -90,123 +89,122 @@
 		}
 	</script>
 </svelte:head>
-<div id="fb-root"></div>
-<!-- svelte-ignore a11y-no-redundant-roles -->
-<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-	<!-- svelte-ignore a11y-missing-attribute -->
-	<div class="navbar-brand">
-		<a class="navbar-item" href="/" on:click={() => (isActive = false)}>
-			<img src={logo} width="64" height="28" alt="Logo" />
-		</a>
 
-		<!-- svelte-ignore a11y-interactive-supports-focus -->
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<a
-			role="button"
-			class="navbar-burger{isActive ? ' is-active' : ''}"
-			aria-label="menu"
-			aria-expanded="false"
-			data-target="navbarBasicExample"
-			on:click={() => (isActive = !isActive)}
-		>
-			<span aria-hidden="true" />
-			<span aria-hidden="true" />
-			<span aria-hidden="true" />
-		</a>
-	</div>
+	<!-- svelte-ignore a11y-no-redundant-roles -->
+	<nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation" bind:clientHeight={height}>
+		<div id="fb-root"></div>
+		<!-- svelte-ignore a11y-missing-attribute -->
+		<div class="navbar-brand">
+			<a class="navbar-item" href="/" on:click={() => (isActive = false)}>
+				<img src={logo} width="64" height="28" alt="Logo" />
+			</a>
 
-	<div id="navbarBasicExample" class="navbar-menu{isActive ? ' is-active' : ''}">
-		<div class="navbar-start">
-			{#each menu as c (c.id)}
-				<a
-					class="navbar-item is-tab{itemActive === c.name ? ' is-active' : ''}"
-					href={c.href}
-					on:click={() => {
-						isActive = false;
-						itemActive = c.name;
-					}}>{c.name}</a
-				>
-			{/each}
+			<!-- svelte-ignore a11y-interactive-supports-focus -->
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<a
+				role="button"
+				class="navbar-burger{isActive ? ' is-active' : ''}"
+				aria-label="menu"
+				aria-expanded="false"
+				data-target="navbarBasicExample"
+				on:click={() => (isActive = !isActive)}
+			>
+				<span aria-hidden="true" />
+				<span aria-hidden="true" />
+				<span aria-hidden="true" />
+			</a>
+		</div>
 
-			<div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<a class="navbar-link is-arrowless">Download</a>
+		<div id="navbarBasicExample" class="navbar-menu{isActive ? ' is-active' : ''}">
+			<div class="navbar-start">
+				{#each menu as c (c.id)}
+					<a
+						class="navbar-item is-tab{itemActive === c.name ? ' is-active' : ''}"
+						href={c.href}
+						on:click={() => {
+							isActive = false;
+							itemActive = c.name;
+						}}>{c.name}</a
+					>
+				{/each}
 
-				<div class="navbar-dropdown">
-					{#each drop as d (d.id)}
-						<a
-							class="navbar-item"
-							on:click={() => {
-								isActive = false;
-								itemActive = '';
-							}}
-							href={d.href}>{d.name}</a
-						>
-					{/each}
+				<div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<a class="navbar-link is-arrowless">Download</a>
+
+					<div class="navbar-dropdown">
+						{#each drop as d (d.id)}
+							<a
+								class="navbar-item"
+								on:click={() => {
+									isActive = false;
+									itemActive = '';
+								}}
+								href={d.href}>{d.name}</a
+							>
+						{/each}
+					</div>
+				</div>
+
+				<div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<a class="navbar-link is-arrowless">Blog</a>
+
+					<div class="navbar-dropdown">
+						{#each drop2 as d (d.id)}
+							<a
+								class="navbar-item"
+								on:click={() => {
+									isActive = false;
+									itemActive = '';
+								}}
+								href={d.href}>{d.name}</a
+							>
+						{/each}
+					</div>
+				</div>
+				<div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<a class="navbar-link is-arrowless">Mikrotik</a>
+
+					<div class="navbar-dropdown">
+						{#each drop3 as d (d.id)}
+							<a
+								class="navbar-item"
+								on:click={() => {
+									isActive = false;
+									itemActive = '';
+								}}
+								href={d.href}>{d.name}</a
+							>
+						{/each}
+					</div>
 				</div>
 			</div>
-
-			<div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<a class="navbar-link is-arrowless">Blog</a>
-
-				<div class="navbar-dropdown">
-					{#each drop2 as d (d.id)}
-						<a
-							class="navbar-item"
-							on:click={() => {
-								isActive = false;
-								itemActive = '';
-							}}
-							href={d.href}>{d.name}</a
-						>
-					{/each}
-				</div>
-			</div>			
-			<div class="navbar-item has-dropdown is-hoverable{isActive ? ' is-active' : ''}">
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<a class="navbar-link is-arrowless">Mikrotik</a>
-	
-				<div class="navbar-dropdown">
-					{#each drop3 as d (d.id)}
-						<a
-							class="navbar-item"
-							on:click={() => {
-								isActive = false;
-								itemActive = '';
-							}}
-							href={d.href}>{d.name}</a
-						>
-					{/each}
-				</div>
-			</div>
-			</div>
-
-
-		<div class="navbar-end">
-			<div class="navbar-item">
-				<div class="buttons">
-					<div id="status"></div>
-					<div
-						class="fb-login-button"
-						data-width="90"
-						data-size="32"
-						data-button-type="button"
-						data-layout=""
-						data-auto-logout-link="false"
-						data-use-continue-as="false"
-					></div>
-					<div>
-						<!-- svelte-ignore a11y-misplaced-scope -->
-						<fb:login-button
-							id="fb-login"
-							scope="public_profile,email"
-							onlogin="checkLoginState();"
-						>
-						</fb:login-button>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div class="buttons">
+						<div id="status"></div>
+						<div
+							class="fb-login-button"
+							data-width="90"
+							data-size="32"
+							data-button-type="button"
+							data-layout=""
+							data-auto-logout-link="false"
+							data-use-continue-as="false"
+						></div>
+						<div>
+							<!-- svelte-ignore a11y-misplaced-scope -->
+							<fb:login-button
+								id="fb-login"
+								scope="public_profile,email"
+								onlogin="checkLoginState();"
+							>
+							</fb:login-button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
