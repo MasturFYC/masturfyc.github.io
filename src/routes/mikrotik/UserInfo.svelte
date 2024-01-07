@@ -223,7 +223,7 @@
 			<div class="columns container is-mobile">
 				<div class="column">
 					<button disabled={!data.customerId || isRemoving || isLoading}
-						class="button is-light {isRemoving ? 'is-loading':''}"
+						class="button is-light {data.customerId && 'is-danger'} {isRemoving ? 'is-loading':''}"
 						on:click={removeAssociation}>Remove Association</button
 					>
 				</div>

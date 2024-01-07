@@ -112,7 +112,7 @@
 <svelte:window bind:innerWidth />
 
 <!-- <section class="container is-max-desktop"> -->
-<section class="container is-max-desktop">
+<div class="container is-max-desktop">
 	<div class="columns is-align-items-end">
 		<div class="column is-4">
 			<div class="title is-family-secondary">Sapulidi users</div>
@@ -199,6 +199,6 @@
 			{:else}
 				<ActiveUser users={filterActiveUser(txt)} bind:innerWidth bind:customers />
 			{/if}
-		</section>
+		</div>
 	<!-- </div>
 </div> -->

@@ -71,7 +71,9 @@ $fullhd-enabled: false;
 $input-hover-border-color: hsl(0, 0%, 68%);
 $input-color: hsl(0, 0%, 35%);
 $input-hover-color: hsl(0, 0%, 21%);
+$body-overflow-y: auto;
 
+// $section-padding: 3rem 1.0rem;
 // Update some of Bulma's component variables
 // $body-background-color: $beige-lighter;
 // $control-border-width: 2px;
@@ -92,4 +94,8 @@ $input-hover-color: hsl(0, 0%, 21%);
 
 .min-w120 {
   margin-top: 4px;
+}
+
+html {
+  overflow-y: auto;
 }

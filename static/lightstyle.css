@@ -282,7 +282,7 @@ html {
   -webkit-font-smoothing: antialiased;
   min-width: 300px;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-rendering: optimizeLegibility;
   text-size-adjust: 100%; }
 
@@ -7318,3 +7318,6 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 .min-w120 {
   margin-top: 4px; }
+
+html {
+  overflow-y: auto; }
